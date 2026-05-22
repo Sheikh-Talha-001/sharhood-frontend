@@ -1,0 +1,53 @@
+import api from './api';
+
+export const adminService = {
+  getSummary: async () => {
+    const response = await api.get('/admin/dashboard');
+    return response.data;
+  },
+  getUsers: async () => {
+    const response = await api.get('/admin/users');
+    return response.data;
+  },
+  suspendUser: async (id: string, isSuspended: boolean) => {
+    const endpoint = isSuspended ? 'suspend' : 'activate';
+    const response = await api.put(`/admin/users/${id}/${endpoint}`);
+    return response.data;
+  },
+  getVerifications: async () => {
+    const response = await api.get('/admin/verifications');
+    return response.data;
+  },
+  updateVerification: async (id: string, status: string, rejectionReason?: string) => {
+    const endpoint = status === 'approved' ? 'approve' : 'reject';
+    const response = await api.put(`/admin/verifications/${id}/${endpoint}`, { rejectionReason });
+    return response.data;
+  },
+  getPartners: async () => {
+    const response = await api.get('/admin/partner-applications');
+    return response.data;
+  },
+  updatePartner: async (id: string, status: string) => {
+    const endpoint = status === 'approved' ? 'approve' : 'reject';
+    const response = await api.put(`/admin/partner-applications/${id}/${endpoint}`);
+    return response.data;
+  },
+  getReports: async () => {
+    const response = await api.get('/admin/reports');
+    return response.data;
+  },
+  updateReport: async (id: string, status: string) => {
+    const endpoint = status === 'resolved' ? 'resolve' : 'dismiss';
+    const response = await api.put(`/admin/reports/${id}/${endpoint}`);
+    return response.data;
+  },
+  getItems: async () => {
+    const response = await api.get('/admin/items');
+    return response.data;
+  },
+  removeItem: async (id: string, isRemoved: boolean) => {
+    const endpoint = isRemoved ? 'remove' : 'restore';
+    const response = await api.put(`/admin/items/${id}/${endpoint}`);
+    return response.data;
+  }
+};

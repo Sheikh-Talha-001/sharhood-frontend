@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@400;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-hand: "Caveat", cursive;
+  
+  /* Custom Colors */
+  --color-brand-bg: #F5F0EA;
+  --color-brand-black: #111111;
+  --color-brand-lime: #D7FF00;
+  --color-brand-orange: #FF6B3D;
+  --color-brand-yellow: #FFC928;
+  --color-brand-pink: #FF84B7;
+}
+
+@layer base {
+  body {
+    @apply bg-brand-bg text-brand-black font-sans antialiased;
+    overflow-x: hidden;
+  }
+}
+
+/* Custom Utilities */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Handwritten Font Classes */
+.font-handwriting {
+  @apply font-hand;
+}
+
+/* Lenis Recommended CSS */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Swiper Styles */
+.swiper-slide {
+  height: auto;
+}
