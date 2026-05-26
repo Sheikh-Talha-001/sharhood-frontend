@@ -6,7 +6,7 @@ export const reportService = {
     return response.data;
   },
   getMyReports: async () => {
-    const response = await api.get('/reports/me');
+    const response = await api.get('/reports/my-reports');
     return response.data;
   }
 };

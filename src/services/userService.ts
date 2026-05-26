@@ -16,11 +16,11 @@ export const userService = {
     return response.data;
   },
   updatePassword: async (data: any) => {
-    const response = await api.put('/users/password', data);
+    const response = await api.put('/users/change-password', data);
     return response.data;
   },
   getPublicProfile: async (id: string) => {
-    const response = await api.get(`/users/${id}`);
+    const response = await api.get(`/users/${id}/public`);
     return response.data;
   }
 };

@@ -1,14 +1,12 @@
 import api from './api';
 
 export interface PartnerApplicationData {
-  email: string | number | readonly string[];
   fullName: string;
   phoneNumber: string;
   categoriesInterestedIn: string[];
   reasonForJoining: string;
   experienceDescription: string;
   businessName?: string;
-  city: string;
 }
 
 export const partnerService = {

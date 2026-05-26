@@ -29,6 +29,14 @@ export const itemService = {
     const response = await api.get('/items', { params });
     return response.data;
   },
+  getCategories: async () => {
+    const response = await api.get('/items/categories');
+    return response.data;
+  },
+  getMyItems: async () => {
+    const response = await api.get('/items/my-items');
+    return response.data;
+  },
   getById: async (id: string) => {
     const response = await api.get(`/items/${id}`);
     return response.data;

@@ -9,7 +9,13 @@ export function Verification() {
   const [status, setStatus] = useState<"pending" | "approved" | "unsubmitted" | "rejected">("unsubmitted");
   const [step, setStep] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
-  const [file, setFile] = useState<File | null>(null);
+  
+  // State for required backend fields
+  const [nationalIdNumber, setNationalIdNumber] = useState("");
+  const [idFrontImage, setIdFrontImage] = useState<File | null>(null);
+  const [idBackImage, setIdBackImage] = useState<File | null>(null);
+  const [selfieWithId, setSelfieWithId] = useState<File | null>(null);
+  
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -17,10 +23,10 @@ export function Verification() {
       try {
         const response = await verificationService.getStatus();
         if (response.data) {
-          setStatus(response.data.status); // 'pending', 'approved', or 'rejected'
+          setStatus(response.data.verificationStatus); // Use verificationStatus
         }
       } catch (err: any) {
-        if (err.response?.status === 404) {
+        if (err.response?.status === 404 || err.response?.status === 400) {
           setStatus("unsubmitted");
         } else {
           setError("Failed to fetch verification status");
@@ -32,22 +38,19 @@ export function Verification() {
     fetchStatus();
   }, []);
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setFile(e.target.files[0]);
-    }
-  };
-
   const handleSubmit = async () => {
-    if (!file) {
-      setError("Please select a document image.");
+    if (!nationalIdNumber || !idFrontImage || !selfieWithId) {
+      setError("Please fill in all required fields (National ID, Front Image, Selfie).");
       return;
     }
     setIsLoading(true);
     setError(null);
     try {
       const formData = new FormData();
-      formData.append('idDocument', file);
+      formData.append('nationalIdNumber', nationalIdNumber);
+      formData.append('idFrontImage', idFrontImage);
+      if (idBackImage) formData.append('idBackImage', idBackImage);
+      formData.append('selfieWithId', selfieWithId);
       
       await verificationService.submit(formData);
       setStatus("pending");
@@ -92,12 +95,13 @@ export function Verification() {
             {status === "unsubmitted" && step === 1 && (
               <div className="space-y-6">
                  <div>
-                    <label className="block text-sm font-bold text-gray-900 mb-2">Legal First Name</label>
-                    <input type="text" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-brand-yellow focus:border-brand-yellow transition-all font-medium" />
-                 </div>
-                 <div>
-                    <label className="block text-sm font-bold text-gray-900 mb-2">Legal Last Name</label>
-                    <input type="text" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-brand-yellow focus:border-brand-yellow transition-all font-medium" />
+                    <label className="block text-sm font-bold text-gray-900 mb-2">National ID / Passport Number</label>
+                    <input 
+                      type="text" 
+                      value={nationalIdNumber}
+                      onChange={(e) => setNationalIdNumber(e.target.value)}
+                      className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-brand-yellow focus:border-brand-yellow transition-all font-medium" 
+                    />
                  </div>
                  <div className="pt-4">
                     <button onClick={() => setStep(2)} className="w-full bg-brand-black text-white font-bold py-4 rounded-full hover:bg-brand-yellow hover:text-brand-black transition-all">Next Step: Document Upload</button>
@@ -107,12 +111,19 @@ export function Verification() {
 
             {status === "unsubmitted" && step === 2 && (
               <div className="space-y-6">
-                 <div className="border-2 border-dashed border-gray-200 rounded-2xl p-8 flex flex-col items-center justify-center bg-gray-50">
-                    <UploadCloud className="w-12 h-12 text-gray-400 mb-4" />
-                    <p className="text-gray-600 font-bold mb-2">Upload ID Document (Driver's License or Passport)</p>
-                    <p className="text-gray-500 text-sm mb-6">JPG, PNG up to 5MB</p>
-                    <input type="file" accept="image/*" onChange={handleFileChange} className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-brand-yellow file:text-brand-black hover:file:bg-brand-black hover:file:text-white" />
+                 <div className="border-2 border-dashed border-gray-200 rounded-2xl p-6 flex flex-col items-center justify-center bg-gray-50">
+                    <p className="text-gray-900 font-bold mb-2">Front of ID Document</p>
+                    <input type="file" accept="image/*" onChange={(e) => e.target.files && setIdFrontImage(e.target.files[0])} className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-brand-yellow file:text-brand-black hover:file:bg-brand-black hover:file:text-white" />
                  </div>
+                 <div className="border-2 border-dashed border-gray-200 rounded-2xl p-6 flex flex-col items-center justify-center bg-gray-50">
+                    <p className="text-gray-900 font-bold mb-2">Back of ID Document (Optional)</p>
+                    <input type="file" accept="image/*" onChange={(e) => e.target.files && setIdBackImage(e.target.files[0])} className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-brand-yellow file:text-brand-black hover:file:bg-brand-black hover:file:text-white" />
+                 </div>
+                 <div className="border-2 border-dashed border-gray-200 rounded-2xl p-6 flex flex-col items-center justify-center bg-gray-50">
+                    <p className="text-gray-900 font-bold mb-2">Selfie holding ID</p>
+                    <input type="file" accept="image/*" onChange={(e) => e.target.files && setSelfieWithId(e.target.files[0])} className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-brand-yellow file:text-brand-black hover:file:bg-brand-black hover:file:text-white" />
+                 </div>
+                 
                  <div className="pt-4 flex gap-4">
                     <button onClick={() => setStep(1)} className="px-6 py-4 rounded-full bg-gray-100 font-bold hover:bg-gray-200 transition-colors">Back</button>
                     <button onClick={handleSubmit} className="flex-1 bg-brand-black text-white font-bold py-4 rounded-full hover:bg-brand-yellow hover:text-brand-black transition-all">Submit Verification</button>

@@ -17,9 +17,7 @@ export function BecomePartner() {
   const [formData, setFormData] = useState<PartnerApplicationData>({
     fullName: user?.name || "",
     phoneNumber: "",
-    email: user?.email || "", // Not in schema, but good for form display
     businessName: "",
-    city: "",
     categoriesInterestedIn: [],
     experienceDescription: "",
     reasonForJoining: ""
@@ -33,8 +31,7 @@ export function BecomePartner() {
     if (user) {
       setFormData(prev => ({
         ...prev,
-        fullName: prev.fullName || user.name,
-        email: prev.email || user.email
+        fullName: prev.fullName || user.name
       }));
     }
   }, [user]);
@@ -68,7 +65,7 @@ export function BecomePartner() {
     }
 
     if (formData.categoriesInterestedIn.length === 0) {
-      setError("Please select at least one category.");
+      setError("Please select at least one category of interest.");
       return;
     }
 
@@ -268,18 +265,6 @@ export function BecomePartner() {
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm font-bold text-gray-700 mb-2">Email *</label>
-                    <input 
-                      type="email" 
-                      name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-yellow transition-all"
-                      required
-                      disabled={!!user}
-                    />
-                  </div>
                   <div>
                     <label className="block text-sm font-bold text-gray-700 mb-2">Phone Number *</label>
                     <input 

@@ -10,7 +10,7 @@ export const agreementService = {
     return response.data;
   },
   generatePDF: async (id: string) => {
-    const response = await api.get(`/agreements/${id}/pdf`, { responseType: 'blob' });
+    const response = await api.get(`/agreements/${id}/download`, { responseType: 'blob' });
     return response.data;
   }
 };

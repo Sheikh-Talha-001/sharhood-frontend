@@ -2,7 +2,7 @@ import api from './api';
 
 export const verificationService = {
   getStatus: async () => {
-    const response = await api.get('/verification/me');
+    const response = await api.get('/verification/status');
     return response.data;
   },
   submit: async (data: FormData) => {
