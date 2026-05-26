@@ -1,4 +1,5 @@
 import { Menu, Search, UserCircle } from "lucide-react";
+import { Link } from "react-router-dom";
 import { useAuth } from "@/src/context/AuthContext";
 
 interface Props {
@@ -20,7 +21,7 @@ export function DashboardHeader({ toggleMobileMenu }: Props) {
         </div>
       </div>
       <div className="flex items-center gap-4">
-         <button className="flex items-center gap-2 px-3 py-2 rounded-full hover:bg-gray-50 transition-colors">
+         <Link to="/dashboard/profile" className="flex items-center gap-2 px-3 py-2 rounded-full hover:bg-gray-50 transition-colors">
            {user?.avatar ? (
              <img src={user.avatar} alt={user.name} className="w-8 h-8 rounded-full object-cover" />
            ) : (
@@ -29,7 +30,7 @@ export function DashboardHeader({ toggleMobileMenu }: Props) {
              </div>
            )}
            <span className="font-bold text-sm hidden sm:block">{user?.name || "My Account"}</span>
-         </button>
+         </Link>
       </div>
     </header>
   );

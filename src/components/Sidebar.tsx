@@ -19,6 +19,7 @@ export function Sidebar({ isMobileOpen, closeMobile }: Props) {
     { label: "Notifications", path: "/dashboard/notifications", icon: Bell },
     { label: "Verification", path: "/dashboard/verification", icon: Shield },
     { label: "Partner Program", path: "/dashboard/partner", icon: Store },
+    { label: "Profile", path: "/dashboard/profile", icon: Settings },
   ];
 
   const adminNavItems = [

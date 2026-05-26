@@ -15,7 +15,8 @@ import { Notifications } from "@/src/pages/Notifications";
 import { Verification } from "@/src/pages/Verification";
 import { PartnerApplication } from "@/src/pages/PartnerApplication";
 import { BecomePartner } from "@/src/pages/BecomePartner";
-import { ProfileSettings } from "@/src/pages/ProfileSettings";
+import { Profile } from "@/src/pages/Profile";
+import { EditProfile } from "@/src/pages/EditProfile";
 import { EmptyState } from "@/src/components/EmptyState";
 import { LoadingSkeleton } from "@/src/components/LoadingSkeleton";
 
@@ -57,7 +58,8 @@ export function AppRoutes() {
           <Route path="notifications" element={<Notifications />} />
           <Route path="verification" element={<Verification />} />
           <Route path="partner" element={<PartnerApplication />} />
-          <Route path="profile" element={<ProfileSettings />} />
+          <Route path="profile" element={<Profile />} />
+          <Route path="profile/edit" element={<EditProfile />} />
         </Route>
       </Route>
 

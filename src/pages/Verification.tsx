@@ -23,7 +23,14 @@ export function Verification() {
       try {
         const response = await verificationService.getStatus();
         if (response.data) {
-          setStatus(response.data.verificationStatus); // Use verificationStatus
+          const apiStatus = response.data.verificationStatus;
+          if (apiStatus === "unverified") {
+            setStatus("unsubmitted");
+          } else if (apiStatus === "verified") {
+            setStatus("approved");
+          } else {
+            setStatus(apiStatus);
+          }
         }
       } catch (err: any) {
         if (err.response?.status === 404 || err.response?.status === 400) {
