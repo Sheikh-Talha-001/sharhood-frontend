@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { Navbar } from "@/src/components/Navbar";
 import { Footer } from "@/src/components/Footer";
+import toast from "react-hot-toast";
 
 export function BecomePartner() {
   const { user, checkAuthStatus } = useAuth();
@@ -55,7 +56,8 @@ export function BecomePartner() {
     setError(null);
 
     if (!user) {
-      setError("Please log in or register to submit an application.");
+      toast.error("Please log in or register to submit an application.");
+      navigate("/register");
       return;
     }
 

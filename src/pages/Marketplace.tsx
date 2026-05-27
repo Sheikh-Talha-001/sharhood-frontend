@@ -79,7 +79,11 @@ export function Marketplace() {
         }
       } catch (err: any) {
         console.error("Failed to fetch marketplace items:", err);
-        setError(err.response?.data?.error || "Could not load items.");
+        if (err.response?.status === 429) {
+          setError("Too many requests. Please wait a moment and try again.");
+        } else {
+          setError(err.response?.data?.error || "Could not load items. Please check your connection.");
+        }
       } finally {
         setIsLoading(false);
       }
@@ -115,7 +119,7 @@ export function Marketplace() {
         )}
 
         {/* --- SIDEBAR FILTERS --- */}
-        <div className={`fixed inset-y-0 left-0 z-50 w-[85%] max-w-sm bg-white p-6 shadow-2xl transform transition-transform duration-300 lg:relative lg:transform-none lg:w-72 lg:shadow-none lg:bg-transparent lg:p-0 shrink-0 flex flex-col h-full lg:h-auto overflow-y-auto lg:overflow-visible ${isMobileFilterOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
+        <div className={`fixed inset-y-0 left-0 z-50 w-[85%] max-w-sm bg-white p-6 shadow-2xl transform transition-transform duration-300 lg:sticky lg:top-28 lg:transform-none lg:w-72 lg:shadow-none lg:bg-transparent lg:p-0 shrink-0 flex flex-col h-full lg:h-[calc(100vh-120px)] overflow-y-auto ${isMobileFilterOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
            <div className="flex items-center justify-between lg:hidden mb-8">
              <h2 className="text-xl font-bold flex items-center gap-2"><SlidersHorizontal className="w-5 h-5"/> Mobile Filters</h2>
              <button onClick={() => setIsMobileFilterOpen(false)} className="p-2 bg-gray-50 rounded-full text-gray-500 hover:bg-gray-100 hover:text-brand-black transition-colors">
@@ -184,7 +188,7 @@ export function Marketplace() {
              <MarketplaceSkeleton />
            ) : items.length > 0 ? (
              <>
-               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+               <div className="grid grid-cols-2 lg:grid-cols-2 gap-3 sm:gap-6 lg:gap-8">
                  {items.map((item) => (
                    <ItemCard key={item._id || item.id} item={item} />
                  ))}

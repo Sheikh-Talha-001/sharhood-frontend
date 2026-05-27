@@ -49,9 +49,9 @@ export function ItemDetails() {
       endDate.setDate(startDate.getDate() + requestDays);
 
       await borrowRequestService.create({
-        itemId: item._id || item.id, // Handle _id or id
+        item: item._id || item.id, // Backend expects 'item' not 'itemId'
         startDate: startDate.toISOString(),
-        endDate: endDate.toISOString(),
+        expectedReturnDate: endDate.toISOString(), // Backend expects 'expectedReturnDate' not 'endDate'
         message
       });
       toast.success("Request submitted successfully!");
@@ -66,7 +66,7 @@ export function ItemDetails() {
   if (isLoading) return <div className="py-10"><LoadingSkeleton type="details" /></div>;
   if (error || !item) return <div className="py-20 text-center text-red-500 font-bold">{error || "Item not found"}</div>;
 
-  const images = item.images && item.images.length > 0 ? item.images : ["https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=1000&q=80"];
+  const images = item.image ? [item.image] : (item.images && item.images.length > 0 ? item.images : ["https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=1000&q=80"]);
   const isAvailable = item.availability !== undefined ? item.availability : (item.available !== undefined ? item.available : true);
   const owner = item.owner || { name: "Local User", isVerified: false, isPartner: false, memberSince: "2024" };
   const price = item.price || "Free";

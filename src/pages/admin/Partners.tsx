@@ -1,26 +1,26 @@
 import { useState, useEffect } from "react";
-import { AdminTable } from "@/src/components/AdminTable";
-import { ConfirmationDialog } from "@/src/components/ConfirmationDialog";
-import { SearchBar } from "@/src/components/SearchBar";
-import { Store } from "lucide-react";
+import { DashboardCard } from "@/src/components/DashboardCard";
+import { AdminSearchBar } from "@/src/components/admin/AdminSearchBar";
 import { adminService } from "@/src/services/adminService";
 import { LoadingSpinner } from "@/src/components/LoadingSpinner";
+import { CheckCircle, XCircle } from "lucide-react";
+import toast from "react-hot-toast";
 
 export function Partners() {
-  const [selectedPartner, setSelectedPartner] = useState<any>(null);
-  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
-  const [actionType, setActionType] = useState<"approve" | "reject">("approve");
-
   const [partners, setPartners] = useState<any[]>([]);
+  const [filteredPartners, setFilteredPartners] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   const fetchPartners = async () => {
     setIsLoading(true);
     try {
-      const response = await adminService.getPartnerApps();
+      const response = await adminService.getPartners();
       setPartners(response.data || []);
+      setFilteredPartners(response.data || []);
     } catch (err) {
       console.error(err);
+      setError("Failed to load partner applications.");
     } finally {
       setIsLoading(false);
     }
@@ -30,82 +30,124 @@ export function Partners() {
     fetchPartners();
   }, []);
 
-  const handleAction = (request: any, type: "approve" | "reject") => {
-    setSelectedPartner(request);
-    setActionType(type);
-    setIsConfirmOpen(true);
+  const handleSearch = (query: string) => {
+    if (!query) {
+      setFilteredPartners(partners);
+    } else {
+      const lowerQuery = query.toLowerCase();
+      setFilteredPartners(
+        partners.filter(p => 
+          p.user?.name?.toLowerCase().includes(lowerQuery) || 
+          p.user?.email?.toLowerCase().includes(lowerQuery) ||
+          p.businessName?.toLowerCase().includes(lowerQuery)
+        )
+      );
+    }
   };
 
-  const handleConfirm = async () => {
-    if (!selectedPartner) return;
+  const handleAction = async (id: string, status: 'approved' | 'rejected') => {
     try {
-      await adminService.updatePartnerApp(selectedPartner._id, actionType === "approve" ? "approved" : "rejected");
-      await fetchPartners();
+      await adminService.updatePartner(id, status);
+      toast.success(`Application ${status} successfully!`);
+      const updated = partners.map(p => p._id === id ? { ...p, status } : p);
+      setPartners(updated);
+      setFilteredPartners(updated);
     } catch (err) {
       console.error(err);
-    } finally {
-      setIsConfirmOpen(false);
+      toast.error("Failed to update application.");
     }
   };
 
-  const columns = [
-    { 
-      header: "Applicant", 
-      accessor: "name", 
-      render: (req: any) => (
-        <div>
-          <span className="font-bold text-gray-900 block">{req.user?.name}</span>
-          <span className="text-xs font-medium text-gray-500">{req.user?.email}</span>
-        </div>
-      ) 
-    },
-    { header: "Categories", accessor: "categoriesInterestedIn", render: (req: any) => <span>{req.categoriesInterestedIn?.join(', ')}</span> },
-    { header: "Submitted", accessor: "createdAt", render: (req: any) => <span>{new Date(req.createdAt).toLocaleDateString()}</span> },
-    { header: "Status", accessor: "status", render: (req: any) => <span className={`px-2.5 py-1 rounded-md text-xs font-bold uppercase ${req.status === 'pending' ? 'bg-orange-100 text-orange-800' : req.status === 'approved' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>{req.status}</span> },
-    { 
-      header: "Actions", 
-      accessor: "actions", 
-      render: (req: any) => (
-        <>
-          {req.status === 'pending' && (
-            <div className="flex gap-2">
-               <button onClick={() => handleAction(req, "approve")} className="text-sm font-bold text-green-600 bg-green-50 px-3 py-1.5 rounded-full hover:bg-green-100 transition-colors">Approve</button>
-               <button onClick={() => handleAction(req, "reject")} className="text-sm font-bold text-red-600 bg-red-50 px-3 py-1.5 rounded-full hover:bg-red-100 transition-colors">Reject</button>
-            </div>
-          )}
-        </>
-      )
-    }
-  ];
-
   return (
-    <div className="max-w-6xl mx-auto space-y-6">
+    <div className="space-y-6 max-w-6xl mx-auto">
        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
          <div>
-           <div className="flex items-center gap-3 mb-1">
-             <div className="w-8 h-8 rounded-lg bg-brand-yellow/20 flex items-center justify-center">
-                <Store className="w-4 h-4 text-brand-black" />
-             </div>
-             <h1 className="text-3xl font-bold tracking-tight text-gray-900">Partner Applications</h1>
-           </div>
-           <p className="text-gray-500 font-medium">Review community members applying to list items.</p>
+           <h1 className="text-3xl font-black tracking-tight text-gray-900">Partner Applications</h1>
+           <p className="text-gray-500 font-medium mt-1">Review requests to become an approved partner.</p>
          </div>
          <div className="w-full sm:w-72">
-           <SearchBar placeholder="Search partners..." />
+            <AdminSearchBar onSearch={handleSearch} placeholder="Search applications..." />
          </div>
        </div>
 
-       {isLoading ? <div className="py-20"><LoadingSpinner /></div> : <AdminTable columns={columns} data={partners} emptyMessage="No partner applications." />}
-
-       <ConfirmationDialog 
-          isOpen={isConfirmOpen}
-          onClose={() => setIsConfirmOpen(false)}
-          onConfirm={handleConfirm}
-          title={actionType === "approve" ? "Approve Partner" : "Reject Partner"}
-          message={`Are you sure you want to ${actionType} the partner application for ${selectedPartner?.user?.name}?`}
-          confirmText={actionType === "approve" ? "Approve" : "Reject"}
-          confirmVariant={actionType === "approve" ? "primary" : "danger"}
-       />
+       <DashboardCard>
+         {isLoading ? (
+           <div className="py-20"><LoadingSpinner /></div>
+         ) : error ? (
+           <div className="py-12 text-center text-red-500 font-bold">{error}</div>
+         ) : (
+           <div className="overflow-x-auto">
+             <table className="w-full">
+               <thead>
+                 <tr className="border-b border-gray-100">
+                   <th className="text-left py-4 px-6 text-xs font-bold text-gray-400 uppercase tracking-widest">Applicant</th>
+                   <th className="text-left py-4 px-6 text-xs font-bold text-gray-400 uppercase tracking-widest">Categories</th>
+                   <th className="text-left py-4 px-6 text-xs font-bold text-gray-400 uppercase tracking-widest">Submitted Date</th>
+                   <th className="text-left py-4 px-6 text-xs font-bold text-gray-400 uppercase tracking-widest">Status</th>
+                   <th className="text-right py-4 px-6 text-xs font-bold text-gray-400 uppercase tracking-widest">Action</th>
+                 </tr>
+               </thead>
+               <tbody className="divide-y divide-gray-50">
+                 {filteredPartners.length === 0 ? (
+                   <tr>
+                     <td colSpan={5} className="py-12 text-center text-gray-500 font-medium">No partner applications found.</td>
+                   </tr>
+                 ) : (
+                   filteredPartners.map((app) => (
+                     <tr key={app._id} className="hover:bg-gray-50/50 transition-colors">
+                       <td className="py-4 px-6">
+                          <div>
+                            <p className="font-bold text-gray-900">{app.businessName || app.user?.name}</p>
+                            <p className="text-sm text-gray-500">{app.user?.email}</p>
+                          </div>
+                       </td>
+                       <td className="py-4 px-6">
+                          <div className="flex flex-wrap gap-1">
+                            {app.intendedCategories?.map((c: string) => (
+                              <span key={c} className="text-xs bg-gray-100 px-2 py-1 rounded-md text-gray-600 font-medium">{c}</span>
+                            ))}
+                          </div>
+                       </td>
+                       <td className="py-4 px-6 text-sm text-gray-600 font-medium">
+                         {new Date(app.createdAt).toLocaleDateString()}
+                       </td>
+                       <td className="py-4 px-6">
+                         <span className={`px-3 py-1 text-xs font-bold rounded-md ${
+                           app.status === 'approved' ? 'bg-green-50 text-green-600' :
+                           app.status === 'rejected' ? 'bg-red-50 text-red-600' :
+                           'bg-yellow-50 text-yellow-600'
+                         }`}>
+                           {app.status.toUpperCase()}
+                         </span>
+                       </td>
+                       <td className="py-4 px-6 text-right space-x-2">
+                         {app.status === 'pending' ? (
+                           <>
+                             <button 
+                               onClick={() => handleAction(app._id, 'approved')}
+                               className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-green-50 text-green-600 hover:bg-green-500 hover:text-white transition-colors"
+                             >
+                               <CheckCircle className="w-4 h-4" />
+                             </button>
+                             <button 
+                               onClick={() => handleAction(app._id, 'rejected')}
+                               className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-red-50 text-red-600 hover:bg-red-500 hover:text-white transition-colors"
+                             >
+                               <XCircle className="w-4 h-4" />
+                             </button>
+                           </>
+                         ) : (
+                           <span className="text-sm font-medium text-gray-400">Reviewed</span>
+                         )}
+                       </td>
+                     </tr>
+                   ))
+                 )}
+               </tbody>
+             </table>
+           </div>
+         )}
+       </DashboardCard>
     </div>
   );
 }

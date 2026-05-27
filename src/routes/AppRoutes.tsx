@@ -20,6 +20,8 @@ import { EditProfile } from "@/src/pages/EditProfile";
 import { EmptyState } from "@/src/components/EmptyState";
 import { LoadingSkeleton } from "@/src/components/LoadingSkeleton";
 
+import { UploadItem } from "@/src/pages/UploadItem";
+
 // Lazy Loaded Admin imports
 const AdminDashboard = React.lazy(() => import("@/src/pages/admin/AdminDashboard").then(m => ({ default: m.AdminDashboard })));
 const Verifications = React.lazy(() => import("@/src/pages/admin/Verifications").then(m => ({ default: m.Verifications })));
@@ -46,6 +48,8 @@ export function AppRoutes() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/become-partner" element={<BecomePartner />} />
+        <Route path="/marketplace" element={<Marketplace />} />
+        <Route path="/marketplace/:id" element={<ItemDetails />} />
       </Route>
 
       {/* Protected Dashboard Routes */}
@@ -54,8 +58,8 @@ export function AppRoutes() {
           <Route index element={<Dashboard />} />
           <Route path="marketplace" element={<Marketplace />} />
           <Route path="marketplace/:id" element={<ItemDetails />} />
+          <Route path="upload" element={<UploadItem />} />
           <Route path="agreements" element={<Agreements />} />
-          <Route path="notifications" element={<Notifications />} />
           <Route path="verification" element={<Verification />} />
           <Route path="partner" element={<PartnerApplication />} />
           <Route path="profile" element={<Profile />} />

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { AgreementCard, AgreementProps } from "@/src/components/AgreementCard";
+import { AgreementCard } from "@/src/components/AgreementCard";
 import { SearchBar } from "@/src/components/SearchBar";
 import { agreementService } from "@/src/services/agreementService";
 import { LoadingSpinner } from "@/src/components/LoadingSpinner";

@@ -97,7 +97,7 @@ export function Dashboard() {
           title="Post an Item" 
           description="Earn by lending your gear" 
           icon={PenTool} 
-          path="/dashboard/partner" 
+          path="/dashboard/upload" 
           colorClass="bg-green-50 text-green-500"
         />
         <QuickActionCard 
@@ -147,7 +147,7 @@ export function Dashboard() {
          <div className="flex items-end justify-between mb-6">
             <h2 className="text-2xl font-black text-gray-900">Trending Nearby</h2>
          </div>
-         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
             {trendingItems.length > 0 ? (
               trendingItems.map((item: any) => (
                 <ItemCard key={item._id || item.id} item={item} />

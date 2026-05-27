@@ -49,5 +49,14 @@ export const adminService = {
     const endpoint = isRemoved ? 'remove' : 'restore';
     const response = await api.put(`/admin/items/${id}/${endpoint}`);
     return response.data;
+  },
+  getAppeals: async () => {
+    const response = await api.get('/admin/suspension-appeals');
+    return response.data;
+  },
+  updateAppeal: async (id: string, status: string) => {
+    const endpoint = status === 'approved' ? 'approve' : 'reject';
+    const response = await api.put(`/admin/suspension-appeals/${id}/${endpoint}`);
+    return response.data;
   }
 };

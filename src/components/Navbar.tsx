@@ -1,14 +1,16 @@
 import { motion, useScroll, useTransform, AnimatePresence } from "motion/react";
 import { useState, useEffect } from "react";
 import { cn } from "@/src/lib/utils";
-import { Menu, X } from "lucide-react";
+import { Menu, X, LayoutDashboard } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
+import { useAuth } from "@/src/context/AuthContext";
 
 export function Navbar() {
   const { scrollY } = useScroll();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const { isAuthenticated } = useAuth();
 
   useEffect(() => {
     return scrollY.onChange((latest) => {
@@ -61,7 +63,7 @@ export function Navbar() {
             "hidden lg:flex items-center gap-2 p-1.5 rounded-full transition-all duration-500 border border-white/20",
             isScrolled ? "bg-white shadow-lg" : "bg-white/40 backdrop-blur-md shadow-sm font-normal" 
           )}>
-            <NavLink label="Marketplace" to="/dashboard/marketplace" />
+            <NavLink label="Marketplace" to="/marketplace" />
             <NavLink label="How It Works" to="/#how-it-works" />
             <NavLink label="Blog" to="/#" />
             <NavLink label="FAQ" to="/#faq" />
@@ -72,9 +74,15 @@ export function Navbar() {
             <Link to="/become-partner" className="bg-white text-brand-black px-6 py-3 rounded-full text-sm font-bold border border-brand-black/5 hover:bg-gray-50 transition-all shadow-sm">
               Become a partner
             </Link>
-            <Link to="/register" className="bg-brand-black text-white px-6 py-3 rounded-full text-sm font-bold hover:bg-brand-yellow hover:text-black hover:shadow-lg hover:shadow-brand-yellow/20 transition-all active:scale-95 shadow-md inline-block text-center">
-              Register Now
-            </Link>
+            {isAuthenticated ? (
+              <Link to="/dashboard" className="bg-brand-black text-white px-6 py-3 rounded-full text-sm font-bold hover:bg-brand-yellow hover:text-black hover:shadow-lg hover:shadow-brand-yellow/20 transition-all active:scale-95 shadow-md flex items-center gap-2">
+                <LayoutDashboard className="w-4 h-4" /> Go to Dashboard
+              </Link>
+            ) : (
+              <Link to="/register" className="bg-brand-black text-white px-6 py-3 rounded-full text-sm font-bold hover:bg-brand-yellow hover:text-black hover:shadow-lg hover:shadow-brand-yellow/20 transition-all active:scale-95 shadow-md inline-block text-center">
+                Register Now
+              </Link>
+            )}
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -97,7 +105,7 @@ export function Navbar() {
             className="fixed inset-0 z-40 bg-[#FFF9F2] pt-32 px-6 pb-6 flex flex-col justify-between"
           >
              <div className="flex flex-col gap-6 text-center text-xl font-bold text-brand-black">
-                <Link to="/dashboard/marketplace" onClick={() => setIsMobileMenuOpen(false)}>Marketplace</Link>
+                <Link to="/marketplace" onClick={() => setIsMobileMenuOpen(false)}>Marketplace</Link>
                 <Link to="/#how-it-works" onClick={() => setIsMobileMenuOpen(false)}>How It Works</Link>
                 <Link to="/become-partner" onClick={() => setIsMobileMenuOpen(false)} className="text-brand-yellow">Become a Partner</Link>
                 <Link to="/#faq" onClick={() => setIsMobileMenuOpen(false)}>FAQ</Link>
@@ -107,9 +115,15 @@ export function Navbar() {
                 <Link to="/become-partner" className="w-full bg-white text-brand-black py-4 rounded-full font-bold shadow-sm border border-gray-100 text-center">
                    Apply to Partner Program
                 </Link>
-                <Link to="/register" className="w-full bg-brand-black text-white py-4 rounded-full font-bold shadow-md hover:bg-brand-yellow hover:text-black transition-colors text-center">
-                   Register Now
-                </Link>
+                {isAuthenticated ? (
+                  <Link to="/dashboard" className="w-full bg-brand-black text-white py-4 rounded-full font-bold shadow-md hover:bg-brand-yellow hover:text-black transition-colors flex items-center justify-center gap-2">
+                     <LayoutDashboard className="w-5 h-5" /> Go to Dashboard
+                  </Link>
+                ) : (
+                  <Link to="/register" className="w-full bg-brand-black text-white py-4 rounded-full font-bold shadow-md hover:bg-brand-yellow hover:text-black transition-colors text-center">
+                     Register Now
+                  </Link>
+                )}
              </div>
           </motion.div>
         )}

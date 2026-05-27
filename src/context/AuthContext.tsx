@@ -15,21 +15,28 @@
 
 import { createContext, useContext, useState, useEffect, useCallback, type ReactNode } from 'react';
 import api from '../services/api';
+import { initSocket, disconnectSocket } from '../lib/socket';
 
 // ============================================================
 // Types
 // ============================================================
 export interface User {
-  verificationStatus: string;
   _id: string;
   name: string;
   email: string;
-  role: 'user' | 'admin' | 'partner';
+  role: 'user' | 'admin';           // backend only has 'user' and 'admin'
+  verificationStatus: 'unverified' | 'pending' | 'verified' | 'rejected';
+  partnerStatus: 'none' | 'pending' | 'approved' | 'rejected';
+  canListItems: boolean;             // set to true when partner is approved
   isVerified?: boolean;
   isPartner?: boolean;
   isSuspended?: boolean;
   avatar?: string;
+  avatarPublicId?: string;
   phone?: string;
+  phoneNumber?: string;
+  bio?: string;
+  neighborhood?: string;
   address?: string;
   createdAt?: string;
 }
@@ -78,6 +85,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     checkAuthStatus();
   }, [checkAuthStatus]);
+
+  useEffect(() => {
+    if (user) {
+      initSocket(user._id);
+    } else if (!isLoading) {
+      disconnectSocket();
+    }
+  }, [user, isLoading]);
 
   // ------------------------------------------------------------
   // Login
