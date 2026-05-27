@@ -1,8 +1,13 @@
-import { FileText, Download, Calendar } from "lucide-react";
+import { useState } from "react";
+import { FileText, Download, Calendar, Loader2 } from "lucide-react";
 import { StatusBadge } from "./StatusBadge";
 import { format } from "date-fns";
+import { agreementService } from "@/src/services/agreementService";
+import toast from "react-hot-toast";
 
 export function AgreementCard({ agreement, isLender = false }: { agreement: any, isLender?: boolean }) {
+  const [isDownloading, setIsDownloading] = useState(false);
+
   // Map backend model to UI
   const item = agreement.item || {};
   const itemTitle = item.title || "Unknown Item";
@@ -14,9 +19,46 @@ export function AgreementCard({ agreement, isLender = false }: { agreement: any,
   const otherParty = isLender ? borrowerName : lenderName;
   const roleText = isLender ? "Lending to" : "Borrowing from";
 
-  const startDate = agreement.startDate ? format(new Date(agreement.startDate), "MMM d, yyyy") : "TBD";
-  const endDate = agreement.endDate ? format(new Date(agreement.endDate), "MMM d, yyyy") : "TBD";
+  const startDate = agreement.borrowDate ? format(new Date(agreement.borrowDate), "MMM d, yyyy") : "TBD";
+  const endDate = agreement.expectedReturnDate ? format(new Date(agreement.expectedReturnDate), "MMM d, yyyy") : "TBD";
   const price = agreement.totalPrice ? `$${agreement.totalPrice}` : "Free";
+  const status = agreement.agreementStatus || agreement.status || "pending";
+
+  const handleDownload = async () => {
+    setIsDownloading(true);
+    try {
+      const blob = await agreementService.generatePDF(agreement._id || agreement.id);
+      const url = window.URL.createObjectURL(new Blob([blob]));
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `${agreement.agreementNumber || "Agreement"}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Download failed:", error);
+      toast.error("Failed to download agreement");
+    } finally {
+      setIsDownloading(false);
+    }
+  };
+
+  const handleView = async () => {
+    setIsDownloading(true);
+    try {
+      const blob = await agreementService.generatePDF(agreement._id || agreement.id);
+      const url = window.URL.createObjectURL(new Blob([blob], { type: 'application/pdf' }));
+      window.open(url, "_blank");
+      // Note: we can't revoke the URL immediately if we open it in a new tab,
+      // the browser needs time to load it. Alternatively, users can just download it.
+    } catch (error) {
+      console.error("View failed:", error);
+      toast.error("Failed to view agreement");
+    } finally {
+      setIsDownloading(false);
+    }
+  };
 
   return (
     <div className="bg-white rounded-3xl border border-gray-100 p-5 shadow-sm hover:shadow-md transition-shadow">
@@ -30,7 +72,7 @@ export function AgreementCard({ agreement, isLender = false }: { agreement: any,
              <p className="text-sm font-medium text-gray-500 mt-0.5">{roleText} <span className="text-brand-black font-bold">{otherParty}</span></p>
            </div>
         </div>
-        <StatusBadge status={agreement.status || "pending"} />
+        <StatusBadge status={status} />
       </div>
       
       <div className="grid grid-cols-2 gap-4 mb-5">
@@ -48,14 +90,22 @@ export function AgreementCard({ agreement, isLender = false }: { agreement: any,
       </div>
       
       <div className="flex items-center gap-3">
-         <button className="flex-1 bg-white border border-gray-200 text-gray-700 font-bold text-sm py-2.5 rounded-full hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
+         <button 
+           onClick={handleView}
+           disabled={isDownloading}
+           className="flex-1 bg-white border border-gray-200 text-gray-700 font-bold text-sm py-2.5 rounded-full hover:bg-gray-50 transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
+         >
             <FileText className="w-4 h-4" />
             View Details
          </button>
-         {(agreement.status === "approved" || agreement.status === "active") && (
-           <button className="flex-1 bg-brand-black text-white font-bold text-sm py-2.5 rounded-full hover:bg-brand-yellow hover:text-black transition-colors flex items-center justify-center gap-2">
-              <Download className="w-4 h-4" />
-              Download PDF
+         {(status === "active" || status === "completed") && (
+           <button 
+             onClick={handleDownload}
+             disabled={isDownloading}
+             className="flex-1 bg-brand-black text-white font-bold text-sm py-2.5 rounded-full hover:bg-brand-yellow hover:text-black transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:hover:bg-brand-black disabled:hover:text-white"
+           >
+              {isDownloading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Download className="w-4 h-4" />}
+              {isDownloading ? "Downloading..." : "Download PDF"}
            </button>
          )}
       </div>

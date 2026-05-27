@@ -21,6 +21,11 @@ import { EmptyState } from "@/src/components/EmptyState";
 import { LoadingSkeleton } from "@/src/components/LoadingSkeleton";
 
 import { UploadItem } from "@/src/pages/UploadItem";
+import { MyItems } from "@/src/pages/MyItems";
+import { IncomingRequests } from "@/src/pages/IncomingRequests";
+import { MyRequests } from "@/src/pages/MyRequests";
+import { PublicProfile } from "@/src/pages/PublicProfile";
+import { AppealSuspension } from "@/src/pages/AppealSuspension";
 
 // Lazy Loaded Admin imports
 const AdminDashboard = React.lazy(() => import("@/src/pages/admin/AdminDashboard").then(m => ({ default: m.AdminDashboard })));
@@ -50,6 +55,8 @@ export function AppRoutes() {
         <Route path="/become-partner" element={<BecomePartner />} />
         <Route path="/marketplace" element={<Marketplace />} />
         <Route path="/marketplace/:id" element={<ItemDetails />} />
+        <Route path="/users/:id" element={<PublicProfile />} />
+        <Route path="/suspended" element={<AppealSuspension />} />
       </Route>
 
       {/* Protected Dashboard Routes */}
@@ -59,6 +66,9 @@ export function AppRoutes() {
           <Route path="marketplace" element={<Marketplace />} />
           <Route path="marketplace/:id" element={<ItemDetails />} />
           <Route path="upload" element={<UploadItem />} />
+          <Route path="my-items" element={<MyItems />} />
+          <Route path="incoming-requests" element={<IncomingRequests />} />
+          <Route path="my-requests" element={<MyRequests />} />
           <Route path="agreements" element={<Agreements />} />
           <Route path="verification" element={<Verification />} />
           <Route path="partner" element={<PartnerApplication />} />

@@ -17,6 +17,12 @@ export function Sidebar({ isMobileOpen, closeMobile }: Props) {
   const userNavItems = [
     { label: "Dashboard", path: "/dashboard", icon: LayoutDashboard, exact: true },
     { label: "Browse Items", path: "/dashboard/marketplace", icon: Package },
+    // Conditional items for Partners/Lenders
+    ...(user?.canListItems ? [
+      { label: "My Items", path: "/dashboard/my-items", icon: Package },
+      { label: "Incoming Requests", path: "/dashboard/incoming-requests", icon: Bell },
+    ] : []),
+    { label: "My Requests", path: "/dashboard/my-requests", icon: FileText },
     { label: "Upload Item", path: "/dashboard/upload", icon: PlusCircle },
     { label: "Agreements", path: "/dashboard/agreements", icon: FileText },
     { label: "Verification", path: "/dashboard/verification", icon: Shield },

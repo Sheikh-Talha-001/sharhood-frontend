@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { ArrowLeft, MapPin, Calendar, Info, CheckCircle, Shield, Heart } from "lucide-react";
+import { ArrowLeft, MapPin, Calendar, Info, CheckCircle, Shield, Heart, Flag } from "lucide-react";
 import { DashboardCard } from "@/src/components/DashboardCard";
 import { TrustBadge } from "@/src/components/TrustBadge";
 import { itemService, Item } from "@/src/services/itemService";
 import { borrowRequestService } from "@/src/services/borrowRequestService";
 import { LoadingSkeleton } from "@/src/components/LoadingSkeleton";
+import { ReportModal } from "@/src/components/ReportModal";
 import { toast } from "react-hot-toast";
 
 export function ItemDetails() {
@@ -13,6 +14,7 @@ export function ItemDetails() {
   const navigate = useNavigate();
   const [isRequesting, setIsRequesting] = useState(false);
   const [agreed, setAgreed] = useState(false);
+  const [isReportModalOpen, setIsReportModalOpen] = useState(false);
   
   const [item, setItem] = useState<Item | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -244,10 +246,29 @@ export function ItemDetails() {
                  <span className="font-bold text-gray-600">Borrow Requests</span>
                  <span className="font-black text-brand-black bg-white px-3 py-1 rounded-lg shadow-sm">{item.borrowRequestCount || 0}</span>
               </div>
-           </DashboardCard>
-        </div>
+            </DashboardCard>
+            
+            {/* Report Button */}
+            <div className="text-center mt-4">
+              <button 
+                onClick={() => setIsReportModalOpen(true)}
+                className="text-sm font-bold text-gray-400 hover:text-red-500 transition-colors inline-flex items-center gap-1.5"
+              >
+                <Flag className="w-4 h-4" /> Report this listing
+              </button>
+            </div>
+         </div>
 
       </div>
+
+      {/* Report Modal */}
+      <ReportModal 
+        isOpen={isReportModalOpen} 
+        onClose={() => setIsReportModalOpen(false)} 
+        type="item" 
+        targetId={item._id || item.id} 
+        targetName={item.title} 
+      />
     </div>
   );
 }
