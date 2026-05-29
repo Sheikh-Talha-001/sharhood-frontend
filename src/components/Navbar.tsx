@@ -65,8 +65,8 @@ export function Navbar() {
           )}>
             <NavLink label="Marketplace" to="/marketplace" />
             <NavLink label="How It Works" to="/#how-it-works" />
-            <NavLink label="Blog" to="/#" />
-            <NavLink label="FAQ" to="/#faq" />
+            <NavLink label="Blog" to="/blog" />
+            <NavLink label="FAQ" to="/faq" />
            </div>
 
           {/* Desktop Buttons */}
@@ -108,7 +108,8 @@ export function Navbar() {
                 <Link to="/marketplace" onClick={() => setIsMobileMenuOpen(false)}>Marketplace</Link>
                 <Link to="/#how-it-works" onClick={() => setIsMobileMenuOpen(false)}>How It Works</Link>
                 <Link to="/become-partner" onClick={() => setIsMobileMenuOpen(false)} className="text-brand-yellow">Become a Partner</Link>
-                <Link to="/#faq" onClick={() => setIsMobileMenuOpen(false)}>FAQ</Link>
+                <Link to="/faq" onClick={() => setIsMobileMenuOpen(false)}>FAQ</Link>
+                <Link to="/blog" onClick={() => setIsMobileMenuOpen(false)}>Blog</Link>
              </div>
              
              <div className="flex flex-col gap-4 mt-8">
@@ -133,9 +134,24 @@ export function Navbar() {
 }
 
 function NavLink({ label, to, active }: { label: string; to: string; active?: boolean }) {
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    // Basic smooth scroll implementation for hash links
+    if (to.startsWith("/#")) {
+      const targetId = to.substring(2);
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        e.preventDefault();
+        targetElement.scrollIntoView({ behavior: 'smooth' });
+        // Update URL without a jump
+        window.history.pushState(null, '', to);
+      }
+    }
+  };
+
   return (
     <Link 
       to={to} 
+      onClick={handleClick}
       className={cn(
         "px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300",
         active ? "bg-brand-yellow text-brand-black font-bold" : "text-gray-700 hover:bg-gray-100"

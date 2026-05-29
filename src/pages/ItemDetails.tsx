@@ -86,7 +86,7 @@ export function ItemDetails() {
   const price = item.price || "Free";
 
   return (
-    <div className="max-w-5xl mx-auto pb-12 px-4 sm:px-6 font-sans bg-[#ffffff] min-h-screen">
+    <div className="max-w-5xl mx-auto pb-12 px-4 sm:px-6 font-sans bg-transparent min-h-screen">
       <Link to="/marketplace" className="inline-flex items-center gap-2 text-sm font-semibold text-[#333333] hover:text-[#7e0038] transition-colors mb-6 pt-6">
         <ArrowLeft className="size-4" /> Back to Browse
       </Link>

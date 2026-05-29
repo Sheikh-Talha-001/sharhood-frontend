@@ -1,14 +1,15 @@
 import { motion } from "motion/react";
 import { cn } from "@/src/lib/utils";
 import { Star, Search, Sparkles } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const PRODUCTS = [
-  { name: "Sander", price: "6 €/day", rating: 4, user: "Marc", image: "https://images.unsplash.com/photo-1530124560676-4fbc91adb61" },
-  { name: "Pressure washer", price: "18 €/day", rating: 5, user: "Michelle", image: "https://images.unsplash.com/photo-1590634289895-d22518e97ddf" },
+  { name: "Sander", price: "6 €/day", rating: 4, user: "Marc", image: "https://res.cloudinary.com/duyq66vog/image/upload/v1780079583/download_6_jkyhte.jpg" },
+  { name: "Pressure washer", price: "18 €/day", rating: 5, user: "Michelle", image: "https://res.cloudinary.com/duyq66vog/image/upload/v1780079678/download_8_cfci8e.jpg" },
   { name: "Carpet cleaner", price: "14 €/day", rating: 5, user: "Julie", image: "https://images.unsplash.com/photo-1558317374-067fb5f30001" },
-  { name: "Beer tap", price: "Free", rating: 5, user: "E. Leclerc Lille", image: "https://images.unsplash.com/photo-1532634743-fe58bf0147fc" },
+  { name: "Beer tap", price: "Free", rating: 5, user: "E. Leclerc Lille", image: "https://res.cloudinary.com/duyq66vog/image/upload/v1780079583/download_6_jkyhte.jpg" },
   { name: "Electric drill", price: "5 €/day", rating: 4.6, user: "Maxime", image: "https://images.unsplash.com/photo-1544724569-5f546fd6f2b5" },
-  { name: "Sander", price: "6 €/day", rating: 4, user: "Marc", image: "https://images.unsplash.com/photo-1530124560676-4fbc91adb61" },
+  { name: "Sander", price: "6 €/day", rating: 4, user: "Marc", image: "https://res.cloudinary.com/duyq66vog/image/upload/v1780079632/download_7_kzj9or.jpg" },
 ];
 
 export function CategoryStrip() {
@@ -71,10 +72,10 @@ export function CategoryStrip() {
       </div>
 
       <div className="mt-12 text-center">
-         <button type="button" className="bg-brand-black text-white px-10 py-5 rounded-full font-bold text-lg flex items-center gap-3 mx-auto hover:scale-105 transition-all shadow-xl">
+         <Link to="/marketplace" className="bg-brand-black text-white px-10 py-5 rounded-full font-bold text-lg flex items-center gap-3 mx-auto hover:scale-105 transition-all shadow-xl max-w-fit">
             <Search className="size-5" />
             Find what I need
-         </button>
+         </Link>
          <p className="mt-8 text-gray-500 font-medium text-sm md:text-base max-w-2xl mx-auto px-6">
             With over <span className="font-bold text-brand-black">100,000 items</span> on Lendly, find everything <br className="hidden md:block" /> you need from your neighbors and nearby shops.
          </p>
@@ -90,7 +91,7 @@ function ProductCard({ name, price, rating, user, image }: any) {
       className="bg-white rounded-3xl w-[220px] md:w-[260px] p-4 flex flex-col shadow-sm border border-brand-black/5 flex-shrink-0 group"
     >
       <div className="relative aspect-square rounded-2xl overflow-hidden mb-4 bg-gray-100">
-         <img src={image} alt={name} className="size-full object-cover transition-transform duration-500 group-hover:scale-110" />
+         <img src={image} alt={name} loading="lazy" className="size-full object-cover transition-transform duration-500 group-hover:scale-110" />
          {/* Price Tag */}
          <div className={cn(
            "absolute top-2 right-2 px-3 py-1.5 rounded-full text-[10px] md:text-xs font-bold shadow-lg",
@@ -114,7 +115,7 @@ function ProductCard({ name, price, rating, user, image }: any) {
 
       <div className="flex items-center gap-2 border-t pt-3">
          <div className="size-6 rounded-full bg-gray-200 overflow-hidden">
-            <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${user}`} alt="" />
+            <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${user}`} alt="" loading="lazy" />
          </div>
          <span className="text-xs font-medium text-gray-500">{user}</span>
       </div>

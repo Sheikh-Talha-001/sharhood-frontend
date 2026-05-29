@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import { Search, Send, ShieldCheck, MapPin, RefreshCcw } from "lucide-react";
 import { cn } from "@/src/lib/utils";
+import { Link } from "react-router-dom";
 
 const STEPS = [
   {
@@ -89,9 +90,9 @@ export function SharingSection() {
              <div className="size-32 bg-brand-black rounded-3xl flex items-center justify-center mb-8 shadow-xl">
                 <div className="size-16 border-4 border-brand-lime rounded-full"></div>
              </div>
-             <button type="button" className="bg-brand-black text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-brand-lime hover:text-brand-black transition-all">
+             <Link to="/about" className="bg-brand-black text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-brand-lime hover:text-brand-black transition-all inline-block">
                 Learn more
-             </button>
+             </Link>
           </div>
         </motion.div>
       </div>

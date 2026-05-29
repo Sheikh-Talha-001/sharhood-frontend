@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import { FloatingSticker, Sticker } from "./FloatingSticker";
 import { ArrowUpRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export function PromoBanner() {
   return (
@@ -24,20 +25,12 @@ export function PromoBanner() {
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             className="relative z-10"
           >
-             {/* Simple Laptop Representation */}
-             <div className="relative mx-auto w-[90%] max-w-[450px] aspect-[1.6/1]">
-                <div className="size-full bg-brand-black rounded-t-3xl p-2 border-4 border-gray-800 shadow-2xl relative overflow-hidden">
-                   <div className="size-full bg-white rounded-t-2xl overflow-hidden p-4 relative flex items-center justify-center">
-                      <div className="text-center">
-                         <div className="size-12 bg-brand-orange rounded-xl mx-auto mb-3 flex items-center justify-center">
-                            <ArrowUpRight className="size-6 text-white" />
-                         </div>
-                         <p className="font-bold text-lg text-brand-black uppercase tracking-tight">Marketplace <br /> Insights</p>
-                      </div>
-                   </div>
-                </div>
-                <div className="w-[110%] h-[12px] bg-gray-300 -ml-[5%] rounded-b-lg border-t-2 border-gray-400" />
-             </div>
+             {/* Pre-rendered Laptop Mockup Image */}
+             <img 
+               src="https://res.cloudinary.com/duyq66vog/image/upload/v1779288821/634shots_so_rdmp4i.png" 
+               alt="Access Anything Anywhere Dashboard" 
+               className="w-[90%] max-w-[450px] h-auto object-contain mx-auto drop-shadow-2xl" 
+             />
              
              {/* Stickers */}
              <FloatingSticker className="-top-10 left-10" rotate={-15}>
@@ -60,12 +53,12 @@ export function PromoBanner() {
           <p className="text-lg md:text-xl text-brand-black/70 font-medium mb-12 max-w-xl leading-relaxed">
             Our growing community lets you borrow the world, one neighborhood at a time. Reduce waste, save money, and meet your neighbors.
           </p>
-          <button type="button" className="bg-brand-black text-white px-8 py-4 rounded-full font-bold text-base uppercase tracking-widest hover:scale-105 active:scale-95 transition-transform flex items-center gap-3 mx-auto lg:mx-0 shadow-lg group">
+          <Link to="/marketplace" className="bg-brand-black text-white px-8 py-4 rounded-full font-bold text-base uppercase tracking-widest hover:scale-105 active:scale-95 transition-transform flex items-center gap-3 mx-auto lg:mx-0 shadow-lg group max-w-fit">
             Explore Marketplace
             <div className="size-8 bg-brand-orange rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
               <ArrowUpRight className="size-5" />
             </div>
-          </button>
+          </Link>
         </div>
       </motion.div>
     </section>

@@ -66,7 +66,7 @@ export function AgreementCard({ agreement, isLender = false, onComplaintClick }:
       <div className="flex items-start justify-between mb-4 border-b border-gray-100 pb-4">
         <div className="flex items-center gap-4">
            <div className="size-12 rounded-xl overflow-hidden bg-gray-100 flex-shrink-0">
-             <img src={itemImage} alt={itemTitle} className="size-full object-cover" />
+             <img src={itemImage} alt={itemTitle} loading="lazy" className="size-full object-cover" />
            </div>
            <div>
              <h4 className="font-bold text-gray-900 line-clamp-1">{itemTitle}</h4>

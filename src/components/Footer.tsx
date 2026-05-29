@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export function Footer() {
   return (
-    <footer className="bg-[#241d1b] text-[#fcf3ec] pt-24 px-6 md:px-12 mt-24 lg:rounded-t-[3rem] overflow-hidden relative pb-0">
+    <footer className="bg-[#241d1b] text-[#fcf3ec] pt-24 px-6 md:px-12 mt-24 rounded-t-[2.5rem] md:rounded-t-[3rem] overflow-hidden relative pb-0">
       <div className="max-w-7xl mx-auto relative z-10">
         
         {/* Top Section - Large Call to Action */}
@@ -27,25 +27,24 @@ export function Footer() {
             <FooterColumn title="Platform" links={[
               { name: "Marketplace", href: "/marketplace" },
               { name: "How it Works", href: "/#how-it-works" },
-              { name: "Lending Guide", href: "#" },
+              { name: "Lending Guide", href: "/lending-guide" },
             ]} />
             <FooterColumn title="Company" links={[
-              { name: "About Us", href: "#" },
-              { name: "Careers", href: "#" },
-              { name: "Press", href: "#" },
-              { name: "Contact", href: "#" }
+              { name: "About Us", href: "/about" },
+              { name: "Blog", href: "/blog" },
+              { name: "FAQ", href: "/faq" }
             ]} />
             <FooterColumn title="Community" links={[
-              { name: "Community Rules", href: "#" },
-              { name: "Trust & Safety", href: "#" },
-              { name: "Insurance", href: "#" },
-              { name: "Verification", href: "#" }
+              { name: "Community Rules", href: "/community-rules" },
+              { name: "Trust & Safety", href: "/trust-safety" },
+              { name: "Insurance", href: "/insurance" },
+              { name: "Verification", href: "/verification-info" }
             ]} />
             <FooterColumn title="Legal" links={[
-              { name: "Privacy Policy", href: "#" },
-              { name: "Terms of Service", href: "#" },
-              { name: "Cookie Policy", href: "#" },
-              { name: "Lender Agreement", href: "#" }
+              { name: "Privacy Policy", href: "/privacy" },
+              { name: "Terms of Service", href: "/terms" },
+              { name: "Cookie Policy", href: "/cookies" },
+              { name: "Lender Agreement", href: "/lender-agreement" }
             ]} />
         </div>
 
@@ -57,8 +56,8 @@ export function Footer() {
              </p>
              <div className="hidden md:block size-1.5 rounded-full bg-[#fcf3ec]/20" />
              <div className="flex gap-6 text-sm font-semibold text-[#fcf3ec]/50">
-                <a href="#" className="hover:text-[#ffffff] transition-colors">Privacy</a>
-                <a href="#" className="hover:text-[#ffffff] transition-colors">Terms</a>
+                <Link to="/privacy" className="hover:text-[#ffffff] transition-colors">Privacy</Link>
+                <Link to="/terms" className="hover:text-[#ffffff] transition-colors">Terms</Link>
              </div>
            </div>
            
@@ -78,7 +77,7 @@ export function Footer() {
 
       {/* Massive Background Text at the bottom */}
       <div className="w-full text-center leading-none mt-8 overflow-hidden pointer-events-none select-none flex justify-center">
-         <span className="text-[19vw] font-black text-[#fcf3ec]/3 tracking-tighter block mb-[-3vw]">
+         <span className="text-[23vw] sm:text-[21vw] md:text-[19vw] lg:text-[18vw] font-black text-[#fcf3ec]/3 tracking-tighter block mb-[-3vw] w-full text-center leading-none">
            Lendly
          </span>
       </div>

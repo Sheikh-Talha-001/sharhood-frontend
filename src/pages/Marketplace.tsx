@@ -106,7 +106,7 @@ export function Marketplace() {
   const hasActiveFilters = selectedCategory || selectedCondition || searchQuery || verifiedOnly;
 
   return (
-    <div className="pb-12 pt-8 font-sans bg-[#ffffff] min-h-screen px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <div className="pb-12 pt-8 font-sans bg-transparent min-h-screen px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       {/* Top Hero Section */}
       <MarketplaceHero />
 

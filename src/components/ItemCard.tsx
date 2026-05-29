@@ -44,6 +44,7 @@ export function ItemCard({ item }: Props) {
         <img 
           src={image} 
           alt={item.title} 
+          loading="lazy"
           className="size-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
         />
         
