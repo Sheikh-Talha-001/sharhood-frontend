@@ -26,7 +26,7 @@ export function VerificationBadge({ status, type = "identity" }: Props) {
 
   return (
     <div className={cn("inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold border", styles[status])}>
-      <Icon className="w-3.5 h-3.5" />
+      <Icon className="size-3.5" />
       {labels[status]}
     </div>
   );

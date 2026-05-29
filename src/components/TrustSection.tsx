@@ -35,13 +35,13 @@ const REVIEWS = [
 
 export function TrustSection() {
   return (
-    <section className="py-24 px-6 max-w-7xl mx-auto">
+    <section className="py-32 lg:py-40 px-6 max-w-7xl mx-auto">
       <div className="text-center mb-20">
         <motion.h2 
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          className="text-3xl md:text-4xl lg:text-5xl tracking-tight [word-spacing:0.15em] leading-[1.2] font-semibold mb-6 tracking-tight"
+          className="text-4xl md:text-5xl lg:text-6xl tracking-tight [word-spacing:0.15em] leading-[1.2] font-semibold mb-6 tracking-tight"
         >
           Rent the right items <br />
           at the right time. <br />
@@ -63,7 +63,7 @@ export function TrustSection() {
               <img 
                 src={review.image} 
                 alt={review.name} 
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                className="size-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
               
               {/* Overlay Tags */}
@@ -72,7 +72,7 @@ export function TrustSection() {
                   {review.tag}
                 </div>
                 <div className="bg-black/50 backdrop-blur-md p-2 rounded-full text-white">
-                  <Heart className="w-4 h-4" />
+                  <Heart className="size-4" />
                 </div>
               </div>
 
@@ -82,11 +82,11 @@ export function TrustSection() {
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                 className="absolute right-4 top-1/2 -translate-y-1/2 flex flex-col gap-3 pointer-events-none"
               >
-                <div className="w-10 h-10 bg-brand-lime rounded-full flex items-center justify-center shadow-lg">
-                   <Star className="w-5 h-5 fill-current text-brand-black" />
+                <div className="size-10 bg-brand-lime rounded-full flex items-center justify-center shadow-lg">
+                   <Star className="size-5 fill-current text-brand-black" />
                 </div>
-                <div className="w-10 h-10 bg-brand-orange rounded-full flex items-center justify-center shadow-lg">
-                   <MessageCircle className="w-5 h-5 text-white" />
+                <div className="size-10 bg-brand-orange rounded-full flex items-center justify-center shadow-lg">
+                   <MessageCircle className="size-5 text-white" />
                 </div>
               </motion.div>
 

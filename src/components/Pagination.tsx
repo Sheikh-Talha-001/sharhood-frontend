@@ -12,12 +12,12 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Props) {
 
   return (
     <div className="flex items-center justify-center gap-2 mt-8">
-      <button 
+      <button type="button" 
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="w-10 h-10 flex items-center justify-center rounded-full border border-gray-200 text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:hover:bg-transparent transition-colors"
+        className="size-10 flex items-center justify-center rounded-full border border-gray-200 text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:hover:bg-transparent transition-colors"
       >
-        <ChevronLeft className="w-5 h-5" />
+        <ChevronLeft className="size-5" />
       </button>
       
       <div className="flex items-center gap-1">
@@ -25,11 +25,11 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Props) {
           const page = i + 1;
           const isActive = page === currentPage;
           return (
-            <button
+            <button type="button"
               key={page}
               onClick={() => onPageChange(page)}
               className={cn(
-                "w-10 h-10 rounded-full text-sm font-bold transition-colors",
+                "size-10 rounded-full text-sm font-bold transition-colors",
                 isActive ? "bg-brand-black text-white" : "text-gray-600 hover:bg-gray-50"
               )}
             >
@@ -39,12 +39,12 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Props) {
         })}
       </div>
 
-      <button 
+      <button type="button" 
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="w-10 h-10 flex items-center justify-center rounded-full border border-gray-200 text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:hover:bg-transparent transition-colors"
+        className="size-10 flex items-center justify-center rounded-full border border-gray-200 text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:hover:bg-transparent transition-colors"
       >
-        <ChevronRight className="w-5 h-5" />
+        <ChevronRight className="size-5" />
       </button>
     </div>
   );

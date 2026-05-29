@@ -47,7 +47,7 @@ export function UploadItem() {
   if (authLoading) {
     return (
       <div className="max-w-3xl mx-auto py-20 flex items-center justify-center">
-        <Loader2 className="w-8 h-8 animate-spin text-brand-yellow" />
+        <Loader2 className="size-8 animate-spin text-brand-yellow" />
       </div>
     );
   }
@@ -64,8 +64,8 @@ export function UploadItem() {
     const isPending = user?.partnerStatus === 'pending';
     return (
       <div className="max-w-2xl mx-auto py-12 text-center">
-        <div className="w-20 h-20 bg-brand-yellow/10 text-brand-yellow rounded-full flex items-center justify-center mx-auto mb-6">
-          <Info className="w-10 h-10" />
+        <div className="size-20 bg-brand-yellow/10 text-brand-yellow rounded-full flex items-center justify-center mx-auto mb-6">
+          <Info className="size-10" />
         </div>
         <h1 className="text-3xl font-black text-gray-900 mb-4">
           {isPending ? 'Application Under Review' : 'Partner Access Only'}
@@ -76,7 +76,7 @@ export function UploadItem() {
             : 'You must be an approved partner to list items on the marketplace. This ensures trust and quality in our community.'}
         </p>
         {!isPending && (
-          <button
+          <button type="button"
             onClick={() => navigate('/dashboard/partner')}
             className="bg-brand-black text-white px-8 py-4 rounded-full font-bold hover:bg-brand-yellow hover:text-brand-black transition-colors"
           >
@@ -142,11 +142,11 @@ export function UploadItem() {
 
   return (
     <div className="max-w-3xl mx-auto pb-12">
-      <button 
+      <button type="button" 
         onClick={() => navigate("/dashboard")}
         className="flex items-center gap-2 text-gray-500 hover:text-brand-black font-bold mb-8 transition-colors"
       >
-        <ArrowLeft className="w-5 h-5" />
+        <ArrowLeft className="size-5" />
         Back to Dashboard
       </button>
 
@@ -166,15 +166,15 @@ export function UploadItem() {
               >
                 {previewUrl ? (
                   <>
-                    <img src={previewUrl} alt="Preview" className="w-full h-full object-cover" />
+                    <img src={previewUrl} alt="Preview" className="size-full object-cover" />
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                      <p className="text-white font-bold flex items-center gap-2"><Camera className="w-5 h-5"/> Change Photo</p>
+                      <p className="text-white font-bold flex items-center gap-2"><Camera className="size-5"/> Change Photo</p>
                     </div>
                   </>
                 ) : (
                   <div className="text-center">
-                    <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-3 shadow-sm text-gray-400 group-hover:text-brand-black transition-colors">
-                      <Camera className="w-6 h-6" />
+                    <div className="size-16 bg-white rounded-full flex items-center justify-center mx-auto mb-3 shadow-sm text-gray-400 group-hover:text-brand-black transition-colors">
+                      <Camera className="size-6" />
                     </div>
                     <p className="font-bold text-gray-900 mb-1">Click to upload photo</p>
                     <p className="text-xs font-medium text-gray-500">JPG or PNG up to 5MB</p>
@@ -265,7 +265,7 @@ export function UploadItem() {
 
             <div className="pt-6 flex flex-col md:flex-row items-center justify-between gap-4 border-t border-gray-100">
                <p className="text-sm font-medium text-gray-500 flex items-center gap-2">
-                 <CheckCircle className="w-4 h-4 text-green-500" /> Free to list on ShareHood
+                 <CheckCircle className="size-4 text-green-500" /> Free to list on Lendly
                </p>
                <button 
                  type="submit" 
@@ -274,7 +274,7 @@ export function UploadItem() {
                >
                  {isSubmitting ? (
                     <>
-                      <Loader2 className="w-5 h-5 animate-spin" />
+                      <Loader2 className="size-5 animate-spin" />
                       Publishing...
                     </>
                  ) : (

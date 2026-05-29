@@ -15,8 +15,8 @@ export function AdminStatsCard({ title, value, icon: Icon, path, trend, colorCla
     <Link to={path} className="block group">
       <div className="bg-white rounded-3xl border border-gray-100 p-6 shadow-sm hover:shadow-xl hover:border-gray-200 transition-all duration-300">
         <div className="flex justify-between items-start mb-4">
-          <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${colorClass}`}>
-            <Icon className="w-6 h-6" />
+          <div className={`size-12 rounded-xl flex items-center justify-center ${colorClass}`}>
+            <Icon className="size-6" />
           </div>
           {trend && (
              <div className="bg-gray-50 text-gray-500 text-xs font-bold px-2 py-1 rounded-md">

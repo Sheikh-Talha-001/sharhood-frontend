@@ -33,8 +33,8 @@ export function TrustStatusCard({ verificationStatus, partnerStatus }: Props) {
         <div className="space-y-4">
           <Link to="/dashboard/verification" className="flex items-center justify-between p-3 rounded-2xl hover:bg-gray-50 transition-colors border border-transparent hover:border-gray-100 cursor-pointer group">
             <div className="flex items-center gap-3">
-               <div className="w-10 h-10 bg-blue-50 text-blue-500 rounded-xl flex items-center justify-center shrink-0">
-                  <Shield className="w-5 h-5" />
+               <div className="size-10 bg-blue-50 text-blue-500 rounded-xl flex items-center justify-center shrink-0">
+                  <Shield className="size-5" />
                </div>
                <div>
                   <h4 className="font-bold text-gray-900 text-sm group-hover:text-blue-600 transition-colors">Identity Status</h4>
@@ -42,15 +42,15 @@ export function TrustStatusCard({ verificationStatus, partnerStatus }: Props) {
                </div>
             </div>
             <div className={`px-3 py-1.5 rounded-full border flex items-center gap-1.5 ${idStatus.bg} ${idStatus.border}`}>
-               <idStatus.icon className={`w-3.5 h-3.5 ${idStatus.color}`} />
+               <idStatus.icon className={`size-3.5 ${idStatus.color}`} />
                <span className={`text-[10px] font-bold uppercase tracking-wider ${idStatus.color}`}>{idStatus.text}</span>
             </div>
           </Link>
 
           <Link to="/dashboard/partner" className="flex items-center justify-between p-3 rounded-2xl hover:bg-gray-50 transition-colors border border-transparent hover:border-gray-100 cursor-pointer group">
             <div className="flex items-center gap-3">
-               <div className="w-10 h-10 bg-purple-50 text-purple-500 rounded-xl flex items-center justify-center shrink-0">
-                  <Store className="w-5 h-5" />
+               <div className="size-10 bg-purple-50 text-purple-500 rounded-xl flex items-center justify-center shrink-0">
+                  <Store className="size-5" />
                </div>
                <div>
                   <h4 className="font-bold text-gray-900 text-sm group-hover:text-purple-600 transition-colors">Partner Status</h4>
@@ -58,7 +58,7 @@ export function TrustStatusCard({ verificationStatus, partnerStatus }: Props) {
                </div>
             </div>
             <div className={`px-3 py-1.5 rounded-full border flex items-center gap-1.5 ${partStatus.bg} ${partStatus.border}`}>
-               <partStatus.icon className={`w-3.5 h-3.5 ${partStatus.color}`} />
+               <partStatus.icon className={`size-3.5 ${partStatus.color}`} />
                <span className={`text-[10px] font-bold uppercase tracking-wider ${partStatus.color}`}>{partStatus.text}</span>
             </div>
           </Link>

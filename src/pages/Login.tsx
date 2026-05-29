@@ -51,14 +51,14 @@ export function Login() {
   return (
     <div className="min-h-screen bg-brand-bg flex items-center justify-center p-6 relative">
        <Link to="/" className="absolute top-6 left-6 p-2 bg-white rounded-full text-brand-black hover:bg-gray-100 transition-colors shadow-sm">
-         <ArrowLeft className="w-5 h-5" />
+         <ArrowLeft className="size-5" />
        </Link>
        <div className="max-w-md w-full bg-white rounded-4xl p-8 md:p-12 shadow-xl border border-gray-100">
           <div className="flex items-center gap-3 mb-10 justify-center">
-             <div className="w-10 h-10 bg-brand-black rounded-xl flex items-center justify-center">
+             <div className="size-10 bg-brand-black rounded-xl flex items-center justify-center">
                <span className="text-brand-yellow font-black text-xl leading-none">S</span>
              </div>
-             <span className="font-bold text-2xl tracking-tight text-brand-black">ShareHood</span>
+             <span className="font-bold text-2xl tracking-tight text-brand-black">Lendly</span>
           </div>
           <h2 className="text-3xl font-bold mb-2 tracking-tight text-center">Welcome back</h2>
           <p className="text-gray-500 font-medium text-center mb-8">Sign in to your account to continue</p>
@@ -94,13 +94,13 @@ export function Login() {
                      className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-brand-yellow focus:border-brand-yellow transition-all font-medium" 
                    />
                    <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
-                      {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                      {showPassword ? <EyeOff className="size-5" /> : <Eye className="size-5" />}
                    </button>
                 </div>
              </div>
              <div className="flex items-center justify-between text-sm font-bold">
                 <label className="flex items-center gap-2 cursor-pointer text-gray-600">
-                   <input type="checkbox" className="w-4 h-4 rounded text-brand-black focus:ring-brand-yellow border-gray-300" />
+                   <input type="checkbox" className="size-4 rounded text-brand-black focus:ring-brand-yellow border-gray-300" />
                    Remember me
                 </label>
                 <a href="#" className="text-brand-black hover:text-brand-yellow transition-colors">Forgot password?</a>
@@ -111,7 +111,7 @@ export function Login() {
                className="w-full bg-brand-black text-white rounded-full py-4 font-bold text-lg hover:bg-brand-yellow hover:text-brand-black hover:shadow-lg hover:shadow-brand-yellow/20 transition-all flex items-center justify-center gap-2 group mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
              >
                 {isSubmitting ? "Signing in..." : "Sign In"}
-                {!isSubmitting && <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />}
+                {!isSubmitting && <ArrowRight className="size-5 group-hover:translate-x-1 transition-transform" />}
              </button>
           </form>
 

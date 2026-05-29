@@ -104,7 +104,7 @@ export function BecomePartner() {
           <p className="text-xl md:text-2xl font-medium text-gray-700 mb-10 max-w-2xl mx-auto">
             The secure marketplace to rent out your items and earn money safely.
           </p>
-          <button 
+          <button type="button" 
             onClick={scrollToForm}
             className="bg-brand-yellow text-brand-black font-black px-10 py-4 rounded-full text-lg hover:scale-105 hover:shadow-xl hover:shadow-brand-yellow/20 transition-all active:scale-95"
           >
@@ -127,19 +127,19 @@ export function BecomePartner() {
           <h2 className="text-3xl md:text-5xl font-black text-center mb-16">What's in it for you?</h2>
           <div className="grid md:grid-cols-2 gap-8 md:gap-12 relative">
              <BenefitCard 
-               icon={<Store className="w-8 h-8" />} 
+               icon={<Store className="size-8" />} 
                title="More people in your store, extra income from your inventory, and cross-selling potential." 
              />
              <BenefitCard 
-               icon={<Gem className="w-8 h-8" />} 
+               icon={<Gem className="size-8" />} 
                title="Monetize your inventory to the max." 
              />
              <BenefitCard 
-               icon={<Users className="w-8 h-8" />} 
+               icon={<Users className="size-8" />} 
                title="Have a positive impact on your planet and community by contributing to circular economy." 
              />
              <BenefitCard 
-               icon={<Zap className="w-8 h-8" />} 
+               icon={<Zap className="size-8" />} 
                title="Make extra income, your profile is visible to over 60,000 users in the app." 
              />
           </div>
@@ -161,7 +161,7 @@ export function BecomePartner() {
             />
             <CategoryCard 
               title="Entrepreneurs"
-              subtitle="Monetize your own items safely with ShareHood"
+              subtitle="Monetize your own items safely with Lendly"
               items={["Handymen (renting power tools)", "Gardeners (renting lawnmowers)", "Gamers/VR sets"]}
             />
             <CategoryCard 
@@ -174,17 +174,17 @@ export function BecomePartner() {
 
         {/* PLATFORM CATEGORIES SHOWCASE */}
         <section className="max-w-5xl mx-auto px-6 mb-32 text-center">
-          <h2 className="text-3xl md:text-5xl font-black mb-6">ShareHood is the app where you can rent anything</h2>
+          <h2 className="text-3xl md:text-5xl font-black mb-6">Lendly is the app where you can rent anything</h2>
           <p className="text-gray-600 font-medium mb-12">From tools to electronics, discover the top categories in our app</p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 justify-items-center">
-            <ShowcaseBadge icon={<Wrench className="w-4 h-4 text-orange-500" />} label="DIY" />
-            <ShowcaseBadge icon={<Tv className="w-4 h-4 text-purple-500" />} label="Parties" />
-            <ShowcaseBadge icon={<Bike className="w-4 h-4 text-blue-500" />} label="Sport" />
-            <ShowcaseBadge icon={<Tent className="w-4 h-4 text-green-500" />} label="Camping" />
-            <ShowcaseBadge icon={<Camera className="w-4 h-4 text-yellow-500" />} label="Audiovisual" />
-            <ShowcaseBadge icon={<Briefcase className="w-4 h-4 text-gray-500" />} label="Events" />
-            <ShowcaseBadge icon={<MapPin className="w-4 h-4 text-red-500" />} label="Mobility" />
-            <ShowcaseBadge icon={<Smartphone className="w-4 h-4 text-teal-500" />} label="Electronics" />
+            <ShowcaseBadge icon={<Wrench className="size-4 text-orange-500" />} label="DIY" />
+            <ShowcaseBadge icon={<Tv className="size-4 text-purple-500" />} label="Parties" />
+            <ShowcaseBadge icon={<Bike className="size-4 text-blue-500" />} label="Sport" />
+            <ShowcaseBadge icon={<Tent className="size-4 text-green-500" />} label="Camping" />
+            <ShowcaseBadge icon={<Camera className="size-4 text-yellow-500" />} label="Audiovisual" />
+            <ShowcaseBadge icon={<Briefcase className="size-4 text-gray-500" />} label="Events" />
+            <ShowcaseBadge icon={<MapPin className="size-4 text-red-500" />} label="Mobility" />
+            <ShowcaseBadge icon={<Smartphone className="size-4 text-teal-500" />} label="Electronics" />
           </div>
         </section>
 
@@ -194,22 +194,22 @@ export function BecomePartner() {
           <div className="bg-gray-200/50 rounded-3xl p-12 md:p-24 relative overflow-hidden border border-gray-300/50 shadow-inner">
              <div className="flex flex-col md:flex-row justify-between items-center relative z-10 gap-8">
                <div className="text-center">
-                 <div className="w-12 h-12 bg-brand-yellow rounded-full flex items-center justify-center font-black text-xl mx-auto mb-4 shadow-lg">1</div>
+                 <div className="size-12 bg-brand-yellow rounded-full flex items-center justify-center font-black text-xl mx-auto mb-4 shadow-lg">1</div>
                  <h3 className="font-bold text-lg">Apply as partner</h3>
                </div>
                <div className="hidden md:block flex-1 h-1 border-t-2 border-dashed border-gray-400"></div>
                <div className="text-center">
-                 <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center font-black text-xl mx-auto mb-4 shadow-lg">2</div>
+                 <div className="size-12 bg-white rounded-full flex items-center justify-center font-black text-xl mx-auto mb-4 shadow-lg">2</div>
                  <h3 className="font-bold text-lg">Admin review</h3>
                </div>
                <div className="hidden md:block flex-1 h-1 border-t-2 border-dashed border-gray-400"></div>
                <div className="text-center">
-                 <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center font-black text-xl mx-auto mb-4 shadow-lg">3</div>
+                 <div className="size-12 bg-white rounded-full flex items-center justify-center font-black text-xl mx-auto mb-4 shadow-lg">3</div>
                  <h3 className="font-bold text-lg">Verification</h3>
                </div>
                <div className="hidden md:block flex-1 h-1 border-t-2 border-dashed border-gray-400"></div>
                <div className="text-center">
-                 <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center font-black text-xl mx-auto mb-4 shadow-lg">4</div>
+                 <div className="size-12 bg-white rounded-full flex items-center justify-center font-black text-xl mx-auto mb-4 shadow-lg">4</div>
                  <h3 className="font-bold text-lg">Start listing</h3>
                </div>
              </div>
@@ -218,7 +218,7 @@ export function BecomePartner() {
 
         {/* APPLICATION FORM */}
         <section id="apply-form" className="max-w-3xl mx-auto px-6">
-          <h2 className="text-3xl md:text-5xl font-black text-center mb-12">Ready to join ShareHood?</h2>
+          <h2 className="text-3xl md:text-5xl font-black text-center mb-12">Ready to join Lendly?</h2>
           
           <div className="bg-white rounded-3xl shadow-xl shadow-brand-yellow/5 border-2 border-brand-yellow p-8 md:p-12">
             <div className="mb-8">
@@ -228,8 +228,8 @@ export function BecomePartner() {
 
             {success ? (
               <div className="text-center py-12">
-                <div className="w-20 h-20 bg-green-50 text-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
-                   <CheckCircle className="w-10 h-10" />
+                <div className="size-20 bg-green-50 text-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                   <CheckCircle className="size-10" />
                 </div>
                 <h2 className="text-2xl font-bold text-gray-900 mb-2">Application Submitted!</h2>
                 <p className="text-gray-500 font-medium">Redirecting you to your dashboard...</p>
@@ -238,7 +238,7 @@ export function BecomePartner() {
               <form onSubmit={handleSubmit} className="space-y-6">
                 {error && (
                   <div className="p-4 bg-red-50 text-red-600 rounded-xl font-bold text-sm border border-red-100 flex gap-2 items-center">
-                    <ShieldCheck className="w-5 h-5 shrink-0" /> {error}
+                    <ShieldCheck className="size-5 shrink-0" /> {error}
                   </div>
                 )}
                 
@@ -324,7 +324,7 @@ export function BecomePartner() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-2">Why do you want to join ShareHood? *</label>
+                  <label className="block text-sm font-bold text-gray-700 mb-2">Why do you want to join Lendly? *</label>
                   <textarea 
                     name="reasonForJoining"
                     value={formData.reasonForJoining}
@@ -341,7 +341,7 @@ export function BecomePartner() {
                     className="bg-brand-yellow text-brand-black font-black px-10 py-4 rounded-full hover:scale-[1.02] transition-all disabled:opacity-50 disabled:hover:scale-100 flex items-center gap-2"
                   >
                     {isSubmitting ? "Submitting..." : "Submit Application"}
-                    {!isSubmitting && <ArrowRight className="w-5 h-5" />}
+                    {!isSubmitting && <ArrowRight className="size-5" />}
                   </button>
                 </div>
               </form>
@@ -358,7 +358,7 @@ export function BecomePartner() {
 function StatItem({ label }: { label: string }) {
   return (
     <div className="flex items-center gap-2">
-      <div className="w-3 h-3 rounded-full bg-brand-yellow shrink-0" />
+      <div className="size-3 rounded-full bg-brand-yellow shrink-0" />
       <span className="font-bold text-lg md:text-xl text-gray-800">{label}</span>
     </div>
   );
@@ -367,7 +367,7 @@ function StatItem({ label }: { label: string }) {
 function BenefitCard({ icon, title }: { icon: React.ReactNode, title: string }) {
   return (
     <div className="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm flex flex-col items-center text-center gap-6 hover:shadow-md transition-shadow relative z-10">
-      <div className="w-16 h-16 bg-[#FFF9F2] rounded-full flex items-center justify-center text-brand-black border border-brand-yellow/30">
+      <div className="size-16 bg-[#FFF9F2] rounded-full flex items-center justify-center text-brand-black border border-brand-yellow/30">
         {icon}
       </div>
       <p className="font-bold text-lg text-gray-800 leading-tight">{title}</p>
@@ -383,7 +383,7 @@ function CategoryCard({ title, subtitle, items }: { title: string, subtitle: str
       <ul className="space-y-3">
         {items.map((item, idx) => (
           <li key={idx} className="flex gap-3">
-            <div className="w-1.5 h-1.5 rounded-full bg-brand-yellow mt-2 shrink-0" />
+            <div className="size-1.5 rounded-full bg-brand-yellow mt-2 shrink-0" />
             <span className="text-sm font-medium text-gray-700">{item}</span>
           </li>
         ))}

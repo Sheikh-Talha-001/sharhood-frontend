@@ -198,13 +198,13 @@ export function NotificationBell() {
 
   return (
     <div className="relative" ref={dropdownRef}>
-      <button 
+      <button type="button" 
         onClick={() => setIsOpen(!isOpen)}
         className="relative p-2 text-[#333333] hover:bg-[#fcf3ec] rounded-full transition-colors"
       >
-        <Bell className="w-5 h-5" />
+        <Bell className="size-5" />
         {unreadCount > 0 && (
-          <span className="absolute -top-0.5 -right-0.5 w-5 h-5 bg-[#7e0038] text-white text-[10px] font-bold flex items-center justify-center rounded-full border-2 border-white">
+          <span className="absolute -top-0.5 -right-0.5 size-5 bg-[#7e0038] text-white text-[10px] font-bold flex items-center justify-center rounded-full border-2 border-white">
             {unreadCount > 99 ? '99+' : unreadCount}
           </span>
         )}
@@ -219,18 +219,18 @@ export function NotificationBell() {
             <h3 className="font-bold text-[#241d1b] text-sm">Notifications</h3>
             <div className="flex items-center gap-3">
               {unreadCount > 0 && (
-                <button 
+                <button type="button" 
                   onClick={handleMarkAllAsRead}
                   className="text-[11px] font-bold text-[#7e0038] hover:text-[#5c002a] transition-colors flex items-center gap-1"
                 >
-                  <Check className="w-3 h-3" /> Mark all read
+                  <Check className="size-3" /> Mark all read
                 </button>
               )}
-              <button
+              <button type="button"
                 onClick={() => { setIsOpen(false); navigate('/dashboard'); }}
                 className="text-[11px] font-bold text-[#666666] hover:text-[#241d1b] transition-colors flex items-center gap-1"
               >
-                <ExternalLink className="w-3 h-3" /> View all
+                <ExternalLink className="size-3" /> View all
               </button>
             </div>
           </div>
@@ -239,7 +239,7 @@ export function NotificationBell() {
           <div className="max-h-[420px] overflow-y-auto">
             {notifications.length === 0 ? (
               <div className="p-10 text-center">
-                <Bell className="w-8 h-8 text-[#cccccc] mx-auto mb-3" />
+                <Bell className="size-8 text-[#cccccc] mx-auto mb-3" />
                 <p className="text-sm font-semibold text-[#999999]">No notifications yet</p>
                 <p className="text-xs text-[#bbbbbb] mt-1">You'll be notified about important updates here.</p>
               </div>
@@ -267,7 +267,7 @@ export function NotificationBell() {
                       </div>
                       {!notification.isRead && (
                         <div className="flex flex-col justify-center">
-                          <div className="w-2 h-2 rounded-full bg-[#7e0038]"></div>
+                          <div className="size-2 rounded-full bg-[#7e0038]"></div>
                         </div>
                       )}
                     </div>

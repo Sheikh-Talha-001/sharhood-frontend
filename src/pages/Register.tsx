@@ -57,14 +57,14 @@ export function Register() {
   return (
     <div className="min-h-screen bg-brand-bg flex items-center justify-center p-6 py-12 relative">
        <Link to="/" className="absolute top-6 left-6 p-2 bg-white rounded-full text-brand-black hover:bg-gray-100 transition-colors shadow-sm hidden sm:flex">
-         <ArrowLeft className="w-5 h-5" />
+         <ArrowLeft className="size-5" />
        </Link>
        <div className="max-w-xl w-full bg-white rounded-4xl p-8 md:p-12 shadow-xl border border-gray-100 mt-12 sm:mt-0">
           <div className="flex items-center gap-3 mb-8 justify-center">
-             <div className="w-10 h-10 bg-brand-black rounded-xl flex items-center justify-center">
+             <div className="size-10 bg-brand-black rounded-xl flex items-center justify-center">
                <span className="text-brand-yellow font-black text-xl leading-none">S</span>
              </div>
-             <span className="font-bold text-2xl tracking-tight text-brand-black">ShareHood</span>
+             <span className="font-bold text-2xl tracking-tight text-brand-black">Lendly</span>
           </div>
           <h2 className="text-3xl font-bold mb-2 tracking-tight text-center">Join the neighborhood</h2>
           <p className="text-gray-500 font-medium text-center mb-8">Create an account to start sharing today.</p>
@@ -79,8 +79,9 @@ export function Register() {
           <form onSubmit={handleSubmit} className="space-y-5">
              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                <div>
-                  <label className="block text-sm font-bold text-brand-black mb-2">Full Name</label>
+                  <label htmlFor="register-name" className="block text-sm font-bold text-brand-black mb-2">Full Name</label>
                   <input 
+                    id="register-name"
                     type="text" 
                     required
                     value={name}
@@ -90,8 +91,9 @@ export function Register() {
                   />
                </div>
                <div>
-                  <label className="block text-sm font-bold text-brand-black mb-2">Phone Number</label>
+                  <label htmlFor="register-phone" className="block text-sm font-bold text-brand-black mb-2">Phone Number</label>
                   <input 
+                    id="register-phone"
                     type="tel" 
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
@@ -101,8 +103,9 @@ export function Register() {
                </div>
              </div>
              <div>
-                <label className="block text-sm font-bold text-brand-black mb-2">Email Address</label>
+                <label htmlFor="register-email" className="block text-sm font-bold text-brand-black mb-2">Email Address</label>
                 <input 
+                  id="register-email"
                   type="email" 
                   required
                   value={email}
@@ -113,9 +116,10 @@ export function Register() {
              </div>
              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                <div>
-                  <label className="block text-sm font-bold text-brand-black mb-2">Password</label>
+                  <label htmlFor="register-password" className="block text-sm font-bold text-brand-black mb-2">Password</label>
                   <div className="relative">
                      <input 
+                       id="register-password"
                        type={showPassword ? "text" : "password"} 
                        required
                        value={password}
@@ -124,13 +128,14 @@ export function Register() {
                        className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-brand-yellow focus:border-brand-yellow transition-all font-medium" 
                      />
                      <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
-                        {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                        {showPassword ? <EyeOff className="size-5" /> : <Eye className="size-5" />}
                      </button>
                   </div>
                </div>
                <div>
-                  <label className="block text-sm font-bold text-brand-black mb-2">Confirm Password</label>
+                  <label htmlFor="register-confirm-password" className="block text-sm font-bold text-brand-black mb-2">Confirm Password</label>
                   <input 
+                    id="register-confirm-password"
                     type={showPassword ? "text" : "password"} 
                     required
                     value={confirmPassword}
@@ -147,7 +152,7 @@ export function Register() {
                className="w-full bg-brand-black text-white rounded-full py-4 font-bold text-lg hover:bg-brand-yellow hover:text-brand-black hover:shadow-lg hover:shadow-brand-yellow/20 transition-all flex items-center justify-center gap-2 group mt-6 disabled:opacity-50 disabled:cursor-not-allowed"
              >
                 {isSubmitting ? "Creating Account..." : "Create Account"}
-                {!isSubmitting && <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />}
+                {!isSubmitting && <ArrowRight className="size-5 group-hover:translate-x-1 transition-transform" />}
              </button>
           </form>
           <div className="mt-8 text-center font-medium text-sm text-gray-500">

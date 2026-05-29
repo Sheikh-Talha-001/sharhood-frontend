@@ -17,7 +17,7 @@ export const borrowRequestService = {
     const response = await api.post('/requests', data);
     return response.data;
   },
-  updateStatus: async (id: string, status: string) => {
+  updateStatus: async (id: string, status: string, data?: any) => {
     // Map status strings to specific backend routes
     const validEndpoints = {
       'approved': 'approve',
@@ -32,7 +32,7 @@ export const borrowRequestService = {
       throw new Error(`Invalid status transition: ${status}`);
     }
 
-    const response = await api.put(`/requests/${id}/${endpoint}`);
+    const response = await api.put(`/requests/${id}/${endpoint}`, data || {});
     return response.data;
   }
 };

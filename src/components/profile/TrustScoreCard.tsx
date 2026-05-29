@@ -27,14 +27,14 @@ export function TrustScoreCard() {
              </svg>
           </div>
           
-          <div className="w-48 h-48 rounded-full flex flex-col items-center justify-center bg-white relative z-10">
+          <div className="size-48 rounded-full flex flex-col items-center justify-center bg-white relative z-10">
             <span className="text-6xl font-black text-gray-900 tracking-tighter -mb-2">4.9</span>
             <span className="text-xs font-bold text-gray-400 uppercase tracking-widest mt-2">Out of 5.0</span>
           </div>
           
           {/* Exceptional Badge */}
           <div className="absolute -top-4 right-0 bg-white border border-gray-100 shadow-sm rounded-full px-3 py-1.5 flex items-center gap-1.5 z-20">
-             <TrendingUp className="w-3.5 h-3.5 text-green-500" />
+             <TrendingUp className="size-3.5 text-green-500" />
              <span className="text-xs font-bold text-gray-700 uppercase tracking-wide">Exceptional</span>
           </div>
         </div>

@@ -59,9 +59,9 @@ export function SafetySection() {
   }, []);
 
   return (
-    <section ref={containerRef} className="py-24 px-6 max-w-7xl mx-auto">
-      <div className="mb-16">
-        <h2 className="text-5xl font-black mb-4">Trust & Safety</h2>
+    <section ref={containerRef} className="py-32 lg:py-40 px-6 max-w-7xl mx-auto">
+      <div className="mb-20 text-center">
+        <h2 className="text-5xl lg:text-6xl font-black mb-6">Trust & Safety</h2>
         <p className="text-xl font-medium text-gray-600">Your security is our top priority at SharHood.</p>
       </div>
 
@@ -77,24 +77,24 @@ export function SafetySection() {
             )}
           >
             <div className="flex-1">
-              <div className="w-20 h-20 rounded-3xl bg-black/10 backdrop-blur-md flex items-center justify-center mb-8">
-                <card.icon className="w-10 h-10" />
+              <div className="size-20 rounded-3xl bg-black/10 backdrop-blur-md flex items-center justify-center mb-8">
+                <card.icon className="size-10" />
               </div>
               <h3 className="text-4xl lg:text-6xl font-black mb-6 tracking-tighter">{card.title}</h3>
               <p className="text-xl font-medium opacity-80 max-w-2xl leading-relaxed mb-10">{card.desc}</p>
               
-              <button className={cn(
+              <button type="button" className={cn(
                 "px-8 py-4 rounded-full font-bold text-lg flex items-center gap-3 transition-all hover:gap-5",
                 i === 0 ? "bg-white text-brand-orange" : "bg-brand-black text-white"
               )}>
                  Learn how we protect you
-                 <ArrowRight className="w-5 h-5" />
+                 <ArrowRight className="size-5" />
               </button>
             </div>
             
             <div className="lg:w-1/3 hidden lg:flex items-center justify-center">
               {/* Abstract Illustration */}
-              <div className="w-64 h-64 border-8 border-current opacity-20 rounded-full animate-pulse" />
+              <div className="size-64 border-8 border-current opacity-20 rounded-full animate-pulse" />
             </div>
           </div>
         ))}

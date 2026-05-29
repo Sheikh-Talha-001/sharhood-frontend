@@ -1,43 +1,43 @@
-import { PackageSearch, SearchX, AlertCircle, BellOff } from "lucide-react";
-import React from "react";
+import { LucideIcon } from "lucide-react";
+import { Link } from "react-router-dom";
 
-interface EmptyStateProps {
+interface Props {
+  icon: LucideIcon;
   title: string;
   description: string;
-  type?: "items" | "search" | "error" | "notifications" | "custom";
-  icon?: React.ReactNode;
-  action?: React.ReactNode;
+  actionLabel?: string;
+  actionLink?: string;
+  actionOnClick?: () => void;
 }
 
-export function EmptyState({ title, description, type = "items", icon, action }: EmptyStateProps) {
-  
-  const getIcon = () => {
-    if (icon) return icon;
-    switch (type) {
-      case "search":
-        return <SearchX className="w-10 h-10" />;
-      case "error":
-        return <AlertCircle className="w-10 h-10 text-red-400" />;
-      case "notifications":
-        return <BellOff className="w-10 h-10" />;
-      case "items":
-      default:
-        return <PackageSearch className="w-10 h-10" />;
-    }
-  };
-
+export function EmptyState({ icon: Icon, title, description, actionLabel, actionLink, actionOnClick }: Props) {
   return (
-    <div className="bg-white rounded-4xl border border-gray-100 p-12 text-center flex flex-col items-center justify-center min-h-[300px] shadow-sm">
-        <div className={`w-20 h-20 rounded-full flex items-center justify-center mb-6 ${type === 'error' ? 'bg-red-50 text-red-500' : 'bg-gray-50 text-gray-400'}`}>
-           {getIcon()}
-        </div>
-        <h3 className="text-2xl font-bold text-gray-900 mb-3">{title}</h3>
-        <p className="text-gray-500 font-medium max-w-sm mb-6 leading-relaxed">{description}</p>
-        {action && (
-          <div className="mt-2">
-            {action}
-          </div>
-        )}
+    <div className="flex flex-col items-center justify-center py-16 px-4 text-center bg-white rounded-3xl border border-gray-100 shadow-sm animate-in fade-in duration-300">
+      <div className="size-20 bg-gray-50 rounded-full flex items-center justify-center mb-6">
+        <Icon className="size-10 text-gray-400" />
+      </div>
+      <h3 className="text-xl font-bold text-gray-900 mb-2">{title}</h3>
+      <p className="text-gray-500 max-w-md mx-auto mb-8 leading-relaxed">
+        {description}
+      </p>
+      
+      {(actionLabel && actionLink) && (
+        <Link 
+          to={actionLink}
+          className="bg-brand-black text-white hover:bg-gray-800 px-8 py-3 rounded-full font-bold transition-colors"
+        >
+          {actionLabel}
+        </Link>
+      )}
+
+      {(actionLabel && actionOnClick) && (
+        <button 
+          onClick={actionOnClick}
+          className="bg-brand-black text-white hover:bg-gray-800 px-8 py-3 rounded-full font-bold transition-colors"
+        >
+          {actionLabel}
+        </button>
+      )}
     </div>
   );
 }

@@ -101,7 +101,7 @@ export function Users() {
            <div className="py-12 text-center text-red-500 font-bold">{error}</div>
          ) : (
            <div className="overflow-x-auto">
-             <table className="w-full">
+             <table className="w-full min-w-[800px]">
                <thead>
                  <tr className="border-b border-gray-100">
                    <th className="text-left py-4 px-6 text-xs font-bold text-gray-400 uppercase tracking-widest">User</th>
@@ -132,7 +132,9 @@ export function Users() {
                                <span className="px-2 py-1 text-xs font-bold rounded bg-green-50 text-green-600 uppercase tracking-wider">Active</span>
                              )}
                              {user.verificationStatus === 'verified' && (
-                               <ShieldCheck className="w-4 h-4 text-green-500" title="Verified" />
+                                <span title="Verified">
+                                  <ShieldCheck className="size-4 text-green-500" />
+                                </span>
                              )}
                           </div>
                        </td>
@@ -141,7 +143,7 @@ export function Users() {
                        </td>
                        <td className="py-4 px-6 text-right">
                          {user.role !== 'admin' && (
-                           <button 
+                           <button type="button" 
                              onClick={() => handleSuspendToggle(user)}
                              className={`inline-flex items-center gap-2 px-4 py-2 text-sm font-bold rounded-lg transition-colors ${
                                user.isSuspended 
@@ -150,9 +152,9 @@ export function Users() {
                              }`}
                            >
                              {user.isSuspended ? (
-                               <><CheckCircle className="w-4 h-4" /> Activate</>
+                               <><CheckCircle className="size-4" /> Activate</>
                              ) : (
-                               <><Ban className="w-4 h-4" /> Suspend</>
+                               <><Ban className="size-4" /> Suspend</>
                              )}
                            </button>
                          )}
@@ -190,13 +192,13 @@ export function Users() {
                </div>
                
                <div className="flex items-center justify-end gap-3 mt-8">
-                 <button 
+                 <button type="button" 
                    onClick={() => setSuspendModal({ isOpen: false, user: null, reason: '' })}
                    className="px-6 py-2.5 rounded-full font-bold text-gray-600 hover:bg-gray-100 transition-colors"
                  >
                    Cancel
                  </button>
-                 <button 
+                 <button type="button" 
                    onClick={confirmSuspend}
                    disabled={!suspendModal.reason.trim()}
                    className="px-6 py-2.5 rounded-full font-bold text-white bg-red-600 hover:bg-red-700 transition-colors disabled:opacity-50"

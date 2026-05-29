@@ -16,13 +16,13 @@ export function VerificationCard({ user }: Props) {
         
         {/* Identity */}
         <div className="flex items-start gap-4">
-          <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${isVerified ? 'bg-green-50 text-green-500' : 'bg-gray-100 text-gray-400'}`}>
-             <User className="w-5 h-5" />
+          <div className={`size-10 rounded-xl flex items-center justify-center shrink-0 ${isVerified ? 'bg-green-50 text-green-500' : 'bg-gray-100 text-gray-400'}`}>
+             <User className="size-5" />
           </div>
           <div className="flex-1">
             <div className="flex items-center justify-between mb-1">
                <span className={`font-bold text-sm ${isVerified ? 'text-gray-900' : 'text-gray-500'}`}>Identity Verified</span>
-               {isVerified && <CheckCircle2 className="w-5 h-5 text-green-500" />}
+               {isVerified && <CheckCircle2 className="size-5 text-green-500" />}
             </div>
             <p className="text-xs font-medium text-gray-400">{isVerified ? 'Government ID (CNIC)' : 'Not verified'}</p>
           </div>
@@ -30,13 +30,13 @@ export function VerificationCard({ user }: Props) {
 
         {/* Student/Work ID */}
         <div className="flex items-start gap-4">
-          <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 bg-green-50 text-green-500">
-             <Shield className="w-5 h-5" />
+          <div className="size-10 rounded-xl flex items-center justify-center shrink-0 bg-green-50 text-green-500">
+             <Shield className="size-5" />
           </div>
           <div className="flex-1">
             <div className="flex items-center justify-between mb-1">
                <span className="font-bold text-sm text-gray-900">Student ID</span>
-               <CheckCircle2 className="w-5 h-5 text-green-500" />
+               <CheckCircle2 className="size-5 text-green-500" />
             </div>
             <p className="text-xs font-medium text-gray-400">SF University Faculty</p>
           </div>
@@ -44,13 +44,13 @@ export function VerificationCard({ user }: Props) {
 
         {/* Phone */}
         <div className="flex items-start gap-4">
-          <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 bg-green-50 text-green-500">
-             <Smartphone className="w-5 h-5" />
+          <div className="size-10 rounded-xl flex items-center justify-center shrink-0 bg-green-50 text-green-500">
+             <Smartphone className="size-5" />
           </div>
           <div className="flex-1">
             <div className="flex items-center justify-between mb-1">
                <span className="font-bold text-sm text-gray-900">Phone Number</span>
-               <CheckCircle2 className="w-5 h-5 text-green-500" />
+               <CheckCircle2 className="size-5 text-green-500" />
             </div>
             <p className="text-xs font-medium text-gray-400">+1 (555) •••• 89</p>
           </div>
@@ -58,8 +58,8 @@ export function VerificationCard({ user }: Props) {
 
         {/* LinkedIn */}
         <div className="flex items-start gap-4 opacity-50">
-          <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 bg-gray-100 text-gray-400">
-             <LinkIcon className="w-5 h-5" />
+          <div className="size-10 rounded-xl flex items-center justify-center shrink-0 bg-gray-100 text-gray-400">
+             <LinkIcon className="size-5" />
           </div>
           <div className="flex-1">
             <div className="flex items-center justify-between mb-1">
@@ -74,11 +74,11 @@ export function VerificationCard({ user }: Props) {
 
       <div className="mt-8 pt-6 border-t border-gray-100">
          <div className="flex gap-3 items-start">
-            <ShieldCheck className="w-5 h-5 text-green-500 shrink-0 mt-0.5" />
+            <ShieldCheck className="size-5 text-green-500 shrink-0 mt-0.5" />
             <div>
                <h4 className="text-xs font-bold text-gray-900 mb-1">Trust Guarantee</h4>
                <p className="text-[11px] font-medium text-gray-500 leading-relaxed">
-                 ShareHood guarantees the authenticity of all verified documents. We use bank-grade encryption to protect your neighborhood data.
+                 Lendly guarantees the authenticity of all verified documents. We use bank-grade encryption to protect your neighborhood data.
                </p>
             </div>
          </div>

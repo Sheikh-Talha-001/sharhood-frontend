@@ -53,6 +53,13 @@ api.interceptors.response.use(
       error.friendlyMessage = 'Too many requests. Please wait a moment and try again.';
     }
 
+    if (error.response?.status === 404) {
+      if (typeof error.response.data === 'string' && (error.response.data.includes('<!DOCTYPE') || error.response.data.includes('Cannot '))) {
+         // Sanitize express default 404 HTML response which leaks routes
+         error.response.data = { error: "Resource not found." };
+      }
+    }
+
     return Promise.reject(error);
   }
 );

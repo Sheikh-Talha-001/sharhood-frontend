@@ -26,6 +26,7 @@ import { IncomingRequests } from "@/src/pages/IncomingRequests";
 import { MyRequests } from "@/src/pages/MyRequests";
 import { PublicProfile } from "@/src/pages/PublicProfile";
 import { AppealSuspension } from "@/src/pages/AppealSuspension";
+import { Complaints } from "@/src/pages/Complaints";
 
 // Lazy Loaded Admin imports
 const AdminDashboard = React.lazy(() => import("@/src/pages/admin/AdminDashboard").then(m => ({ default: m.AdminDashboard })));
@@ -36,6 +37,7 @@ const Users = React.lazy(() => import("@/src/pages/admin/Users").then(m => ({ de
 const Items = React.lazy(() => import("@/src/pages/admin/Items").then(m => ({ default: m.Items })));
 const Appeals = React.lazy(() => import("@/src/pages/admin/Appeals").then(m => ({ default: m.Appeals })));
 const ActivityFeed = React.lazy(() => import("@/src/pages/admin/ActivityFeed").then(m => ({ default: m.ActivityFeed })));
+const AdminComplaints = React.lazy(() => import("@/src/pages/admin/AdminComplaints").then(m => ({ default: m.AdminComplaints })));
 
 const AdminLoader = () => (
   <div className="p-8 h-full flex flex-col gap-6">
@@ -75,6 +77,7 @@ export function AppRoutes() {
           <Route path="profile" element={<Profile />} />
           <Route path="profile/edit" element={<EditProfile />} />
           <Route path="appeal" element={<AppealSuspension />} />
+          <Route path="complaints" element={<Complaints />} />
         </Route>
       </Route>
 
@@ -89,6 +92,7 @@ export function AppRoutes() {
            <Route path="items" element={<Items />} />
            <Route path="appeals" element={<Appeals />} />
            <Route path="activity" element={<ActivityFeed />} />
+           <Route path="complaints" element={<AdminComplaints />} />
         </Route>
       </Route>
     </Routes>

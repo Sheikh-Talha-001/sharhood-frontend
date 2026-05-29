@@ -21,21 +21,21 @@ export function CategoryStrip() {
            transition={{ duration: 4, repeat: Infinity }}
            className="absolute top-0 left-0 text-brand-black/20"
         >
-          <Star className="w-8 h-8 fill-current" />
+          <Star className="size-8 fill-current" />
         </motion.div>
         <motion.div 
            animate={{ rotate: [0, -15, 15, 0], scale: [1, 1.1, 1] }}
            transition={{ duration: 5, repeat: Infinity }}
            className="absolute top-10 right-0 text-brand-black/20"
         >
-          <Sparkles className="w-10 h-10" />
+          <Sparkles className="size-10" />
         </motion.div>
         <motion.div 
            animate={{ y: [0, 10, -10, 0] }}
            transition={{ duration: 6, repeat: Infinity }}
            className="absolute -bottom-10 left-1/4 text-brand-black/20"
         >
-          <Star className="w-6 h-6" />
+          <Star className="size-6" />
         </motion.div>
 
         <motion.h2 
@@ -44,7 +44,7 @@ export function CategoryStrip() {
           viewport={{ once: true }}
           className="text-3xl md:text-4xl lg:text-5xl font-semibold max-w-5xl mx-auto tracking-tight [word-spacing:0.15em] leading-[1.2] text-brand-black mb-12"
         >
-          ShareHood is the go-to app for accessing 
+          Lendly is the go-to app for accessing 
           <span className="font-handwriting italic font-normal text-brand-orange">anything,</span> whenever <span className="font-handwriting italic font-normal text-brand-orange">you need it.</span>
         </motion.h2>
       </div>
@@ -71,12 +71,12 @@ export function CategoryStrip() {
       </div>
 
       <div className="mt-12 text-center">
-         <button className="bg-brand-black text-white px-10 py-5 rounded-full font-bold text-lg flex items-center gap-3 mx-auto hover:scale-105 transition-all shadow-xl">
-            <Search className="w-5 h-5" />
+         <button type="button" className="bg-brand-black text-white px-10 py-5 rounded-full font-bold text-lg flex items-center gap-3 mx-auto hover:scale-105 transition-all shadow-xl">
+            <Search className="size-5" />
             Find what I need
          </button>
          <p className="mt-8 text-gray-500 font-medium text-sm md:text-base max-w-2xl mx-auto px-6">
-            With over <span className="font-bold text-brand-black">100,000 items</span> on Sharehood, find everything <br className="hidden md:block" /> you need from your neighbors and nearby shops.
+            With over <span className="font-bold text-brand-black">100,000 items</span> on Lendly, find everything <br className="hidden md:block" /> you need from your neighbors and nearby shops.
          </p>
       </div>
     </section>
@@ -90,7 +90,7 @@ function ProductCard({ name, price, rating, user, image }: any) {
       className="bg-white rounded-3xl w-[220px] md:w-[260px] p-4 flex flex-col shadow-sm border border-brand-black/5 flex-shrink-0 group"
     >
       <div className="relative aspect-square rounded-2xl overflow-hidden mb-4 bg-gray-100">
-         <img src={image} alt={name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+         <img src={image} alt={name} className="size-full object-cover transition-transform duration-500 group-hover:scale-110" />
          {/* Price Tag */}
          <div className={cn(
            "absolute top-2 right-2 px-3 py-1.5 rounded-full text-[10px] md:text-xs font-bold shadow-lg",
@@ -113,7 +113,7 @@ function ProductCard({ name, price, rating, user, image }: any) {
       </div>
 
       <div className="flex items-center gap-2 border-t pt-3">
-         <div className="w-6 h-6 rounded-full bg-gray-200 overflow-hidden">
+         <div className="size-6 rounded-full bg-gray-200 overflow-hidden">
             <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${user}`} alt="" />
          </div>
          <span className="text-xs font-medium text-gray-500">{user}</span>

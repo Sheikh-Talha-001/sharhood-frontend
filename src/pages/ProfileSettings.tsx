@@ -30,11 +30,11 @@ export function ProfileSettings() {
 
         {/* Right Column: Settings Forms */}
         <div className="lg:col-span-2 space-y-8">
-           <DashboardCard title="Personal Information" icon={<UserCircle className="w-5 h-5" />}>
+           <DashboardCard title="Personal Information" icon={<UserCircle className="size-5" />}>
              <form className="space-y-5">
                <div className="flex items-center gap-6 mb-6">
-                  <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center border border-gray-200">
-                     <Camera className="w-6 h-6 text-gray-400" />
+                  <div className="size-20 bg-gray-100 rounded-full flex items-center justify-center border border-gray-200">
+                     <Camera className="size-6 text-gray-400" />
                   </div>
                   <button type="button" className="px-4 py-2 border border-brand-black text-brand-black font-bold rounded-full hover:bg-brand-black hover:text-white transition-colors text-sm">
                     Upload Photo
@@ -63,7 +63,7 @@ export function ProfileSettings() {
              </form>
            </DashboardCard>
 
-           <DashboardCard title="Security" icon={<Lock className="w-5 h-5" />}>
+           <DashboardCard title="Security" icon={<Lock className="size-5" />}>
              <form className="space-y-5">
                 <div>
                   <label className="block text-sm font-bold text-gray-900 mb-2">Current Password</label>

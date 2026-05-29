@@ -18,9 +18,9 @@ export function ReviewCard({ name, avatarUrl, role, itemContext, rating, comment
       <div className="flex justify-between items-start">
         <div className="flex items-center gap-4">
            {avatarUrl ? (
-             <img src={avatarUrl} alt={name} className="w-12 h-12 rounded-full object-cover bg-gray-100" />
+             <img src={avatarUrl} alt={name} className="size-12 rounded-full object-cover bg-gray-100" />
            ) : (
-             <div className="w-12 h-12 bg-orange-100 text-orange-700 rounded-full flex items-center justify-center font-bold">
+             <div className="size-12 bg-orange-100 text-orange-700 rounded-full flex items-center justify-center font-bold">
                {initials}
              </div>
            )}
@@ -35,7 +35,7 @@ export function ReviewCard({ name, avatarUrl, role, itemContext, rating, comment
         {/* Stars */}
         <div className="flex gap-1">
           {[...Array(5)].map((_, i) => (
-            <Star key={i} className={`w-4 h-4 ${i < rating ? 'text-green-500 fill-green-500' : 'text-gray-200'}`} />
+            <Star key={i} className={`size-4 ${i < rating ? 'text-green-500 fill-green-500' : 'text-gray-200'}`} />
           ))}
         </div>
       </div>

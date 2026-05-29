@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 export function Items() {
   const [items, setItems] = useState<any[]>([]);
   const [filteredItems, setFilteredItems] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState<boolean | undefined>(undefined);
   const [error, setError] = useState<string | null>(null);
   const [removeModal, setRemoveModal] = useState<{isOpen: boolean, item: any, reason: string}>({isOpen: false, item: null, reason: ''});
 
@@ -95,13 +95,13 @@ export function Items() {
        </div>
 
        <DashboardCard>
-         {isLoading ? (
+         {isLoading !== false ? (
            <div className="py-20"><LoadingSpinner /></div>
          ) : error ? (
            <div className="py-12 text-center text-red-500 font-bold">{error}</div>
          ) : (
-           <div className="overflow-x-auto">
-             <table className="w-full">
+            <div className="overflow-x-auto">
+             <table className="w-full min-w-[800px]">
                <thead>
                  <tr className="border-b border-gray-100">
                    <th className="text-left py-4 px-6 text-xs font-bold text-gray-400 uppercase tracking-widest">Listing</th>
@@ -120,11 +120,11 @@ export function Items() {
                      <tr key={item._id} className="hover:bg-gray-50/50 transition-colors">
                        <td className="py-4 px-6">
                           <div className="flex items-center gap-3">
-                             <div className="w-12 h-12 rounded-lg bg-gray-100 overflow-hidden shrink-0">
+                             <div className="size-12 rounded-lg bg-gray-100 overflow-hidden shrink-0">
                                {item.image ? (
-                                 <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
+                                 <img src={item.image} alt={item.title} className="size-full object-cover" />
                                ) : (
-                                 <div className="w-full h-full bg-gray-200"></div>
+                                 <div className="size-full bg-gray-200"></div>
                                )}
                              </div>
                              <div>
@@ -145,7 +145,7 @@ export function Items() {
                           )}
                        </td>
                        <td className="py-4 px-6 text-right">
-                          <button 
+                          <button type="button" 
                              onClick={() => handleRemoveToggle(item)}
                              className={`inline-flex items-center gap-2 px-4 py-2 text-sm font-bold rounded-lg transition-colors ${
                                item.isRemovedByAdmin 
@@ -154,9 +154,9 @@ export function Items() {
                              }`}
                            >
                              {item.isRemovedByAdmin ? (
-                               <><RotateCcw className="w-4 h-4" /> Restore</>
+                               <><RotateCcw className="size-4" /> Restore</>
                              ) : (
-                               <><Trash2 className="w-4 h-4" /> Remove</>
+                               <><Trash2 className="size-4" /> Remove</>
                              )}
                            </button>
                        </td>
@@ -164,8 +164,8 @@ export function Items() {
                    ))
                  )}
                </tbody>
-             </table>
-           </div>
+              </table>
+            </div>
          )}
        </DashboardCard>
 
@@ -193,13 +193,13 @@ export function Items() {
                </div>
                
                <div className="flex items-center justify-end gap-3 mt-8">
-                 <button 
+                 <button type="button" 
                    onClick={() => setRemoveModal({ isOpen: false, item: null, reason: '' })}
                    className="px-6 py-2.5 rounded-full font-bold text-gray-600 hover:bg-gray-100 transition-colors"
                  >
                    Cancel
                  </button>
-                 <button 
+                 <button type="button" 
                    onClick={confirmRemove}
                    disabled={!removeModal.reason.trim()}
                    className="px-6 py-2.5 rounded-full font-bold text-white bg-red-600 hover:bg-red-700 transition-colors disabled:opacity-50"

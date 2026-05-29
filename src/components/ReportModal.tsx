@@ -58,19 +58,19 @@ export function ReportModal({ isOpen, onClose, type, targetId, targetName }: Pro
         {/* Header */}
         <div className="px-8 py-6 border-b border-gray-100 flex items-center justify-between bg-gray-50/50">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-red-100 text-red-600 flex items-center justify-center">
-              <Flag className="w-5 h-5" />
+            <div className="size-10 rounded-full bg-red-100 text-red-600 flex items-center justify-center">
+              <Flag className="size-5" />
             </div>
             <div>
               <h2 className="text-xl font-black text-gray-900 tracking-tight">Report {type === 'user' ? 'User' : 'Item'}</h2>
               <p className="text-sm font-medium text-gray-500">You are reporting <span className="font-bold text-gray-900">{targetName}</span></p>
             </div>
           </div>
-          <button 
+          <button type="button" 
             onClick={onClose}
-            className="w-8 h-8 flex items-center justify-center rounded-full text-gray-400 hover:bg-gray-100 hover:text-gray-900 transition-colors"
+            className="size-8 flex items-center justify-center rounded-full text-gray-400 hover:bg-gray-100 hover:text-gray-900 transition-colors"
           >
-            <X className="w-5 h-5" />
+            <X className="size-5" />
           </button>
         </div>
 
@@ -123,7 +123,7 @@ export function ReportModal({ isOpen, onClose, type, targetId, targetName }: Pro
               disabled={isSubmitting}
               className="flex-1 py-3.5 px-4 rounded-xl font-bold text-white bg-red-600 hover:bg-red-700 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
             >
-              {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin" /> : "Submit Report"}
+              {isSubmitting ? <Loader2 className="size-5 animate-spin" /> : "Submit Report"}
             </button>
           </div>
         </form>

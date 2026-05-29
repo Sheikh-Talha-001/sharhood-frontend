@@ -89,7 +89,7 @@ export function Verifications() {
            <div className="py-12 text-center text-red-500 font-bold">{error}</div>
          ) : (
            <div className="overflow-x-auto">
-             <table className="w-full">
+             <table className="w-full min-w-[800px]">
                <thead>
                  <tr className="border-b border-gray-100">
                    <th className="text-left py-4 px-6 text-xs font-bold text-gray-400 uppercase tracking-widest">Applicant</th>
@@ -108,7 +108,7 @@ export function Verifications() {
                      <tr key={req._id} className="hover:bg-gray-50/50 transition-colors">
                        <td className="py-4 px-6">
                           <div className="flex items-center gap-3">
-                             <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center font-bold text-gray-600">
+                             <div className="size-10 rounded-full bg-gray-100 flex items-center justify-center font-bold text-gray-600">
                                {req.user?.name?.charAt(0) || '?'}
                              </div>
                              <div>
@@ -131,11 +131,11 @@ export function Verifications() {
                        </td>
                        <td className="py-4 px-6 text-right">
                          {req.status === 'pending' ? (
-                           <button 
+                           <button type="button" 
                              onClick={() => setSelectedVerification(req)}
                              className="inline-flex items-center gap-2 px-4 py-2 bg-brand-black text-white text-sm font-bold rounded-lg hover:bg-brand-yellow hover:text-brand-black transition-colors"
                            >
-                             <Eye className="w-4 h-4" /> Review
+                             <Eye className="size-4" /> Review
                            </button>
                          ) : (
                            <span className="text-sm font-medium text-gray-400">Reviewed</span>

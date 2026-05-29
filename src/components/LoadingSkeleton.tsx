@@ -18,7 +18,7 @@ export function LoadingSkeleton({ type = "card", count = 1 }: SkeletonProps) {
         
         <div className="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between">
           <div className="flex items-center gap-3">
-             <div className="w-8 h-8 bg-gray-200 rounded-full"></div>
+             <div className="size-8 bg-gray-200 rounded-full"></div>
              <div className="space-y-2">
                <div className="h-4 bg-gray-200 rounded w-20"></div>
                <div className="h-3 bg-gray-100 rounded w-16"></div>
@@ -65,7 +65,7 @@ export function LoadingSkeleton({ type = "card", count = 1 }: SkeletonProps) {
            <div className="space-y-3">
              {[1, 2, 3, 4].map((j) => (
                <div key={j} className="flex items-center gap-3">
-                 <div className="w-5 h-5 bg-gray-200 rounded"></div>
+                 <div className="size-5 bg-gray-200 rounded"></div>
                  <div className="h-4 bg-gray-100 rounded w-2/3"></div>
                </div>
              ))}

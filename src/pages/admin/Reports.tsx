@@ -78,7 +78,7 @@ export function Reports() {
            <div className="py-12 text-center text-red-500 font-bold">{error}</div>
          ) : (
            <div className="overflow-x-auto">
-             <table className="w-full">
+             <table className="w-full min-w-[800px]">
                <thead>
                  <tr className="border-b border-gray-100">
                    <th className="text-left py-4 px-6 text-xs font-bold text-gray-400 uppercase tracking-widest">Target</th>
@@ -120,34 +120,34 @@ export function Reports() {
                        <td className="py-4 px-6 text-right space-x-2">
                          {report.status === 'pending' ? (
                            <>
-                             <button 
+                             <button type="button" 
                                onClick={() => setViewModal({isOpen: true, data: report})}
                                title="View Details"
-                               className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-blue-50 text-blue-600 hover:bg-blue-500 hover:text-white transition-colors"
+                               className="inline-flex items-center justify-center size-8 rounded-full bg-blue-50 text-blue-600 hover:bg-blue-500 hover:text-white transition-colors"
                              >
-                               <Eye className="w-4 h-4" />
+                               <Eye className="size-4" />
                              </button>
-                             <button 
+                             <button type="button" 
                                onClick={() => handleAction(report._id, 'resolved')}
                                title="Resolve"
-                               className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-green-50 text-green-600 hover:bg-green-500 hover:text-white transition-colors"
+                               className="inline-flex items-center justify-center size-8 rounded-full bg-green-50 text-green-600 hover:bg-green-500 hover:text-white transition-colors"
                              >
-                               <CheckCircle className="w-4 h-4" />
+                               <CheckCircle className="size-4" />
                              </button>
-                             <button 
+                             <button type="button" 
                                onClick={() => handleAction(report._id, 'dismissed')}
                                title="Dismiss"
-                               className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-gray-100 text-gray-400 hover:bg-gray-500 hover:text-white transition-colors"
+                               className="inline-flex items-center justify-center size-8 rounded-full bg-gray-100 text-gray-400 hover:bg-gray-500 hover:text-white transition-colors"
                              >
-                               <XCircle className="w-4 h-4" />
+                               <XCircle className="size-4" />
                              </button>
                            </>
                          ) : (
-                           <button 
+                           <button type="button" 
                              onClick={() => setViewModal({isOpen: true, data: report})}
                              className="inline-flex items-center justify-center px-3 py-1.5 rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors text-xs font-bold gap-1.5"
                            >
-                             <Eye className="w-3.5 h-3.5" /> View
+                             <Eye className="size-3.5" /> View
                            </button>
                          )}
                        </td>
@@ -162,12 +162,12 @@ export function Reports() {
 
       {/* View Details Modal */}
       {viewModal.isOpen && viewModal.data && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-100 flex items-center justify-center p-4">
           <div className="bg-white rounded-3xl w-full max-w-xl overflow-hidden shadow-2xl relative animate-in fade-in zoom-in-95 duration-200 max-h-[90vh] flex flex-col">
             <div className="px-6 py-5 border-b border-gray-100 flex items-center justify-between bg-gray-50/50">
               <h2 className="text-xl font-black text-gray-900 tracking-tight">Report Details</h2>
-              <button onClick={() => setViewModal({isOpen: false, data: null})} className="w-8 h-8 flex items-center justify-center rounded-full text-gray-400 hover:bg-gray-100 hover:text-gray-900 transition-colors">
-                <X className="w-5 h-5" />
+              <button type="button" onClick={() => setViewModal({isOpen: false, data: null})} className="size-8 flex items-center justify-center rounded-full text-gray-400 hover:bg-gray-100 hover:text-gray-900 transition-colors">
+                <X className="size-5" />
               </button>
             </div>
             
@@ -198,7 +198,7 @@ export function Reports() {
             </div>
 
             <div className="px-6 py-4 border-t border-gray-100 bg-gray-50 flex justify-end gap-3">
-              <button 
+              <button type="button" 
                 onClick={() => setViewModal({isOpen: false, data: null})}
                 className="px-6 py-2.5 rounded-xl font-bold text-gray-600 bg-gray-200 hover:bg-gray-300 transition-colors"
               >

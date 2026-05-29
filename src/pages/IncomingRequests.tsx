@@ -3,10 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { DashboardCard } from "@/src/components/DashboardCard";
 import { borrowRequestService } from "@/src/services/borrowRequestService";
 import { useAuth } from "@/src/context/AuthContext";
-import { LoadingSpinner } from "@/src/components/LoadingSpinner";
+import { PageSkeleton } from "@/src/components/LoadingSkeletons";
+import { EmptyState } from "@/src/components/EmptyState";
 import { Check, X, Bell, Calendar, MessageSquare, ShieldCheck, ArrowRightLeft } from "lucide-react";
 import toast from "react-hot-toast";
 import { format } from "date-fns";
+import { ReturnConditionModal } from "@/src/components/ReturnConditionModal";
 
 export function IncomingRequests() {
   const { user } = useAuth();
@@ -15,6 +17,8 @@ export function IncomingRequests() {
   const [isLoading, setIsLoading] = useState(true);
   const [processingId, setProcessingId] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<'pending' | 'approved' | 'completed'>('pending');
+  const [isReturnModalOpen, setIsReturnModalOpen] = useState(false);
+  const [returnRequest, setReturnRequest] = useState<any>(null);
 
   useEffect(() => {
     if (user && !user.canListItems) {
@@ -35,10 +39,10 @@ export function IncomingRequests() {
     }
   };
 
-  const handleUpdateStatus = async (id: string, status: string) => {
+  const handleUpdateStatus = async (id: string, status: string, data?: any) => {
     setProcessingId(id);
     try {
-      await borrowRequestService.updateStatus(id, status);
+      await borrowRequestService.updateStatus(id, status, data);
       toast.success(`Request ${status} successfully`);
       fetchRequests(); // Refresh to get updated statuses and agreements
     } catch (err: any) {
@@ -48,8 +52,19 @@ export function IncomingRequests() {
     }
   };
 
+  const handleConfirmReturn = async (condition: string, notes: string) => {
+    if (!returnRequest) return;
+    
+    await handleUpdateStatus(returnRequest._id, "returned", { 
+      itemConditionAfter: `${condition}${notes ? ` - Notes: ${notes}` : ''}`
+    });
+    
+    setIsReturnModalOpen(false);
+    setReturnRequest(null);
+  };
+
   if (isLoading) {
-    return <div className="py-20"><LoadingSpinner /></div>;
+    return <PageSkeleton />;
   }
 
   // Filter requests into categories
@@ -72,19 +87,19 @@ export function IncomingRequests() {
 
       {/* Tabs */}
       <div className="flex space-x-1 bg-gray-100 p-1 rounded-xl max-w-md">
-        <button
+        <button type="button"
           onClick={() => setActiveTab('pending')}
           className={`flex-1 py-2 text-sm font-bold rounded-lg transition-all ${activeTab === 'pending' ? 'bg-white text-brand-black shadow-sm' : 'text-gray-500 hover:text-brand-black'}`}
         >
           Pending ({pendingRequests.length})
         </button>
-        <button
+        <button type="button"
           onClick={() => setActiveTab('approved')}
           className={`flex-1 py-2 text-sm font-bold rounded-lg transition-all ${activeTab === 'approved' ? 'bg-white text-brand-black shadow-sm' : 'text-gray-500 hover:text-brand-black'}`}
         >
           Active ({activeRequests.length})
         </button>
-        <button
+        <button type="button"
           onClick={() => setActiveTab('completed')}
           className={`flex-1 py-2 text-sm font-bold rounded-lg transition-all ${activeTab === 'completed' ? 'bg-white text-brand-black shadow-sm' : 'text-gray-500 hover:text-brand-black'}`}
         >
@@ -93,13 +108,11 @@ export function IncomingRequests() {
       </div>
 
       {displayRequests.length === 0 ? (
-        <div className="bg-white rounded-3xl border border-gray-100 p-12 text-center">
-           <div className="w-20 h-20 bg-gray-50 text-gray-400 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Bell className="w-10 h-10" />
-           </div>
-           <h2 className="text-2xl font-bold text-gray-900 mb-2">No {activeTab} requests</h2>
-           <p className="text-gray-500">You're all caught up!</p>
-        </div>
+        <EmptyState 
+          icon={Bell}
+          title={`No ${activeTab} requests`}
+          description="You're all caught up! When someone requests to borrow your items, they'll appear here."
+        />
       ) : (
         <div className="space-y-4">
           {displayRequests.map(request => {
@@ -111,8 +124,8 @@ export function IncomingRequests() {
               <DashboardCard key={request._id} className="p-6 transition-colors hover:border-brand-yellow/30">
                 <div className="flex flex-col md:flex-row gap-6">
                   {/* Item Image */}
-                  <div className="w-full md:w-32 h-32 rounded-2xl bg-gray-100 overflow-hidden shrink-0">
-                    <img src={image} alt={item.title} className="w-full h-full object-cover" />
+                  <div className="w-full md:size-32 rounded-2xl bg-gray-100 overflow-hidden shrink-0">
+                    <img src={image} alt={item.title} className="size-full object-cover" />
                   </div>
                   
                   {/* Request Info */}
@@ -132,23 +145,23 @@ export function IncomingRequests() {
                        
                        <div className="flex flex-wrap items-center gap-4 text-sm font-medium text-gray-600 mb-4">
                           <div className="flex items-center gap-1.5">
-                            <Calendar className="w-4 h-4 text-gray-400" />
+                            <Calendar className="size-4 text-gray-400" />
                             {format(new Date(request.startDate), 'MMM d')} - {format(new Date(request.expectedReturnDate), 'MMM d')}
                           </div>
                           <div className="flex items-center gap-1.5">
-                            <div className="w-6 h-6 rounded-full bg-brand-yellow/20 flex items-center justify-center text-xs font-black text-brand-black">
+                            <div className="size-6 rounded-full bg-brand-yellow/20 flex items-center justify-center text-xs font-black text-brand-black">
                               {borrower.name?.charAt(0) || '?'}
                             </div>
                             <span className="font-bold text-gray-900">
                               <Link to={`/users/${borrower._id}`} className="hover:underline">{borrower.name}</Link>
                             </span>
-                            {borrower.isVerified && <ShieldCheck className="w-4 h-4 text-green-500" title="Verified ID" />}
+                            {borrower.isVerified && <ShieldCheck className="size-4 text-green-500" title="Verified ID" />}
                           </div>
                        </div>
                        
                        {request.message && (
                          <div className="bg-gray-50 rounded-xl p-4 mb-4 relative">
-                           <MessageSquare className="w-4 h-4 text-gray-400 absolute top-4 left-4" />
+                           <MessageSquare className="size-4 text-gray-400 absolute top-4 left-4" />
                            <p className="pl-6 text-sm text-gray-600 italic">"{request.message}"</p>
                          </div>
                        )}
@@ -158,19 +171,19 @@ export function IncomingRequests() {
                      <div className="flex flex-wrap items-center justify-end gap-3 mt-4 border-t border-gray-100 pt-4">
                        {request.status === 'pending' && (
                          <>
-                           <button 
+                           <button type="button" 
                              onClick={() => handleUpdateStatus(request._id, 'rejected')}
                              disabled={processingId === request._id}
                              className="px-6 py-2.5 rounded-full font-bold text-red-600 bg-red-50 hover:bg-red-100 transition-colors disabled:opacity-50 flex items-center gap-2"
                            >
-                             <X className="w-4 h-4" /> Reject
+                             <X className="size-4" /> Reject
                            </button>
-                           <button 
+                           <button type="button" 
                              onClick={() => handleUpdateStatus(request._id, 'approved')}
                              disabled={processingId === request._id}
                              className="px-6 py-2.5 rounded-full font-bold text-brand-black bg-brand-yellow hover:bg-yellow-400 transition-colors disabled:opacity-50 flex items-center gap-2"
                            >
-                             <Check className="w-4 h-4" /> Approve Request
+                             <Check className="size-4" /> Approve Request
                            </button>
                          </>
                        )}
@@ -183,12 +196,15 @@ export function IncomingRequests() {
                            >
                              View Agreement
                            </Link>
-                           <button 
-                             onClick={() => handleUpdateStatus(request._id, 'returned')}
+                           <button type="button" 
+                             onClick={() => {
+                               setReturnRequest(request);
+                               setIsReturnModalOpen(true);
+                             }}
                              disabled={processingId === request._id}
                              className="px-6 py-2.5 rounded-full font-bold text-white bg-green-500 hover:bg-green-600 transition-colors disabled:opacity-50 flex items-center gap-2"
                            >
-                             <ArrowRightLeft className="w-4 h-4" /> Mark as Returned
+                             <ArrowRightLeft className="size-4" /> Mark as Returned
                            </button>
                          </>
                        )}
@@ -199,6 +215,20 @@ export function IncomingRequests() {
             );
           })}
         </div>
+      )}
+
+      {returnRequest && (
+        <ReturnConditionModal
+          isOpen={isReturnModalOpen}
+          onClose={() => {
+            if (processingId) return;
+            setIsReturnModalOpen(false);
+            setReturnRequest(null);
+          }}
+          onConfirm={handleConfirmReturn}
+          isSubmitting={processingId === returnRequest._id}
+          itemTitle={returnRequest.item?.title || "Item"}
+        />
       )}
     </div>
   );

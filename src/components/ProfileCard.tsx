@@ -14,9 +14,9 @@ interface Props {
 export function ProfileCard({ user }: Props) {
   return (
     <div className="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm flex flex-col items-center text-center">
-      <div className="w-24 h-24 bg-gray-100 rounded-full mb-4 overflow-hidden flex items-center justify-center text-3xl font-bold text-gray-500 relative group cursor-pointer border-4 border-white shadow-sm ring-1 ring-gray-100">
+      <div className="size-24 bg-gray-100 rounded-full mb-4 overflow-hidden flex items-center justify-center text-3xl font-bold text-gray-500 relative group cursor-pointer border-4 border-white shadow-sm ring-1 ring-gray-100">
         {user.avatar ? (
-          <img src={user.avatar} alt={user.name} className="w-full h-full object-cover" />
+          <img src={user.avatar} alt={user.name} className="size-full object-cover" />
         ) : (
           user.name.charAt(0)
         )}

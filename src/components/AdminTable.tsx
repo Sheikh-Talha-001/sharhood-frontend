@@ -20,8 +20,8 @@ export function AdminTable({ columns, data, keyField = "_id", emptyMessage = "No
         <table className="w-full text-left text-sm">
           <thead className="bg-gray-50 border-b border-gray-200 text-gray-500">
             <tr>
-              {columns.map((col, i) => (
-                <th key={i} className="px-6 py-4 font-bold uppercase tracking-wider text-xs whitespace-nowrap">
+              {columns.map((col) => (
+                <th key={col.accessor || col.header} className="px-6 py-4 font-bold uppercase tracking-wider text-xs whitespace-nowrap">
                   {col.header}
                 </th>
               ))}
@@ -37,8 +37,8 @@ export function AdminTable({ columns, data, keyField = "_id", emptyMessage = "No
             ) : (
               data.map((row, i) => (
                 <tr key={row[keyField] || i} className="hover:bg-gray-50/50 transition-colors">
-                  {columns.map((col, j) => (
-                    <td key={j} className="px-6 py-4">
+                  {columns.map((col) => (
+                    <td key={col.accessor || col.header} className="px-6 py-4">
                       {col.render ? col.render(row) : row[col.accessor]}
                     </td>
                   ))}

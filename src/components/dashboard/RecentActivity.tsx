@@ -23,10 +23,10 @@ export function RecentActivity({ requests }: Props) {
   const getStatusIcon = (status: string) => {
     switch(status) {
       case "approved":
-      case "returned": return <CheckCircle2 className="w-4 h-4" />;
+      case "returned": return <CheckCircle2 className="size-4" />;
       case "rejected":
-      case "cancelled": return <XCircle className="w-4 h-4" />;
-      default: return <Clock className="w-4 h-4" />;
+      case "cancelled": return <XCircle className="size-4" />;
+      default: return <Clock className="size-4" />;
     }
   };
 
@@ -41,11 +41,11 @@ export function RecentActivity({ requests }: Props) {
       <div className="divide-y divide-gray-100">
         {requests.map((req) => (
           <div key={req._id} className="p-6 md:p-8 flex items-center gap-6 hover:bg-gray-50/50 transition-colors">
-            <div className="w-12 h-12 rounded-2xl bg-gray-100 flex items-center justify-center shrink-0 border border-gray-200 overflow-hidden">
+            <div className="size-12 rounded-2xl bg-gray-100 flex items-center justify-center shrink-0 border border-gray-200 overflow-hidden">
                {req.item?.images?.[0] ? (
-                 <img src={req.item.images[0]} alt={req.item.title} className="w-full h-full object-cover" />
+                 <img src={req.item.images[0]} alt={req.item.title} className="size-full object-cover" />
                ) : (
-                 <ArrowRightLeft className="w-5 h-5 text-gray-400" />
+                 <ArrowRightLeft className="size-5 text-gray-400" />
                )}
             </div>
             <div className="flex-1">
@@ -57,7 +57,7 @@ export function RecentActivity({ requests }: Props) {
                  </div>
                </div>
                <p className="text-sm font-medium text-gray-500">
-                 Requested {new Date(req.createdAt).toLocaleDateString()}
+                 Requested {req.createdAt ? new Date(req.createdAt).toLocaleDateString() : "Recently"}
                </p>
             </div>
           </div>

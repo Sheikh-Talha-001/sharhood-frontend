@@ -34,19 +34,19 @@ export function AppealSuspension() {
       
       {/* Header Logo */}
       <div className="absolute top-8 left-8 flex items-center gap-3">
-        <div className="w-8 h-8 bg-brand-black rounded-lg flex items-center justify-center">
+        <div className="size-8 bg-brand-black rounded-lg flex items-center justify-center">
           <span className="text-brand-yellow font-black text-lg leading-none">S</span>
         </div>
-        <span className="font-bold text-xl tracking-tight text-brand-black">ShareHood</span>
+        <span className="font-bold text-xl tracking-tight text-brand-black">Lendly</span>
       </div>
 
       <div className="max-w-xl w-full bg-white rounded-4xl p-8 md:p-12 shadow-2xl border border-gray-100 relative overflow-hidden">
         
         {/* Decorative background element */}
-        <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-red-500 to-orange-500" />
+        <div className="absolute top-0 left-0 w-full h-2 bg-linear-to-r from-red-500 to-orange-500" />
 
-        <div className="mx-auto flex items-center justify-center h-20 w-20 rounded-full bg-red-50 mb-8 ring-8 ring-red-50/50">
-          <Scale className="h-10 w-10 text-red-600" />
+        <div className="mx-auto flex items-center justify-center size-20 rounded-full bg-red-50 mb-8 ring-8 ring-red-50/50">
+          <Scale className="size-10 text-red-600" />
         </div>
         
         <div className="text-center mb-8">
@@ -66,21 +66,22 @@ export function AppealSuspension() {
               to="/"
               className="inline-flex items-center justify-center gap-2 bg-white text-green-700 border border-green-200 px-6 py-3 rounded-xl font-bold hover:bg-green-100 transition-colors shadow-sm"
             >
-              Return to Homepage <ArrowRight className="w-4 h-4" />
+              Return to Homepage <ArrowRight className="size-4" />
             </Link>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="bg-orange-50 border border-orange-100 rounded-xl p-4 flex items-start gap-3">
-               <AlertTriangle className="w-5 h-5 text-orange-600 shrink-0 mt-0.5" />
+               <AlertTriangle className="size-5 text-orange-600 shrink-0 mt-0.5" />
                <p className="text-sm font-medium text-orange-800 leading-relaxed">
                  You may submit an appeal to have your account reinstated. Please provide a detailed explanation of your situation.
                </p>
             </div>
 
             <div>
-              <label className="block text-sm font-bold text-gray-900 mb-2">Account Email</label>
+              <label htmlFor="appeal-email" className="block text-sm font-bold text-gray-900 mb-2">Account Email</label>
               <input 
+                id="appeal-email"
                 type="email" 
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -91,10 +92,11 @@ export function AppealSuspension() {
             </div>
 
             <div>
-              <label className="block text-sm font-bold text-gray-900 mb-2">
+              <label htmlFor="appeal-message" className="block text-sm font-bold text-gray-900 mb-2">
                 Appeal Message
               </label>
               <textarea 
+                id="appeal-message"
                 value={appealMessage}
                 onChange={(e) => setAppealMessage(e.target.value)}
                 placeholder="Please explain why your account should be reinstated (min. 20 characters)."
@@ -114,7 +116,7 @@ export function AppealSuspension() {
                 className="w-full bg-brand-black text-white rounded-xl py-4 font-bold hover:bg-gray-900 transition-all shadow-sm disabled:opacity-50 flex justify-center items-center gap-2"
               >
                 {isSubmitting ? (
-                  <><Loader2 className="w-5 h-5 animate-spin" /> Submitting...</>
+                  <><Loader2 className="size-5 animate-spin" /> Submitting...</>
                 ) : (
                   "Submit Appeal"
                 )}

@@ -3,8 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { DashboardCard } from "@/src/components/DashboardCard";
 import { itemService } from "@/src/services/itemService";
 import { useAuth } from "@/src/context/AuthContext";
-import { LoadingSpinner } from "@/src/components/LoadingSpinner";
-import { Edit2, Trash2, PlusCircle, Package } from "lucide-react";
+import { PageSkeleton } from "@/src/components/LoadingSkeletons";
+import { EmptyState } from "@/src/components/EmptyState";
+import { Edit2, Trash2, PlusCircle, Package, Loader2 } from "lucide-react";
+import { ItemEditModal } from "@/src/components/ItemEditModal";
 import toast from "react-hot-toast";
 
 export function MyItems() {
@@ -13,6 +15,9 @@ export function MyItems() {
   const [items, setItems] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isDeleting, setIsDeleting] = useState<string | null>(null);
+  
+  const [editingItem, setEditingItem] = useState<any>(null);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   useEffect(() => {
     // Double check capability, though route should protect it
@@ -50,7 +55,7 @@ export function MyItems() {
   };
 
   if (isLoading) {
-    return <div className="py-20"><LoadingSpinner /></div>;
+    return <PageSkeleton />;
   }
 
   return (
@@ -64,27 +69,19 @@ export function MyItems() {
           to="/dashboard/upload" 
           className="bg-brand-black text-white px-6 py-3 rounded-full font-bold hover:bg-brand-yellow hover:text-brand-black transition-all flex items-center gap-2 shadow-sm"
         >
-          <PlusCircle className="w-5 h-5" />
+          <PlusCircle className="size-5" />
           List New Item
         </Link>
       </div>
 
       {items.length === 0 ? (
-        <div className="bg-white rounded-3xl border border-gray-100 p-12 text-center">
-           <div className="w-20 h-20 bg-gray-50 text-gray-400 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Package className="w-10 h-10" />
-           </div>
-           <h2 className="text-2xl font-bold text-gray-900 mb-2">You haven't listed any items yet</h2>
-           <p className="text-gray-500 mb-8 max-w-md mx-auto">
-             Help your neighbors by listing tools, camping gear, or other items you don't use every day.
-           </p>
-           <Link 
-             to="/dashboard/upload" 
-             className="inline-block bg-brand-yellow text-brand-black px-8 py-4 rounded-full font-bold hover:bg-yellow-400 transition-colors"
-           >
-             Create Your First Listing
-           </Link>
-        </div>
+        <EmptyState 
+          icon={Package}
+          title="You haven't listed any items yet"
+          description="Help your neighbors by listing tools, camping gear, or other items you don't use every day."
+          actionLabel="Create Your First Listing"
+          actionLink="/dashboard/upload"
+        />
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {items.map(item => {
@@ -95,7 +92,7 @@ export function MyItems() {
             return (
               <DashboardCard key={itemId} className="flex flex-col overflow-hidden hover:border-brand-yellow/30 transition-colors group">
                 <div className="relative aspect-video bg-gray-100 overflow-hidden -mx-6 -mt-6 mb-4">
-                  <img src={image} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <img src={image} alt={item.title} className="size-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   <div className="absolute top-3 left-3 bg-white/90 backdrop-blur px-2.5 py-1 rounded-lg text-xs font-bold shadow-sm uppercase tracking-wider">
                     {item.category}
                   </div>
@@ -127,19 +124,21 @@ export function MyItems() {
                       View Listing
                     </Link>
                     <div className="flex items-center gap-2">
-                      <button 
-                        disabled
-                        title="Editing is coming soon"
-                        className="w-10 h-10 rounded-full bg-gray-50 text-gray-400 flex items-center justify-center cursor-not-allowed"
+                      <button type="button" 
+                        onClick={() => {
+                          setEditingItem(item);
+                          setIsEditModalOpen(true);
+                        }}
+                        className="size-10 rounded-full bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white transition-colors flex items-center justify-center"
                       >
-                        <Edit2 className="w-4 h-4" />
+                        <Edit2 className="size-4" />
                       </button>
-                      <button 
+                      <button type="button" 
                         onClick={() => handleDelete(itemId)}
                         disabled={isDeleting === itemId}
-                        className="w-10 h-10 rounded-full bg-red-50 text-red-500 hover:bg-red-500 hover:text-white transition-colors flex items-center justify-center disabled:opacity-50"
+                        className="size-10 rounded-full bg-red-50 text-red-500 hover:bg-red-500 hover:text-white transition-colors flex items-center justify-center disabled:opacity-50"
                       >
-                        {isDeleting === itemId ? <LoadingSpinner size="sm" /> : <Trash2 className="w-4 h-4" />}
+                        {isDeleting === itemId ? <Loader2 className="size-4 animate-spin" /> : <Trash2 className="size-4" />}
                       </button>
                     </div>
                   </div>
@@ -148,6 +147,18 @@ export function MyItems() {
             );
           })}
         </div>
+      )}
+
+      {editingItem && (
+        <ItemEditModal 
+          isOpen={isEditModalOpen}
+          onClose={() => {
+            setIsEditModalOpen(false);
+            setEditingItem(null);
+          }}
+          item={editingItem}
+          onSuccess={fetchMyItems}
+        />
       )}
     </div>
   );

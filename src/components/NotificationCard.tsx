@@ -10,37 +10,41 @@ import { cn } from "@/src/lib/utils";
 
 const TYPE_CONFIG: Record<string, { icon: React.ReactNode; bg: string; label: string }> = {
   // Borrow workflow
-  borrow_request:        { icon: <Package className="w-5 h-5 text-[#7e0038]" />,       bg: "bg-[#7e0038]/10", label: "Borrow" },
-  request_approved:      { icon: <CheckCircle className="w-5 h-5 text-[#10664c]" />,   bg: "bg-[#10664c]/10", label: "Approved" },
-  request_rejected:      { icon: <XCircle className="w-5 h-5 text-[#b91c1c]" />,       bg: "bg-red-50",       label: "Rejected" },
-  request_cancelled:     { icon: <ArrowLeftRight className="w-5 h-5 text-[#6b7280]" />, bg: "bg-gray-100",     label: "Cancelled" },
-  item_returned:         { icon: <Handshake className="w-5 h-5 text-[#10664c]" />,     bg: "bg-[#10664c]/10", label: "Returned" },
-  agreement_generated:   { icon: <FileText className="w-5 h-5 text-[#7e0038]" />,      bg: "bg-[#7e0038]/10", label: "Agreement" },
+  borrow_request:        { icon: <Package className="size-5 text-[#7e0038]" />,       bg: "bg-[#7e0038]/10", label: "Borrow" },
+  request_approved:      { icon: <CheckCircle className="size-5 text-[#10664c]" />,   bg: "bg-[#10664c]/10", label: "Approved" },
+  request_rejected:      { icon: <XCircle className="size-5 text-[#b91c1c]" />,       bg: "bg-red-50",       label: "Rejected" },
+  request_cancelled:     { icon: <ArrowLeftRight className="size-5 text-[#6b7280]" />, bg: "bg-gray-100",     label: "Cancelled" },
+  item_returned:         { icon: <Handshake className="size-5 text-[#10664c]" />,     bg: "bg-[#10664c]/10", label: "Returned" },
+  agreement_generated:   { icon: <FileText className="size-5 text-[#7e0038]" />,      bg: "bg-[#7e0038]/10", label: "Agreement" },
   // Verification
-  verification_approved: { icon: <ShieldCheck className="w-5 h-5 text-[#10664c]" />,   bg: "bg-[#10664c]/10", label: "Verified" },
-  verification_rejected: { icon: <XCircle className="w-5 h-5 text-[#b91c1c]" />,       bg: "bg-red-50",       label: "Verification" },
+  verification_approved: { icon: <ShieldCheck className="size-5 text-[#10664c]" />,   bg: "bg-[#10664c]/10", label: "Verified" },
+  verification_rejected: { icon: <XCircle className="size-5 text-[#b91c1c]" />,       bg: "bg-red-50",       label: "Verification" },
   // Item moderation
-  item_removed:          { icon: <AlertTriangle className="w-5 h-5 text-[#b91c1c]" />, bg: "bg-red-50",       label: "Moderation" },
-  item_restored:         { icon: <CheckCircle className="w-5 h-5 text-[#10664c]" />,   bg: "bg-[#10664c]/10", label: "Restored" },
+  item_removed:          { icon: <AlertTriangle className="size-5 text-[#b91c1c]" />, bg: "bg-red-50",       label: "Moderation" },
+  item_restored:         { icon: <CheckCircle className="size-5 text-[#10664c]" />,   bg: "bg-[#10664c]/10", label: "Restored" },
   // Account
-  user_suspended:        { icon: <AlertTriangle className="w-5 h-5 text-[#b91c1c]" />, bg: "bg-red-50",       label: "Suspended" },
-  account_reactivated:   { icon: <UserCheck className="w-5 h-5 text-[#10664c]" />,     bg: "bg-[#10664c]/10", label: "Reactivated" },
+  user_suspended:        { icon: <AlertTriangle className="size-5 text-[#b91c1c]" />, bg: "bg-red-50",       label: "Suspended" },
+  account_reactivated:   { icon: <UserCheck className="size-5 text-[#10664c]" />,     bg: "bg-[#10664c]/10", label: "Reactivated" },
   // Reports
-  report_resolved:       { icon: <Flag className="w-5 h-5 text-[#10664c]" />,          bg: "bg-[#10664c]/10", label: "Report" },
+  report_resolved:       { icon: <Flag className="size-5 text-[#10664c]" />,          bg: "bg-[#10664c]/10", label: "Report" },
   // Partner
-  partner_approved:      { icon: <CheckCircle className="w-5 h-5 text-[#10664c]" />,   bg: "bg-[#10664c]/10", label: "Partner" },
-  partner_rejected:      { icon: <XCircle className="w-5 h-5 text-[#b91c1c]" />,       bg: "bg-red-50",       label: "Partner" },
+  partner_approved:      { icon: <CheckCircle className="size-5 text-[#10664c]" />,   bg: "bg-[#10664c]/10", label: "Partner" },
+  partner_rejected:      { icon: <XCircle className="size-5 text-[#b91c1c]" />,       bg: "bg-red-50",       label: "Partner" },
   // Appeals
-  appeal_approved:       { icon: <UserCheck className="w-5 h-5 text-[#10664c]" />,     bg: "bg-[#10664c]/10", label: "Appeal" },
-  appeal_rejected:       { icon: <XCircle className="w-5 h-5 text-[#b91c1c]" />,       bg: "bg-red-50",       label: "Appeal" },
+  appeal_approved:       { icon: <UserCheck className="size-5 text-[#10664c]" />,     bg: "bg-[#10664c]/10", label: "Appeal" },
+  appeal_rejected:       { icon: <XCircle className="size-5 text-[#b91c1c]" />,       bg: "bg-red-50",       label: "Appeal" },
   // Admin-facing
-  new_report:            { icon: <Flag className="w-5 h-5 text-[#f59e0b]" />,          bg: "bg-amber-50",     label: "Report" },
-  new_verification:      { icon: <ShieldCheck className="w-5 h-5 text-[#3b82f6]" />,   bg: "bg-blue-50",      label: "Verification" },
-  new_partner_application: { icon: <Scale className="w-5 h-5 text-[#7e0038]" />,       bg: "bg-[#7e0038]/10", label: "Application" },
-  new_appeal:            { icon: <AlertTriangle className="w-5 h-5 text-[#f59e0b]" />, bg: "bg-amber-50",     label: "Appeal" },
+  new_report:            { icon: <Flag className="size-5 text-[#f59e0b]" />,          bg: "bg-amber-50",     label: "Report" },
+  new_verification:      { icon: <ShieldCheck className="size-5 text-[#3b82f6]" />,   bg: "bg-blue-50",      label: "Verification" },
+  new_partner_application: { icon: <Scale className="size-5 text-[#7e0038]" />,       bg: "bg-[#7e0038]/10", label: "Application" },
+  new_appeal:            { icon: <AlertTriangle className="size-5 text-[#f59e0b]" />, bg: "bg-amber-50",     label: "Appeal" },
+  new_complaint:         { icon: <AlertTriangle className="size-5 text-[#f59e0b]" />, bg: "bg-amber-50",     label: "Complaint" },
+  // Owner Complaints
+  complaint_resolved:    { icon: <CheckCircle className="size-5 text-[#10664c]" />,   bg: "bg-[#10664c]/10", label: "Resolved" },
+  complaint_rejected:    { icon: <XCircle className="size-5 text-[#b91c1c]" />,       bg: "bg-red-50",       label: "Rejected" },
 };
 
-const DEFAULT_CONFIG = { icon: <Bell className="w-5 h-5 text-gray-500" />, bg: "bg-gray-100", label: "Notification" };
+const DEFAULT_CONFIG = { icon: <Bell className="size-5 text-gray-500" />, bg: "bg-gray-100", label: "Notification" };
 
 // ============================================================
 // Relative time formatting
@@ -77,7 +81,7 @@ export function NotificationCard({ notification, onMarkRead }: Props) {
       "p-4 rounded-2xl border flex gap-4 transition-all duration-200 cursor-pointer",
       notification.isRead ? "bg-white border-[#e5e5e5]" : "bg-[#fcf3ec]/50 border-[#7e0038]/15"
     )}>
-      <div className={cn("w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5", config.bg)}>
+      <div className={cn("size-10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5", config.bg)}>
         {config.icon}
       </div>
       <div className="flex-1 min-w-0">
@@ -93,7 +97,7 @@ export function NotificationCard({ notification, onMarkRead }: Props) {
           {notification.message}
         </p>
         {!notification.isRead && onMarkRead && (
-          <button
+          <button type="button"
             onClick={(e) => { e.stopPropagation(); onMarkRead(id); }}
             className="text-xs font-bold text-[#7e0038] hover:text-[#5c002a] transition-colors"
           >
@@ -102,7 +106,7 @@ export function NotificationCard({ notification, onMarkRead }: Props) {
         )}
       </div>
       {!notification.isRead && (
-        <div className="w-2.5 h-2.5 bg-[#7e0038] rounded-full flex-shrink-0 mt-2" />
+        <div className="size-2.5 bg-[#7e0038] rounded-full flex-shrink-0 mt-2" />
       )}
     </div>
   );

@@ -43,10 +43,10 @@ const TESTIMONIALS = [
 
 export function Testimonials() {
   return (
-    <section className="py-24 px-6 max-w-7xl mx-auto">
-      <div className="flex items-center justify-between mb-16">
-         <h2 className="text-5xl font-black tracking-tight">Voices of <br /> the Hood</h2>
-         <div className="w-24 h-24 bg-brand-yellow rounded-full flex items-center justify-center animate-bounce">
+    <section className="py-32 lg:py-40 px-6 max-w-7xl mx-auto">
+      <div className="flex flex-col items-center justify-center mb-20 text-center">
+         <h2 className="text-5xl lg:text-6xl font-black tracking-tight mb-8">Voices of <br /> the Hood</h2>
+         <div className="size-24 bg-brand-yellow rounded-full flex items-center justify-center animate-bounce">
             <span className="text-3xl">💬</span>
          </div>
       </div>
@@ -54,7 +54,7 @@ export function Testimonials() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {TESTIMONIALS.map((t, i) => (
           <motion.div
-            key={i}
+            key={t.author}
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
@@ -66,11 +66,11 @@ export function Testimonials() {
             )}
           >
              {t.image && (
-                <img src={t.image} className="absolute inset-0 w-full h-full object-cover opacity-20 multiply" alt="" />
+                <img src={t.image} className="absolute inset-0 size-full object-cover opacity-20 multiply" alt="" />
              )}
              <p className="text-2xl font-bold leading-tight mb-12 relative z-10 italic">"{t.quote}"</p>
              <div className="flex items-center gap-4 relative z-10">
-                <div className="w-12 h-12 bg-white/30 backdrop-blur-md rounded-full flex items-center justify-center font-bold">
+                <div className="size-12 bg-white/30 backdrop-blur-md rounded-full flex items-center justify-center font-bold">
                    {t.author.charAt(0)}
                 </div>
                 <span className="font-black text-lg uppercase tracking-widest">{t.author}</span>

@@ -27,11 +27,11 @@ export function CTA() {
              Join thousands of people who are saving money and building community by sharing what they own.
           </p>
           <div className="flex flex-wrap justify-center gap-6">
-             <button className="bg-brand-lime text-brand-black px-12 py-6 rounded-full font-black text-xl uppercase tracking-widest hover:scale-105 active:scale-95 transition-all flex items-center gap-4">
+             <button type="button" className="bg-brand-lime text-brand-black px-12 py-6 rounded-full font-black text-xl uppercase tracking-widest hover:scale-105 active:scale-95 transition-all flex items-center gap-4">
                 Explore Marketplace
-                <ArrowRight className="w-6 h-6" />
+                <ArrowRight className="size-6" />
              </button>
-             <button className="bg-white text-brand-black px-12 py-6 rounded-full font-black text-xl uppercase tracking-widest hover:scale-105 active:scale-95 transition-all">
+             <button type="button" className="bg-white text-brand-black px-12 py-6 rounded-full font-black text-xl uppercase tracking-widest hover:scale-105 active:scale-95 transition-all">
                 Become a Lender
              </button>
           </div>

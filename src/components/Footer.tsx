@@ -18,7 +18,7 @@ export function Footer() {
            </div>
            <Link to="/become-partner" className="group flex items-center gap-3 bg-[#7e0038] text-[#ffffff] px-8 py-5 rounded-full font-semibold text-lg hover:bg-[#5c002a] transition-all shrink-0 border border-[#7e0038]">
               Become a Partner
-              <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+              <ArrowUpRight className="size-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
            </Link>
         </div>
 
@@ -55,7 +55,7 @@ export function Footer() {
              <p className="text-[#fcf3ec]/50 font-medium text-sm">
                © 2026 Lendly Inc. All rights reserved.
              </p>
-             <div className="hidden md:block w-1.5 h-1.5 rounded-full bg-[#fcf3ec]/20" />
+             <div className="hidden md:block size-1.5 rounded-full bg-[#fcf3ec]/20" />
              <div className="flex gap-6 text-sm font-semibold text-[#fcf3ec]/50">
                 <a href="#" className="hover:text-[#ffffff] transition-colors">Privacy</a>
                 <a href="#" className="hover:text-[#ffffff] transition-colors">Terms</a>
@@ -64,13 +64,13 @@ export function Footer() {
            
            <div className="flex flex-wrap justify-center gap-6 text-sm font-semibold text-[#fcf3ec]/70">
               <a href="#" className="hover:text-[#ffffff] transition-colors flex items-center gap-0.5 group">
-                 Twitter <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                 Twitter <ArrowUpRight className="size-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </a>
               <a href="#" className="hover:text-[#ffffff] transition-colors flex items-center gap-0.5 group">
-                 Instagram <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                 Instagram <ArrowUpRight className="size-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </a>
               <a href="#" className="hover:text-[#ffffff] transition-colors flex items-center gap-0.5 group">
-                 LinkedIn <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                 LinkedIn <ArrowUpRight className="size-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </a>
            </div>
         </div>
@@ -78,7 +78,7 @@ export function Footer() {
 
       {/* Massive Background Text at the bottom */}
       <div className="w-full text-center leading-none mt-8 overflow-hidden pointer-events-none select-none flex justify-center">
-         <span className="text-[19vw] font-black text-[#fcf3ec]/[0.03] tracking-tighter block -mb-[3vw]">
+         <span className="text-[19vw] font-black text-[#fcf3ec]/3 tracking-tighter block mb-[-3vw]">
            Lendly
          </span>
       </div>

@@ -4,25 +4,7 @@ import { useState, useEffect } from "react";
 import { AdminStatsCard } from "@/src/components/admin/AdminStatsCard";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, Legend } from 'recharts';
 
-// Realistic mockup data for the charts since backend doesn't provide timeseries
-const activityData = [
-  { name: 'Mon', verifications: 12, users: 45, items: 32 },
-  { name: 'Tue', verifications: 19, users: 52, items: 40 },
-  { name: 'Wed', verifications: 15, users: 48, items: 35 },
-  { name: 'Thu', verifications: 22, users: 61, items: 50 },
-  { name: 'Fri', verifications: 28, users: 70, items: 65 },
-  { name: 'Sat', verifications: 35, users: 95, items: 85 },
-  { name: 'Sun', verifications: 30, users: 82, items: 70 },
-];
 
-const reportsData = [
-  { name: 'Jan', resolved: 40, pending: 24, dismissed: 24 },
-  { name: 'Feb', resolved: 30, pending: 13, dismissed: 22 },
-  { name: 'Mar', resolved: 20, pending: 48, dismissed: 22 },
-  { name: 'Apr', resolved: 27, pending: 39, dismissed: 20 },
-  { name: 'May', resolved: 18, pending: 28, dismissed: 21 },
-  { name: 'Jun', resolved: 23, pending: 38, dismissed: 25 },
-];
 
 export function AdminDashboard() {
   const [data, setData] = useState<any>(null);
@@ -82,14 +64,14 @@ export function AdminDashboard() {
           />
           <AdminStatsCard 
              title="Active Items" 
-             value={data?.items?.total || 0} 
+             value={data?.platformActivity?.activeListings || 0} 
              icon={Package} 
              path="/admin/items" 
              colorClass="bg-gray-100 text-gray-800" 
           />
           <AdminStatsCard 
              title="Active Borrows" 
-             value={data?.activeBorrowRequests || 0} 
+             value={data?.platformActivity?.activeAgreements || 0} 
              icon={Activity} 
              path="/admin" 
              colorClass="bg-purple-50 text-purple-500" 
@@ -99,14 +81,14 @@ export function AdminDashboard() {
        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
           <AdminStatsCard 
              title="Pending Verifications" 
-             value={data?.pendingVerifications || 0} 
+             value={data?.moderationQueue?.pendingVerifications || 0} 
              icon={Shield} 
              path="/admin/verifications" 
              colorClass="bg-brand-yellow text-brand-black" 
           />
           <AdminStatsCard 
              title="Pending Reports" 
-             value={data?.pendingReports || 0} 
+             value={data?.moderationQueue?.pendingReports || 0} 
              icon={AlertTriangle} 
              path="/admin/reports" 
              colorClass="bg-red-50 text-red-500" 
@@ -132,7 +114,7 @@ export function AdminDashboard() {
              </div>
              <div className="h-72 w-full">
                <ResponsiveContainer width="100%" height="100%">
-                 <AreaChart data={activityData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                 <AreaChart data={data?.timeseries?.activityData || []} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                    <defs>
                      <linearGradient id="colorUsers" x1="0" y1="0" x2="0" y2="1">
                        <stop offset="5%" stopColor="#10B981" stopOpacity={0.3}/>
@@ -166,7 +148,7 @@ export function AdminDashboard() {
              </div>
              <div className="h-72 w-full">
                <ResponsiveContainer width="100%" height="100%">
-                 <BarChart data={reportsData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                 <BarChart data={data?.timeseries?.reportsData || []} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#F3F4F6" />
                    <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#9CA3AF', fontSize: 12}} dy={10} />
                    <YAxis axisLine={false} tickLine={false} tick={{fill: '#9CA3AF', fontSize: 12}} />

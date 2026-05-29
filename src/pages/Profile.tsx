@@ -47,7 +47,7 @@ export function Profile() {
         <div className="lg:col-span-2 space-y-6">
           <div className="flex items-end justify-between mb-2">
              <h2 className="text-2xl font-black text-gray-900">Community Endorsements <span className="text-gray-400 font-bold ml-2 text-xl">48</span></h2>
-             <button className="text-sm font-bold text-green-500 hover:text-green-600 transition-colors uppercase tracking-wide">
+             <button type="button" className="text-sm font-bold text-green-500 hover:text-green-600 transition-colors uppercase tracking-wide">
                View All History
              </button>
           </div>

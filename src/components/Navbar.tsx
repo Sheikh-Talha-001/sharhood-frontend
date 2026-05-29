@@ -52,7 +52,7 @@ export function Navbar() {
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 bg-white/40 backdrop-blur-md px-4 py-2 rounded-2xl shadow-sm border border-white/20 z-50">
-            <div className="w-8 h-8 bg-brand-black rounded-lg flex items-center justify-center">
+            <div className="size-8 bg-brand-black rounded-lg flex items-center justify-center">
               <span className="text-brand-yellow font-black text-lg text-center leading-none">S</span>
             </div>
             <span className="font-bold text-xl tracking-tight text-brand-black">SharHood</span>
@@ -76,7 +76,7 @@ export function Navbar() {
             </Link>
             {isAuthenticated ? (
               <Link to="/dashboard" className="bg-brand-black text-white px-6 py-3 rounded-full text-sm font-bold hover:bg-brand-yellow hover:text-black hover:shadow-lg hover:shadow-brand-yellow/20 transition-all active:scale-95 shadow-md flex items-center gap-2">
-                <LayoutDashboard className="w-4 h-4" /> Go to Dashboard
+                <LayoutDashboard className="size-4" /> Go to Dashboard
               </Link>
             ) : (
               <Link to="/register" className="bg-brand-black text-white px-6 py-3 rounded-full text-sm font-bold hover:bg-brand-yellow hover:text-black hover:shadow-lg hover:shadow-brand-yellow/20 transition-all active:scale-95 shadow-md inline-block text-center">
@@ -86,11 +86,11 @@ export function Navbar() {
           </div>
 
           {/* Mobile Menu Toggle */}
-          <button 
+          <button type="button" 
             className="lg:hidden p-2 bg-white/40 backdrop-blur-md border border-white/20 rounded-xl z-50"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
-            {isMobileMenuOpen ? <X className="w-6 h-6 text-brand-black" /> : <Menu className="w-6 h-6 text-brand-black" />}
+            {isMobileMenuOpen ? <X className="size-6 text-brand-black" /> : <Menu className="size-6 text-brand-black" />}
           </button>
         </div>
       </motion.nav>
@@ -117,7 +117,7 @@ export function Navbar() {
                 </Link>
                 {isAuthenticated ? (
                   <Link to="/dashboard" className="w-full bg-brand-black text-white py-4 rounded-full font-bold shadow-md hover:bg-brand-yellow hover:text-black transition-colors flex items-center justify-center gap-2">
-                     <LayoutDashboard className="w-5 h-5" /> Go to Dashboard
+                     <LayoutDashboard className="size-5" /> Go to Dashboard
                   </Link>
                 ) : (
                   <Link to="/register" className="w-full bg-brand-black text-white py-4 rounded-full font-bold shadow-md hover:bg-brand-yellow hover:text-black transition-colors text-center">

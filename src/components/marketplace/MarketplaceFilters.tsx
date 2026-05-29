@@ -36,11 +36,11 @@ export function MarketplaceFilters({
       <div className="flex items-center justify-between mb-8">
          <h2 className="text-[16px] font-semibold text-[#241d1b] tracking-tight">Filters</h2>
          {hasActiveFilters && (
-           <button 
+           <button type="button" 
              onClick={onClearAll}
              className="text-sm font-semibold text-[#7e0038] hover:text-[#241d1b] transition-colors flex items-center gap-1"
            >
-             <X className="w-3.5 h-3.5" /> Clear All
+             <X className="size-3.5" /> Clear All
            </button>
          )}
       </div>
@@ -50,8 +50,8 @@ export function MarketplaceFilters({
         <div>
           <h3 className="text-xs font-semibold text-[#333333] uppercase tracking-widest mb-4">Trust & Safety</h3>
           <label className="flex items-center gap-3 p-3 rounded-xl hover:bg-[#fcf3ec] cursor-pointer border border-[#e5e5e5] hover:border-[#7e0038]/50 transition-all group">
-             <div className={`w-6 h-6 rounded-md flex items-center justify-center transition-colors border ${verifiedOnly ? 'bg-[#10664c] border-[#10664c]' : 'bg-[#ffffff] border-[#e5e5e5] group-hover:border-[#7e0038]'}`}>
-                {verifiedOnly && <Check className="w-4 h-4 text-[#ffffff]" />}
+             <div className={`size-6 rounded-md flex items-center justify-center transition-colors border ${verifiedOnly ? 'bg-[#10664c] border-[#10664c]' : 'bg-[#ffffff] border-[#e5e5e5] group-hover:border-[#7e0038]'}`}>
+                {verifiedOnly && <Check className="size-4 text-[#ffffff]" />}
              </div>
              <div>
                 <span className="block text-sm font-semibold text-[#241d1b] leading-none mb-1">Verified Neighbors Only</span>
@@ -66,7 +66,7 @@ export function MarketplaceFilters({
           <h3 className="text-xs font-semibold text-[#333333] uppercase tracking-widest mb-4">Categories</h3>
           <div className="space-y-1">
             {categories.map(category => (
-              <button
+              <button type="button"
                 key={category}
                 onClick={() => onSelectCategory(category === selectedCategory ? "" : category)}
                 className={`w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold transition-all ${
@@ -86,7 +86,7 @@ export function MarketplaceFilters({
           <h3 className="text-xs font-semibold text-[#333333] uppercase tracking-widest mb-4">Item Condition</h3>
           <div className="flex flex-wrap gap-2">
             {conditions.map(condition => (
-              <button
+              <button type="button"
                 key={condition}
                 onClick={() => onSelectCondition(condition === selectedCondition ? "" : condition)}
                 className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all border ${

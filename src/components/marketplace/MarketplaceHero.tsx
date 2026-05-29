@@ -7,7 +7,7 @@ export function MarketplaceHero() {
       
       <div className="relative z-10 max-w-2xl">
         <div className="flex items-center gap-2 mb-4">
-           <ShieldCheck className="w-5 h-5 text-[#10664c]" />
+           <ShieldCheck className="size-5 text-[#10664c]" />
            <span className="text-[#10664c] font-semibold text-sm tracking-wide uppercase">Community-Powered Lending</span>
         </div>
         <h1 className="text-4xl md:text-5xl font-semibold text-[#ffffff] mb-4 tracking-tight leading-tight">

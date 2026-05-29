@@ -39,11 +39,11 @@ export function VerificationModal({ verification, onClose, onApprove, onReject, 
               Reviewing application for: <span className="text-brand-black font-bold">{verification.user?.name}</span>
             </p>
           </div>
-          <button 
+          <button type="button" 
             onClick={onClose}
             className="p-2 hover:bg-gray-200 bg-gray-100 text-gray-600 rounded-full transition-colors"
           >
-            <X className="w-5 h-5" />
+            <X className="size-5" />
           </button>
         </div>
 
@@ -63,18 +63,18 @@ export function VerificationModal({ verification, onClose, onApprove, onReject, 
                 <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4 flex items-center gap-2">
                   1. ID Front
                 </h3>
-                <div className="bg-gray-100 rounded-2xl overflow-hidden border border-gray-200 aspect-[4/3] relative">
+                <div className="bg-gray-100 rounded-2xl overflow-hidden border border-gray-200 aspect-4/3 relative">
                   {verification.idFrontImage ? (
                     <img
                       src={verification.idFrontImage}
                       alt="ID Front"
-                      className="w-full h-full object-contain"
+                      className="size-full object-contain"
                       onError={(e) => {
                         (e.currentTarget as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 24 24'%3E%3Ctext y='18' font-size='18'%3E🪪%3C/text%3E%3C/svg%3E";
                       }}
                     />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center text-gray-400 text-sm font-medium">
+                    <div className="size-full flex items-center justify-center text-gray-400 text-sm font-medium">
                       No image uploaded
                     </div>
                   )}
@@ -86,18 +86,18 @@ export function VerificationModal({ verification, onClose, onApprove, onReject, 
                 <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4 flex items-center gap-2">
                   2. Selfie with ID
                 </h3>
-                <div className="bg-gray-100 rounded-2xl overflow-hidden border border-gray-200 aspect-[4/3] relative">
+                <div className="bg-gray-100 rounded-2xl overflow-hidden border border-gray-200 aspect-4/3 relative">
                   {verification.selfieWithId ? (
                     <img
                       src={verification.selfieWithId}
                       alt="Selfie with ID"
-                      className="w-full h-full object-contain"
+                      className="size-full object-contain"
                       onError={(e) => {
                         (e.currentTarget as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 24 24'%3E%3Ctext y='18' font-size='18'%3E🤳%3C/text%3E%3C/svg%3E";
                       }}
                     />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center text-gray-400 text-sm font-medium">
+                    <div className="size-full flex items-center justify-center text-gray-400 text-sm font-medium">
                       No selfie uploaded
                     </div>
                   )}
@@ -115,7 +115,7 @@ export function VerificationModal({ verification, onClose, onApprove, onReject, 
                 <img
                   src={verification.idBackImage}
                   alt="ID Back"
-                  className="w-full h-full object-contain"
+                  className="size-full object-contain"
                 />
               </div>
             </div>
@@ -150,7 +150,7 @@ export function VerificationModal({ verification, onClose, onApprove, onReject, 
 
         {/* Footer Actions */}
         <div className="px-8 py-6 border-t border-gray-100 bg-gray-50 flex items-center justify-end gap-4 shrink-0">
-          <button 
+          <button type="button" 
             onClick={onClose}
             disabled={isProcessing}
             className="px-6 py-3 rounded-full font-bold text-gray-600 hover:bg-gray-200 transition-colors"
@@ -158,21 +158,21 @@ export function VerificationModal({ verification, onClose, onApprove, onReject, 
             Cancel
           </button>
           
-          <button 
+          <button type="button" 
             onClick={onReject}
             disabled={isProcessing}
             className="px-6 py-3 rounded-full font-bold bg-red-100 text-red-600 hover:bg-red-200 transition-colors flex items-center gap-2 disabled:opacity-50"
           >
-            <XCircle className="w-5 h-5" />
+            <XCircle className="size-5" />
             Reject Application
           </button>
 
-          <button 
+          <button type="button" 
             onClick={onApprove}
             disabled={isProcessing}
             className="px-8 py-3 rounded-full font-bold bg-green-500 text-white hover:bg-green-600 transition-colors shadow-lg shadow-green-500/30 flex items-center gap-2 disabled:opacity-50"
           >
-            <CheckCircle className="w-5 h-5" />
+            <CheckCircle className="size-5" />
             Approve & Verify
           </button>
         </div>

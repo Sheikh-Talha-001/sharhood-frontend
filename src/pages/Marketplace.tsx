@@ -121,9 +121,9 @@ export function Marketplace() {
         {/* --- SIDEBAR FILTERS --- */}
         <div className={`fixed inset-y-0 left-0 z-50 w-[85%] max-w-sm bg-[#ffffff] p-6 border-r border-[#e5e5e5] transform transition-transform duration-300 lg:sticky lg:top-28 lg:transform-none lg:w-72 lg:border-none lg:bg-transparent lg:p-0 shrink-0 flex flex-col h-full lg:h-[calc(100vh-120px)] overflow-y-auto ${isMobileFilterOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
            <div className="flex items-center justify-between lg:hidden mb-8">
-             <h2 className="text-[16px] font-semibold flex items-center gap-2 text-[#241d1b]"><SlidersHorizontal className="w-5 h-5"/> Mobile Filters</h2>
-             <button onClick={() => setIsMobileFilterOpen(false)} className="p-2 bg-[#fcf3ec] rounded-full text-[#333333] hover:bg-[#e5e5e5] hover:text-[#7e0038] transition-colors">
-               <X className="w-5 h-5" />
+             <h2 className="text-[16px] font-semibold flex items-center gap-2 text-[#241d1b]"><SlidersHorizontal className="size-5"/> Mobile Filters</h2>
+             <button type="button" onClick={() => setIsMobileFilterOpen(false)} className="p-2 bg-[#fcf3ec] rounded-full text-[#333333] hover:bg-[#e5e5e5] hover:text-[#7e0038] transition-colors">
+               <X className="size-5" />
              </button>
            </div>
            
@@ -141,7 +141,7 @@ export function Marketplace() {
            />
            
            <div className="lg:hidden mt-8 sticky bottom-0 bg-[#ffffff] pt-4 border-t border-[#e5e5e5]">
-              <button onClick={() => setIsMobileFilterOpen(false)} className="w-full bg-[#7e0038] text-[#ffffff] font-semibold py-4 rounded-xl active:scale-95 transition-transform">
+              <button type="button" onClick={() => setIsMobileFilterOpen(false)} className="w-full bg-[#7e0038] text-[#ffffff] font-semibold py-4 rounded-xl active:scale-95 transition-transform">
                  Show {totalItems} Results
               </button>
            </div>
@@ -182,7 +182,7 @@ export function Marketplace() {
            {error ? (
              <div className="bg-[#fcf3ec] border border-[#7e0038]/30 rounded-2xl p-12 text-center text-[#7e0038] font-semibold min-h-[400px] flex flex-col items-center justify-center">
                 <p className="text-lg mb-4">{error}</p>
-                <button onClick={() => window.location.reload()} className="px-6 py-2 bg-[#7e0038] text-[#ffffff] rounded-xl font-semibold hover:bg-[#241d1b] transition-colors">Refresh Page</button>
+                <button type="button" onClick={() => window.location.reload()} className="px-6 py-2 bg-[#7e0038] text-[#ffffff] rounded-xl font-semibold hover:bg-[#241d1b] transition-colors">Refresh Page</button>
              </div>
            ) : isLoading ? (
              <MarketplaceSkeleton />

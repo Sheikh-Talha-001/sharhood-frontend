@@ -40,11 +40,11 @@ export function ItemCard({ item }: Props) {
     <Link to={`${basePath}/${itemId}`} className="group flex flex-col h-full bg-[#ffffff] rounded-2xl overflow-hidden border border-[#e5e5e5] hover:border-[#7e0038] transition-colors duration-300 relative shadow-none font-sans">
       
       {/* Image Container */}
-      <div className="relative aspect-[4/3] overflow-hidden bg-[#fcf3ec]">
+      <div className="relative aspect-4/3 overflow-hidden bg-[#fcf3ec]">
         <img 
           src={image} 
           alt={item.title} 
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+          className="size-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
         />
         
         {/* Category & Status Overlay */}
@@ -55,11 +55,11 @@ export function ItemCard({ item }: Props) {
         </div>
 
         {/* Favorite Button */}
-        <button 
+        <button type="button" 
           onClick={(e) => { e.preventDefault(); }}
-          className="absolute top-4 right-4 w-10 h-10 bg-[#ffffff] border border-[#e5e5e5] rounded-full flex items-center justify-center text-[#333333] hover:text-[#7e0038] hover:border-[#7e0038] transition-colors z-10"
+          className="absolute top-4 right-4 size-10 bg-[#ffffff] border border-[#e5e5e5] rounded-full flex items-center justify-center text-[#333333] hover:text-[#7e0038] hover:border-[#7e0038] transition-colors z-10"
         >
-          <Heart className="w-5 h-5" />
+          <Heart className="size-5" />
         </button>
 
         {/* Unavailability Overlay */}
@@ -79,7 +79,7 @@ export function ItemCard({ item }: Props) {
               {item.title}
            </h3>
            <p className="text-sm font-medium text-[#333333] flex items-center gap-1.5">
-              <MapPin className="w-4 h-4" /> {itemLocation}
+              <MapPin className="size-4" /> {itemLocation}
            </p>
         </div>
         
@@ -94,14 +94,14 @@ export function ItemCard({ item }: Props) {
         
         <div className="mt-auto pt-4 border-t border-[#e5e5e5] flex items-center justify-between">
           <div className="flex items-center gap-3">
-             <div className="w-10 h-10 bg-[#fcf3ec] border border-[#e5e5e5] text-[#241d1b] rounded-full flex items-center justify-center text-[15.36px] font-semibold shrink-0">
+             <div className="size-10 bg-[#fcf3ec] border border-[#e5e5e5] text-[#241d1b] rounded-full flex items-center justify-center text-[15.36px] font-semibold shrink-0">
                 {owner.name.charAt(0).toUpperCase()}
              </div>
              <div className="flex flex-col">
                <span className="text-[15.36px] font-medium text-[#241d1b] leading-tight">{owner.name}</span>
                {isVerified ? (
                  <span className="text-xs font-semibold text-[#10664c] flex items-center gap-1 mt-0.5 tracking-wide">
-                    <CheckCircle2 className="w-3.5 h-3.5" /> Verified
+                    <CheckCircle2 className="size-3.5" /> Verified
                  </span>
                ) : (
                  <span className="text-xs font-medium text-[#333333] mt-0.5 tracking-wide">

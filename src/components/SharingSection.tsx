@@ -37,10 +37,13 @@ const STEPS = [
 
 export function SharingSection() {
   return (
-    <section className="py-24 px-6 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20">
-      {/* Left List */}
-      <div>
-        <h2 className="text-5xl font-black mb-16 tracking-tight">How it works...</h2>
+    <section className="py-32 lg:py-40 px-6 max-w-7xl mx-auto">
+      <div className="text-center mb-20">
+        <h2 className="text-5xl lg:text-6xl font-black tracking-tight">How it works...</h2>
+      </div>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
+        {/* Left List */}
+        <div>
         <div className="space-y-8">
           {STEPS.map((step, i) => (
             <motion.div 
@@ -52,10 +55,10 @@ export function SharingSection() {
               className="flex gap-6 group cursor-pointer"
             >
               <div className={cn(
-                "w-16 h-16 shrink-0 rounded-2xl flex items-center justify-center transition-transform group-hover:scale-110",
+                "size-16 shrink-0 rounded-2xl flex items-center justify-center transition-transform group-hover:scale-110",
                 step.color
               )}>
-                <step.icon className="w-8 h-8 text-white" />
+                <step.icon className="size-8 text-white" />
               </div>
               <div className="pt-2">
                 <h3 className="text-2xl font-bold mb-2 group-hover:text-brand-orange transition-colors">{step.title}</h3>
@@ -83,14 +86,15 @@ export function SharingSection() {
           </div>
 
           <div className="relative">
-             <div className="w-32 h-32 bg-brand-black rounded-3xl flex items-center justify-center mb-8 shadow-xl">
-                <div className="w-16 h-16 border-4 border-brand-lime rounded-full"></div>
+             <div className="size-32 bg-brand-black rounded-3xl flex items-center justify-center mb-8 shadow-xl">
+                <div className="size-16 border-4 border-brand-lime rounded-full"></div>
              </div>
-             <button className="bg-brand-black text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-brand-lime hover:text-brand-black transition-all">
+             <button type="button" className="bg-brand-black text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-brand-lime hover:text-brand-black transition-all">
                 Learn more
              </button>
           </div>
         </motion.div>
+      </div>
       </div>
     </section>
   );

@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { DashboardCard } from "@/src/components/DashboardCard";
 import { borrowRequestService } from "@/src/services/borrowRequestService";
-import { LoadingSpinner } from "@/src/components/LoadingSpinner";
+import { PageSkeleton } from "@/src/components/LoadingSkeletons";
+import { EmptyState } from "@/src/components/EmptyState";
 import { X, FileText, Calendar, ShieldCheck } from "lucide-react";
 import toast from "react-hot-toast";
 
@@ -43,7 +44,7 @@ export function MyRequests() {
   };
 
   if (isLoading) {
-    return <div className="py-20"><LoadingSpinner /></div>;
+    return <PageSkeleton />;
   }
 
   // Filter requests into categories
@@ -66,19 +67,19 @@ export function MyRequests() {
 
       {/* Tabs */}
       <div className="flex space-x-1 bg-gray-100 p-1 rounded-xl max-w-md">
-        <button
+        <button type="button"
           onClick={() => setActiveTab('pending')}
           className={`flex-1 py-2 text-sm font-bold rounded-lg transition-all ${activeTab === 'pending' ? 'bg-white text-brand-black shadow-sm' : 'text-gray-500 hover:text-brand-black'}`}
         >
           Pending ({pendingRequests.length})
         </button>
-        <button
+        <button type="button"
           onClick={() => setActiveTab('approved')}
           className={`flex-1 py-2 text-sm font-bold rounded-lg transition-all ${activeTab === 'approved' ? 'bg-white text-brand-black shadow-sm' : 'text-gray-500 hover:text-brand-black'}`}
         >
           Active ({activeRequests.length})
         </button>
-        <button
+        <button type="button"
           onClick={() => setActiveTab('completed')}
           className={`flex-1 py-2 text-sm font-bold rounded-lg transition-all ${activeTab === 'completed' ? 'bg-white text-brand-black shadow-sm' : 'text-gray-500 hover:text-brand-black'}`}
         >
@@ -87,21 +88,13 @@ export function MyRequests() {
       </div>
 
       {displayRequests.length === 0 ? (
-        <div className="bg-white rounded-3xl border border-gray-100 p-12 text-center">
-           <div className="w-20 h-20 bg-gray-50 text-gray-400 rounded-full flex items-center justify-center mx-auto mb-6">
-              <FileText className="w-10 h-10" />
-           </div>
-           <h2 className="text-2xl font-bold text-gray-900 mb-2">No {activeTab} requests</h2>
-           <p className="text-gray-500 mb-8 max-w-md mx-auto">
-             You don't have any {activeTab} borrow requests right now.
-           </p>
-           <Link 
-             to="/dashboard/marketplace" 
-             className="inline-block bg-brand-yellow text-brand-black px-8 py-4 rounded-full font-bold hover:bg-yellow-400 transition-colors"
-           >
-             Browse Marketplace
-           </Link>
-        </div>
+        <EmptyState 
+          icon={FileText}
+          title={`No ${activeTab} requests`}
+          description={`You don't have any ${activeTab} borrow requests right now.`}
+          actionLabel="Browse Marketplace"
+          actionLink="/dashboard/marketplace"
+        />
       ) : (
         <div className="space-y-4">
           {displayRequests.map(request => {
@@ -113,8 +106,8 @@ export function MyRequests() {
               <DashboardCard key={request._id} className="p-6 transition-colors hover:border-brand-yellow/30">
                 <div className="flex flex-col md:flex-row gap-6">
                   {/* Item Image */}
-                  <div className="w-full md:w-32 h-32 rounded-2xl bg-gray-100 overflow-hidden shrink-0">
-                    <img src={image} alt={item.title} className="w-full h-full object-cover" />
+                  <div className="w-full md:size-32 rounded-2xl bg-gray-100 overflow-hidden shrink-0">
+                    <img src={image} alt={item.title} className="size-full object-cover" />
                   </div>
                   
                   {/* Request Info */}
@@ -134,18 +127,18 @@ export function MyRequests() {
                        
                        <div className="flex flex-wrap items-center gap-4 text-sm font-medium text-gray-600 mb-4">
                           <div className="flex items-center gap-1.5">
-                            <Calendar className="w-4 h-4 text-gray-400" />
+                            <Calendar className="size-4 text-gray-400" />
                             {new Date(request.startDate).toLocaleDateString()} - {new Date(request.expectedReturnDate).toLocaleDateString()}
                           </div>
                           <div className="flex items-center gap-1.5">
                             <span className="text-gray-400">Owner:</span>
-                            <div className="w-6 h-6 rounded-full bg-brand-yellow/20 flex items-center justify-center text-xs font-black text-brand-black">
+                            <div className="size-6 rounded-full bg-brand-yellow/20 flex items-center justify-center text-xs font-black text-brand-black">
                               {owner.name?.charAt(0) || '?'}
                             </div>
                             <span className="font-bold text-gray-900">
                               <Link to={`/users/${owner._id}`} className="hover:underline">{owner.name}</Link>
                             </span>
-                            {owner.isPartner && <ShieldCheck className="w-4 h-4 text-brand-yellow" title="Partner" />}
+                            {owner.isPartner && <ShieldCheck className="size-4 text-brand-yellow" title="Partner" />}
                           </div>
                        </div>
                      </div>
@@ -153,12 +146,12 @@ export function MyRequests() {
                      {/* Action Buttons */}
                      <div className="flex flex-wrap items-center justify-end gap-3 mt-4 border-t border-gray-100 pt-4">
                        {request.status === 'pending' && (
-                         <button 
+                         <button type="button" 
                            onClick={() => handleCancelRequest(request._id)}
                            disabled={processingId === request._id}
                            className="px-6 py-2.5 rounded-full font-bold text-red-600 bg-red-50 hover:bg-red-100 transition-colors disabled:opacity-50 flex items-center gap-2"
                          >
-                           <X className="w-4 h-4" /> Cancel Request
+                           <X className="size-4" /> Cancel Request
                          </button>
                        )}
 
@@ -167,7 +160,7 @@ export function MyRequests() {
                            to="/dashboard/agreements"
                            className="px-6 py-2.5 rounded-full font-bold text-brand-black bg-brand-yellow hover:bg-yellow-400 transition-colors flex items-center gap-2"
                          >
-                           <FileText className="w-4 h-4" /> View Agreement
+                           <FileText className="size-4" /> View Agreement
                          </Link>
                        )}
                      </div>

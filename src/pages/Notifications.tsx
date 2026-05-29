@@ -101,11 +101,11 @@ export function Notifications() {
           </p>
         </div>
         {unreadCount > 0 && (
-          <button 
+          <button type="button" 
             onClick={markAllAsRead}
             className="text-sm font-bold text-[#7e0038] hover:text-[#5c002a] transition-colors flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-[#7e0038]/5"
           >
-            <Check className="w-4 h-4" /> Mark all read
+            <Check className="size-4" /> Mark all read
           </button>
         )}
       </div>
@@ -113,7 +113,7 @@ export function Notifications() {
       {/* Filter tabs */}
       <div className="flex gap-1 mb-6 bg-[#f5f5f5] rounded-xl p-1 w-fit">
         {(["all", "unread"] as FilterType[]).map((f) => (
-          <button
+          <button type="button"
             key={f}
             onClick={() => setFilter(f)}
             className={`px-4 py-1.5 text-xs font-bold rounded-lg transition-all ${
@@ -144,7 +144,7 @@ export function Notifications() {
         </div>
       ) : (
         <div className="bg-white rounded-2xl border border-[#e5e5e5] p-12 text-center">
-          <Bell className="w-10 h-10 text-[#cccccc] mx-auto mb-4" />
+          <Bell className="size-10 text-[#cccccc] mx-auto mb-4" />
           <p className="text-[#999999] font-semibold text-sm">
             {filter === "unread" ? "No unread notifications" : "No notifications yet"}
           </p>

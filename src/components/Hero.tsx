@@ -40,11 +40,11 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
           >
-            <button className="bg-brand-yellow text-brand-black px-10 py-5 rounded-full font-medium text-lg flex items-center gap-2 hover:bg-brand-black hover:text-white transition-all group shadow-xl shadow-brand-yellow/20">
+            <button type="button" className="bg-brand-yellow text-brand-black px-10 py-5 rounded-full font-medium text-lg flex items-center gap-2 hover:bg-brand-black hover:text-white transition-all group shadow-xl shadow-brand-yellow/20">
               Explore Rentals
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="size-5 group-hover:translate-x-1 transition-transform" />
             </button>
-            <button className="bg-transparent text-brand-black px-10 py-5 rounded-full font-medium border-2 border-brand-black text-lg flex items-center gap-2 hover:bg-brand-black hover:text-white transition-all">
+            <button type="button" className="bg-transparent text-brand-black px-10 py-5 rounded-full font-medium border-2 border-brand-black text-lg flex items-center gap-2 hover:bg-brand-black hover:text-white transition-all">
               List Your Item
             </button>
           </motion.div>
@@ -60,15 +60,15 @@ export function Hero() {
           >
             {/* Simple Laptop Representation */}
             <div className="relative mx-auto w-[90%] max-w-[600px] aspect-[1.6/1]">
-              <div className="w-full h-full bg-brand-black rounded-t-3xl p-3 border-4 border-gray-800 shadow-2xl relative overflow-hidden">
-                <div className="w-full h-full bg-white rounded-t-2xl overflow-hidden p-4 relative">
+              <div className="size-full bg-brand-black rounded-t-3xl p-3 border-4 border-gray-800 shadow-2xl relative overflow-hidden">
+                <div className="size-full bg-white rounded-t-2xl overflow-hidden p-4 relative">
                   {/* Laptop Screen Content UI */}
                   
-                  <div className="w-full h-full rounded-lg overflow-hidden border border-gray-100 shadow-inner">
+                  <div className="size-full rounded-lg overflow-hidden border border-gray-100 shadow-inner">
                     <img 
-                      src="https://res.cloudinary.com/duyq66vog/image/upload/v1779208535/sharehood_discovery_dashboard_-_Copy_gfbvuo.png" 
-                      className="w-full h-full object-cover object-top" 
-                      alt="ShareHood Discovery Dashboard" 
+                      src="https://res.cloudinary.com/duyq66vog/image/upload/v1779208535/lendly_discovery_dashboard_-_Copy_gfbvuo.png" 
+                      className="size-full object-cover object-top" 
+                      alt="Lendly Discovery Dashboard" 
                     />
                   </div>
                 </div>

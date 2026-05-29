@@ -108,11 +108,11 @@ export function EditProfile() {
 
   return (
     <div className="max-w-3xl mx-auto pb-12">
-      <button 
+      <button type="button" 
         onClick={() => navigate("/dashboard/profile")}
         className="flex items-center gap-2 text-gray-500 hover:text-brand-black font-bold mb-8 transition-colors"
       >
-        <ArrowLeft className="w-5 h-5" />
+        <ArrowLeft className="size-5" />
         Back to Profile
       </button>
 
@@ -124,11 +124,11 @@ export function EditProfile() {
           {/* Profile Picture Section */}
           <div className="flex flex-col md:flex-row items-center gap-8 mb-10 pb-10 border-b border-gray-100">
             <div className="relative">
-              <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden shadow-sm border-2 border-gray-100 bg-brand-yellow flex items-center justify-center">
+              <div className="size-24 md:size-32 rounded-full overflow-hidden shadow-sm border-2 border-gray-100 bg-brand-yellow flex items-center justify-center">
                 {isUploadingImage ? (
-                   <Loader2 className="w-8 h-8 text-brand-black animate-spin" />
+                   <Loader2 className="size-8 text-brand-black animate-spin" />
                 ) : user.avatar ? (
-                  <img src={user.avatar} alt={user.name} className="w-full h-full object-cover" />
+                  <img src={user.avatar} alt={user.name} className="size-full object-cover" />
                 ) : (
                   <span className="text-3xl md:text-5xl font-black text-brand-black">
                     {user.name?.substring(0, 2).toUpperCase()}
@@ -154,7 +154,7 @@ export function EditProfile() {
                 disabled={isUploadingImage}
                 className="px-6 py-2.5 rounded-full border border-brand-black text-brand-black font-bold text-sm hover:bg-brand-black hover:text-white transition-colors disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:text-brand-black flex items-center justify-center gap-2 mx-auto md:mx-0"
               >
-                <Camera className="w-4 h-4" />
+                <Camera className="size-4" />
                 {isUploadingImage ? "Uploading..." : "Change Picture"}
               </button>
             </div>
@@ -237,7 +237,7 @@ export function EditProfile() {
               >
                 {isSaving ? (
                    <>
-                     <Loader2 className="w-5 h-5 animate-spin" />
+                     <Loader2 className="size-5 animate-spin" />
                      Saving Changes...
                    </>
                 ) : (

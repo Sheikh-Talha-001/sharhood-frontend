@@ -31,10 +31,10 @@ export function ConfirmationDialog({
     <AdminModal isOpen={isOpen} onClose={onClose} title={title}>
       <p className="text-gray-600 font-medium mb-8 leading-relaxed">{message}</p>
       <div className="flex gap-3 justify-end">
-        <button onClick={onClose} className="px-6 py-2.5 rounded-full font-bold text-gray-700 bg-gray-100 hover:bg-gray-200 transition-colors">
+        <button type="button" onClick={onClose} className="px-6 py-2.5 rounded-full font-bold text-gray-700 bg-gray-100 hover:bg-gray-200 transition-colors">
           Cancel
         </button>
-        <button onClick={onConfirm} className={`px-6 py-2.5 rounded-full font-bold transition-colors ${getButtonStyles()}`}>
+        <button type="button" onClick={onConfirm} className={`px-6 py-2.5 rounded-full font-bold transition-colors ${getButtonStyles()}`}>
           {confirmText}
         </button>
       </div>

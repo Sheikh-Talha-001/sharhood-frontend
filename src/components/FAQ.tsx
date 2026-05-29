@@ -29,18 +29,18 @@ export function FAQ() {
   const [active, setActive] = useState<number | null>(null);
 
   return (
-    <section className="py-24 px-6 max-w-4xl mx-auto">
-      <h2 className="text-5xl font-black text-center mb-16 underline decoration-brand-lime decoration-8 underline-offset-8">Common Questions</h2>
+    <section className="py-32 lg:py-40 px-6 max-w-4xl mx-auto">
+      <h2 className="text-5xl lg:text-6xl font-black text-center mb-20 underline decoration-brand-lime decoration-8 underline-offset-8">Common Questions</h2>
       <div className="space-y-4">
         {FAQS.map((faq, i) => (
           <div key={i} className="border-b-2 border-brand-black/5 last:border-0">
-            <button
+            <button type="button"
               onClick={() => setActive(active === i ? null : i)}
               className="w-full flex items-center justify-between py-8 text-left group"
             >
               <span className="text-xl md:text-2xl font-bold group-hover:text-brand-orange transition-colors">{faq.q}</span>
               <div className="bg-brand-black text-white p-2 rounded-full transform transition-transform group-hover:rotate-90">
-                {active === i ? <Minus className="w-6 h-6" /> : <Plus className="w-6 h-6" />}
+                {active === i ? <Minus className="size-6" /> : <Plus className="size-6" />}
               </div>
             </button>
             <AnimatePresence>
