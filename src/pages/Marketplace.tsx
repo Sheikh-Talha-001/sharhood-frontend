@@ -106,7 +106,7 @@ export function Marketplace() {
   const hasActiveFilters = selectedCategory || selectedCondition || searchQuery || verifiedOnly;
 
   return (
-    <div className="pb-12">
+    <div className="pb-12 pt-8 font-sans bg-[#ffffff] min-h-screen px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       {/* Top Hero Section */}
       <MarketplaceHero />
 
@@ -115,14 +115,14 @@ export function Marketplace() {
         
         {/* --- MOBILE FILTER OVERLAY --- */}
         {isMobileFilterOpen && (
-          <div className="fixed inset-0 bg-black/60 z-40 lg:hidden backdrop-blur-sm" onClick={() => setIsMobileFilterOpen(false)} />
+          <div className="fixed inset-0 bg-[#241d1b]/60 z-40 lg:hidden backdrop-blur-sm" onClick={() => setIsMobileFilterOpen(false)} />
         )}
 
         {/* --- SIDEBAR FILTERS --- */}
-        <div className={`fixed inset-y-0 left-0 z-50 w-[85%] max-w-sm bg-white p-6 shadow-2xl transform transition-transform duration-300 lg:sticky lg:top-28 lg:transform-none lg:w-72 lg:shadow-none lg:bg-transparent lg:p-0 shrink-0 flex flex-col h-full lg:h-[calc(100vh-120px)] overflow-y-auto ${isMobileFilterOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
+        <div className={`fixed inset-y-0 left-0 z-50 w-[85%] max-w-sm bg-[#ffffff] p-6 border-r border-[#e5e5e5] transform transition-transform duration-300 lg:sticky lg:top-28 lg:transform-none lg:w-72 lg:border-none lg:bg-transparent lg:p-0 shrink-0 flex flex-col h-full lg:h-[calc(100vh-120px)] overflow-y-auto ${isMobileFilterOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
            <div className="flex items-center justify-between lg:hidden mb-8">
-             <h2 className="text-xl font-bold flex items-center gap-2"><SlidersHorizontal className="w-5 h-5"/> Mobile Filters</h2>
-             <button onClick={() => setIsMobileFilterOpen(false)} className="p-2 bg-gray-50 rounded-full text-gray-500 hover:bg-gray-100 hover:text-brand-black transition-colors">
+             <h2 className="text-[16px] font-semibold flex items-center gap-2 text-[#241d1b]"><SlidersHorizontal className="w-5 h-5"/> Mobile Filters</h2>
+             <button onClick={() => setIsMobileFilterOpen(false)} className="p-2 bg-[#fcf3ec] rounded-full text-[#333333] hover:bg-[#e5e5e5] hover:text-[#7e0038] transition-colors">
                <X className="w-5 h-5" />
              </button>
            </div>
@@ -140,8 +140,8 @@ export function Marketplace() {
              isMobileDrawer={true}
            />
            
-           <div className="lg:hidden mt-8 sticky bottom-0 bg-white pt-4 border-t border-gray-100">
-              <button onClick={() => setIsMobileFilterOpen(false)} className="w-full bg-brand-black text-white font-bold py-4 rounded-xl shadow-lg active:scale-95 transition-transform">
+           <div className="lg:hidden mt-8 sticky bottom-0 bg-[#ffffff] pt-4 border-t border-[#e5e5e5]">
+              <button onClick={() => setIsMobileFilterOpen(false)} className="w-full bg-[#7e0038] text-[#ffffff] font-semibold py-4 rounded-xl active:scale-95 transition-transform">
                  Show {totalItems} Results
               </button>
            </div>
@@ -151,7 +151,7 @@ export function Marketplace() {
         <div className="flex-1 min-w-0">
            
            {/* Top Control Bar */}
-           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8 border-b border-[#e5e5e5] pb-6">
               <div className="w-full sm:w-[320px]">
                 <SearchBar 
                   placeholder="Search tools, cameras..." 
@@ -163,13 +163,13 @@ export function Marketplace() {
               </div>
 
               <div className="flex items-center justify-between w-full sm:w-auto gap-4">
-                <span className="text-sm font-bold text-gray-400">
+                <span className="text-sm font-semibold text-[#333333]">
                    {isLoading ? "Loading..." : `${totalItems} items found`}
                 </span>
                 <select 
                   value={sortOrder}
                   onChange={(e) => { setSortOrder(e.target.value); setCurrentPage(1); }}
-                  className="bg-white border border-gray-200 rounded-xl px-4 py-2.5 text-sm font-bold text-gray-700 outline-none focus:ring-2 focus:ring-brand-yellow focus:border-brand-yellow shadow-sm cursor-pointer hover:bg-gray-50 transition-colors"
+                  className="bg-[#ffffff] border border-[#e5e5e5] rounded-xl px-4 py-2.5 text-sm font-semibold text-[#241d1b] outline-none focus:border-[#7e0038] cursor-pointer hover:bg-[#fcf3ec] transition-colors"
                 >
                   {SORTS.map(sort => (
                     <option key={sort.value} value={sort.value}>{sort.label}</option>
@@ -180,9 +180,9 @@ export function Marketplace() {
 
            {/* Results Grid */}
            {error ? (
-             <div className="bg-red-50 border-2 border-dashed border-red-200 rounded-3xl p-12 text-center text-red-600 font-bold min-h-[400px] flex flex-col items-center justify-center">
-                <p className="text-xl mb-4">{error}</p>
-                <button onClick={() => window.location.reload()} className="px-6 py-2 bg-red-600 text-white rounded-full">Refresh Page</button>
+             <div className="bg-[#fcf3ec] border border-[#7e0038]/30 rounded-2xl p-12 text-center text-[#7e0038] font-semibold min-h-[400px] flex flex-col items-center justify-center">
+                <p className="text-lg mb-4">{error}</p>
+                <button onClick={() => window.location.reload()} className="px-6 py-2 bg-[#7e0038] text-[#ffffff] rounded-xl font-semibold hover:bg-[#241d1b] transition-colors">Refresh Page</button>
              </div>
            ) : isLoading ? (
              <MarketplaceSkeleton />

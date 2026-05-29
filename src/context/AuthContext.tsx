@@ -94,6 +94,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, [user, isLoading]);
 
+  useEffect(() => {
+    const handleSuspended = () => {
+      setUser(prev => prev ? { ...prev, isSuspended: true } : null);
+    };
+    window.addEventListener('user_suspended', handleSuspended);
+    return () => window.removeEventListener('user_suspended', handleSuspended);
+  }, []);
+
   // ------------------------------------------------------------
   // Login
   // ------------------------------------------------------------

@@ -3,7 +3,7 @@ import { DashboardCard } from "@/src/components/DashboardCard";
 import { AdminSearchBar } from "@/src/components/admin/AdminSearchBar";
 import { adminService } from "@/src/services/adminService";
 import { LoadingSpinner } from "@/src/components/LoadingSpinner";
-import { CheckCircle, XCircle } from "lucide-react";
+import { CheckCircle, XCircle, Eye, X } from "lucide-react";
 import toast from "react-hot-toast";
 
 export function Partners() {
@@ -11,6 +11,7 @@ export function Partners() {
   const [filteredPartners, setFilteredPartners] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [viewModal, setViewModal] = useState<{isOpen: boolean, data: any}>({isOpen: false, data: null});
 
   const fetchPartners = async () => {
     setIsLoading(true);
@@ -124,8 +125,16 @@ export function Partners() {
                          {app.status === 'pending' ? (
                            <>
                              <button 
+                               onClick={() => setViewModal({isOpen: true, data: app})}
+                               className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-blue-50 text-blue-600 hover:bg-blue-500 hover:text-white transition-colors"
+                               title="View Details"
+                             >
+                               <Eye className="w-4 h-4" />
+                             </button>
+                             <button 
                                onClick={() => handleAction(app._id, 'approved')}
                                className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-green-50 text-green-600 hover:bg-green-500 hover:text-white transition-colors"
+                               title="Approve"
                              >
                                <CheckCircle className="w-4 h-4" />
                              </button>
@@ -137,7 +146,12 @@ export function Partners() {
                              </button>
                            </>
                          ) : (
-                           <span className="text-sm font-medium text-gray-400">Reviewed</span>
+                           <button 
+                             onClick={() => setViewModal({isOpen: true, data: app})}
+                             className="inline-flex items-center justify-center px-3 py-1.5 rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors text-xs font-bold gap-1.5"
+                           >
+                             <Eye className="w-3.5 h-3.5" /> View
+                           </button>
                          )}
                        </td>
                      </tr>
@@ -148,6 +162,73 @@ export function Partners() {
            </div>
          )}
        </DashboardCard>
+
+      {/* View Details Modal */}
+      {viewModal.isOpen && viewModal.data && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl w-full max-w-2xl overflow-hidden shadow-2xl relative animate-in fade-in zoom-in-95 duration-200 max-h-[90vh] flex flex-col">
+            <div className="px-6 py-5 border-b border-gray-100 flex items-center justify-between bg-gray-50/50">
+              <h2 className="text-xl font-black text-gray-900 tracking-tight">Application Details</h2>
+              <button onClick={() => setViewModal({isOpen: false, data: null})} className="w-8 h-8 flex items-center justify-center rounded-full text-gray-400 hover:bg-gray-100 hover:text-gray-900 transition-colors">
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            
+            <div className="p-6 overflow-y-auto space-y-6">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                  <p className="text-xs font-bold text-gray-400 uppercase mb-1">Applicant Name</p>
+                  <p className="font-bold text-gray-900">{viewModal.data.fullName || viewModal.data.user?.name}</p>
+                </div>
+                <div className="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                  <p className="text-xs font-bold text-gray-400 uppercase mb-1">Contact Email</p>
+                  <p className="font-bold text-gray-900">{viewModal.data.user?.email}</p>
+                </div>
+                <div className="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                  <p className="text-xs font-bold text-gray-400 uppercase mb-1">Phone Number</p>
+                  <p className="font-bold text-gray-900">{viewModal.data.phoneNumber || 'N/A'}</p>
+                </div>
+                <div className="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                  <p className="text-xs font-bold text-gray-400 uppercase mb-1">City</p>
+                  <p className="font-bold text-gray-900">{viewModal.data.city || 'N/A'}</p>
+                </div>
+              </div>
+
+              {viewModal.data.businessName && (
+                <div>
+                  <h3 className="font-bold text-gray-900 mb-2">Business Name</h3>
+                  <div className="bg-gray-50 p-4 rounded-xl border border-gray-100 text-sm text-gray-700">
+                    {viewModal.data.businessName}
+                  </div>
+                </div>
+              )}
+
+              <div>
+                <h3 className="font-bold text-gray-900 mb-2">Reason for Joining</h3>
+                <div className="bg-gray-50 p-4 rounded-xl border border-gray-100 text-sm text-gray-700 whitespace-pre-wrap">
+                  {viewModal.data.reasonForJoining || 'No reason provided.'}
+                </div>
+              </div>
+
+              <div>
+                <h3 className="font-bold text-gray-900 mb-2">Experience</h3>
+                <div className="bg-gray-50 p-4 rounded-xl border border-gray-100 text-sm text-gray-700 whitespace-pre-wrap">
+                  {viewModal.data.experienceDescription || 'No experience provided.'}
+                </div>
+              </div>
+            </div>
+
+            <div className="px-6 py-4 border-t border-gray-100 bg-gray-50 flex justify-end gap-3">
+              <button 
+                onClick={() => setViewModal({isOpen: false, data: null})}
+                className="px-6 py-2.5 rounded-xl font-bold text-gray-600 bg-gray-200 hover:bg-gray-300 transition-colors"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

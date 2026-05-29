@@ -350,7 +350,6 @@ export function BecomePartner() {
         </section>
       </main>
 
-      <Footer />
     </div>
   );
 }

@@ -13,10 +13,5 @@ export function ProtectedRoute() {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
-  // Suspended user -> Redirect to the suspension appeal page
-  if (user.isSuspended) {
-    return <Navigate to="/suspended" replace />;
-  }
-
   return <Outlet />;
 }

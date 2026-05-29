@@ -38,9 +38,12 @@ export function PublicProfile() {
 
   if (!profile) return null;
 
-  const { user, listedItems } = profile;
+  // Handle both the old flattened backend format and the new structured format
+  const user = profile.user || profile;
+  const listedItems = profile.listedItems || [];
+  
   const isVerified = user.verificationStatus === 'verified';
-  const isPartner = user.canListItems; // or partnerStatus === 'approved'
+  const isPartner = user.canListItems || user.partnerStatus === 'approved';
   
   return (
     <div className="max-w-6xl mx-auto space-y-8 pb-12">

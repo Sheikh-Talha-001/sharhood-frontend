@@ -27,7 +27,6 @@ export function HomePage() {
           <FAQ />
           <CTA />
         </main>
-        <Footer />
       </div>
     </SmoothScroll>
   );

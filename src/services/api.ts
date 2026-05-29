@@ -42,6 +42,11 @@ api.interceptors.response.use(
       console.warn('401 Unauthorized detected. Token may be expired.');
     }
 
+    if (error.response?.status === 403 && error.response?.data?.error?.toLowerCase().includes('suspended')) {
+      console.warn('403 Suspended detected. Dispatching event to update context state.');
+      window.dispatchEvent(new Event('user_suspended'));
+    }
+
     if (error.response?.status === 429) {
       console.warn('429 Rate limit hit. Too many requests from this IP.');
       // Attach a user-friendly message so components can read it

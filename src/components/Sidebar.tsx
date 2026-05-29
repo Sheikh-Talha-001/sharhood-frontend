@@ -14,7 +14,9 @@ export function Sidebar({ isMobileOpen, closeMobile }: Props) {
   const isAdmin = user?.role === "admin";
   const inAdminRoute = location.pathname.startsWith("/admin");
 
-  const userNavItems = [
+  const userNavItems = user?.isSuspended ? [
+    { label: "Appeal Suspension", path: "/dashboard/appeal", icon: Scale }
+  ] : [
     { label: "Dashboard", path: "/dashboard", icon: LayoutDashboard, exact: true },
     { label: "Browse Items", path: "/dashboard/marketplace", icon: Package },
     // Conditional items for Partners/Lenders

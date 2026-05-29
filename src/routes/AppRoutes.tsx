@@ -74,6 +74,7 @@ export function AppRoutes() {
           <Route path="partner" element={<PartnerApplication />} />
           <Route path="profile" element={<Profile />} />
           <Route path="profile/edit" element={<EditProfile />} />
+          <Route path="appeal" element={<AppealSuspension />} />
         </Route>
       </Route>
 

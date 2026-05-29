@@ -11,6 +11,7 @@ export function Users() {
   const [filteredUsers, setFilteredUsers] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [suspendModal, setSuspendModal] = useState<{isOpen: boolean, user: any, reason: string}>({isOpen: false, user: null, reason: ''});
 
   const fetchUsers = async () => {
     setIsLoading(true);
@@ -45,14 +46,36 @@ export function Users() {
   };
 
   const handleSuspendToggle = async (user: any) => {
-    const isSuspending = !user.isSuspended;
+    if (!user.isSuspended) {
+      setSuspendModal({ isOpen: true, user, reason: '' });
+      return;
+    }
+    
     try {
-      await adminService.suspendUser(user._id, isSuspending);
-      toast.success(isSuspending ? "User suspended" : "User reactivated");
+      await adminService.suspendUser(user._id, false);
+      toast.success("User reactivated");
       
-      const updated = users.map(u => u._id === user._id ? { ...u, isSuspended: isSuspending } : u);
+      const updated = users.map(u => u._id === user._id ? { ...u, isSuspended: false } : u);
       setUsers(updated);
       setFilteredUsers(updated);
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to update user status.");
+    }
+  };
+
+  const confirmSuspend = async () => {
+    const user = suspendModal.user;
+    if (!user) return;
+    
+    try {
+      await adminService.suspendUser(user._id, true, suspendModal.reason);
+      toast.success("User suspended");
+      
+      const updated = users.map(u => u._id === user._id ? { ...u, isSuspended: true, suspensionReason: suspendModal.reason } : u);
+      setUsers(updated);
+      setFilteredUsers(updated);
+      setSuspendModal({ isOpen: false, user: null, reason: '' });
     } catch (err) {
       console.error(err);
       toast.error("Failed to update user status.");
@@ -142,6 +165,49 @@ export function Users() {
            </div>
          )}
        </DashboardCard>
+
+       {/* Suspend Modal */}
+       {suspendModal.isOpen && (
+         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+           <div className="bg-white rounded-3xl w-full max-w-md overflow-hidden shadow-2xl animate-in fade-in zoom-in-95 duration-200">
+             <div className="p-6">
+               <h3 className="text-2xl font-black text-gray-900 mb-2">Suspend User</h3>
+               <p className="text-gray-500 mb-6">
+                 You are about to suspend <strong>{suspendModal.user?.name}</strong>. Please provide a reason.
+               </p>
+               
+               <div className="space-y-4">
+                 <div>
+                   <label className="block text-sm font-bold text-gray-700 mb-2">Suspension Reason</label>
+                   <textarea
+                     value={suspendModal.reason}
+                     onChange={(e) => setSuspendModal({ ...suspendModal, reason: e.target.value })}
+                     className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand-black focus:ring-1 focus:ring-brand-black outline-none transition-all resize-none h-32"
+                     placeholder="E.g., Repeated violation of community guidelines..."
+                     autoFocus
+                   />
+                 </div>
+               </div>
+               
+               <div className="flex items-center justify-end gap-3 mt-8">
+                 <button 
+                   onClick={() => setSuspendModal({ isOpen: false, user: null, reason: '' })}
+                   className="px-6 py-2.5 rounded-full font-bold text-gray-600 hover:bg-gray-100 transition-colors"
+                 >
+                   Cancel
+                 </button>
+                 <button 
+                   onClick={confirmSuspend}
+                   disabled={!suspendModal.reason.trim()}
+                   className="px-6 py-2.5 rounded-full font-bold text-white bg-red-600 hover:bg-red-700 transition-colors disabled:opacity-50"
+                 >
+                   Confirm Suspension
+                 </button>
+               </div>
+             </div>
+           </div>
+         </div>
+       )}
     </div>
   );
 }

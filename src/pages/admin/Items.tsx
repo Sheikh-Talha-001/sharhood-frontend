@@ -11,6 +11,7 @@ export function Items() {
   const [filteredItems, setFilteredItems] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [removeModal, setRemoveModal] = useState<{isOpen: boolean, item: any, reason: string}>({isOpen: false, item: null, reason: ''});
 
   const fetchItems = async () => {
     setIsLoading(true);
@@ -45,14 +46,36 @@ export function Items() {
   };
 
   const handleRemoveToggle = async (item: any) => {
-    const isRemoving = !item.isRemovedByAdmin;
+    if (!item.isRemovedByAdmin) {
+      setRemoveModal({ isOpen: true, item, reason: '' });
+      return;
+    }
+    
     try {
-      await adminService.removeItem(item._id, isRemoving);
-      toast.success(isRemoving ? "Item removed" : "Item restored");
+      await adminService.removeItem(item._id, false);
+      toast.success("Item restored");
       
-      const updated = items.map(i => i._id === item._id ? { ...i, isRemovedByAdmin: isRemoving } : i);
+      const updated = items.map(i => i._id === item._id ? { ...i, isRemovedByAdmin: false } : i);
       setItems(updated);
       setFilteredItems(updated);
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to update item status.");
+    }
+  };
+
+  const confirmRemove = async () => {
+    const item = removeModal.item;
+    if (!item) return;
+    
+    try {
+      await adminService.removeItem(item._id, true, removeModal.reason);
+      toast.success("Item removed");
+      
+      const updated = items.map(i => i._id === item._id ? { ...i, isRemovedByAdmin: true, adminRemovalReason: removeModal.reason } : i);
+      setItems(updated);
+      setFilteredItems(updated);
+      setRemoveModal({ isOpen: false, item: null, reason: '' });
     } catch (err) {
       console.error(err);
       toast.error("Failed to update item status.");
@@ -145,6 +168,49 @@ export function Items() {
            </div>
          )}
        </DashboardCard>
+
+       {/* Remove Modal */}
+       {removeModal.isOpen && (
+         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+           <div className="bg-white rounded-3xl w-full max-w-md overflow-hidden shadow-2xl animate-in fade-in zoom-in-95 duration-200">
+             <div className="p-6">
+               <h3 className="text-2xl font-black text-gray-900 mb-2">Remove Item</h3>
+               <p className="text-gray-500 mb-6">
+                 You are about to remove <strong>{removeModal.item?.title}</strong>. Please provide a reason.
+               </p>
+               
+               <div className="space-y-4">
+                 <div>
+                   <label className="block text-sm font-bold text-gray-700 mb-2">Removal Reason</label>
+                   <textarea
+                     value={removeModal.reason}
+                     onChange={(e) => setRemoveModal({ ...removeModal, reason: e.target.value })}
+                     className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand-black focus:ring-1 focus:ring-brand-black outline-none transition-all resize-none h-32"
+                     placeholder="E.g., Inappropriate content, prohibited item..."
+                     autoFocus
+                   />
+                 </div>
+               </div>
+               
+               <div className="flex items-center justify-end gap-3 mt-8">
+                 <button 
+                   onClick={() => setRemoveModal({ isOpen: false, item: null, reason: '' })}
+                   className="px-6 py-2.5 rounded-full font-bold text-gray-600 hover:bg-gray-100 transition-colors"
+                 >
+                   Cancel
+                 </button>
+                 <button 
+                   onClick={confirmRemove}
+                   disabled={!removeModal.reason.trim()}
+                   className="px-6 py-2.5 rounded-full font-bold text-white bg-red-600 hover:bg-red-700 transition-colors disabled:opacity-50"
+                 >
+                   Confirm Removal
+                 </button>
+               </div>
+             </div>
+           </div>
+         </div>
+       )}
     </div>
   );
 }
